@@ -2,6 +2,7 @@
   "name": "pokedex",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "prepare": "cd .. && husky frontend/.husky",
     "dev": "next dev",
@@ -10,7 +11,8 @@
     "lint": "next lint",
     "lint:fix": "next lint --fix",
     "lint:staged": "lint-staged",
-    "test": "echo \"TODO\"",
+    "test": "vitest run --passWithNoTests",
+    "test:watch": "vitest",
     "ts:check": "./node_modules/.bin/tsc -p . --noEmit",
     "ts:watch": "./node_modules/.bin/tsc -p . --noEmit --watch",
     "prettier": "./node_modules/.bin/prettier --write 'src/**/*.{ts,tsx}'",
@@ -39,18 +41,21 @@
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@vitejs/plugin-react": "^4.3.1",
     "eslint": "^8",
     "eslint-config-next": "14.2.4",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-simple-import-sort": "^12.1.1",
     "eslint-plugin-storybook": "^0.8.0",
     "husky": "^9.0.11",
+    "jsdom": "^24.1.0",
     "lint-staged": "^15.2.7",
     "postcss": "^8",
     "prettier": "^3.3.2",
     "pretty-quick": "^4.0.0",
     "storybook": "^8.1.11",
     "tailwindcss": "^3.4.1",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vitest": "^1.6.0"
   }
 }
