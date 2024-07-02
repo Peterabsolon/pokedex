@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
+  "sideEffects": false,
   "scripts": {
     "prepare": "cd .. && husky frontend/.husky",
     "dev": "next dev",
