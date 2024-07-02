@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "prettier": "./node_modules/.bin/prettier --write 'src/**/*.{ts,tsx}'"
+    "prettier": "./node_modules/.bin/prettier --write 'src/**/*.{ts,tsx}'",
+    "prettier:staged": "pretty-quick --staged"
   },
   "dependencies": {
     "next": "14.2.4",
@@ -23,6 +24,7 @@
     "eslint-config-prettier": "^9.1.0",
     "postcss": "^8",
     "prettier": "^3.3.2",
+    "pretty-quick": "^4.0.0",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
   }
