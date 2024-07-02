@@ -1,20 +1,38 @@
-import type { Config } from "tailwindcss";
+import type { Config } from 'tailwindcss'
+
+const PALETTE_BLUE = {
+  100: '#72DCFF',
+  200: '#49C2FF',
+  300: '#20A0FF',
+  400: '#007aff',
+  500: '#005BE9',
+}
 
 const config: Config = {
-  content: [
-    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
-  ],
+  content: ['./src/**/*.{js,ts,jsx,tsx,mdx}'],
   theme: {
     extend: {
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+      animation: {
+        appear: 'fadeIn .3s ease, moveUp .3s ease',
+      },
+
+      keyframes: {
+        fadeIn: {
+          from: { opacity: '0' },
+          to: { opacity: '1' },
+        },
+
+        moveUp: {
+          from: { transform: 'translateY(15px)' },
+          to: { transform: 'translateY(0px)' },
+        },
+      },
+
+      colors: {
+        blue: PALETTE_BLUE,
       },
     },
   },
-  plugins: [],
-};
-export default config;
+}
+
+export default config
