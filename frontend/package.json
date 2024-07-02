@@ -7,6 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "ts:check": "./node_modules/.bin/tsc -p . --noEmit",
+    "ts:watch": "./node_modules/.bin/tsc -p . --noEmit --watch",
     "prettier": "./node_modules/.bin/prettier --write 'src/**/*.{ts,tsx}'",
     "prettier:staged": "pretty-quick --staged"
   },
