@@ -1,6 +1,7 @@
 {
   "private": true,
   "scripts": {
+    "postinstall": "(cd backend && npm i) && (cd frontend && npm i)",
     "dev:be": "cd backend && node src/index.js",
     "dev:fe": "cd frontend && npm run dev",
     "dev": "npm run dev:be & npm run dev:fe"
