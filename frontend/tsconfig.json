@@ -4,6 +4,7 @@
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
+    "noUncheckedIndexedAccess": true, // this should be a default, change my mind
     "noEmit": true,
     "esModuleInterop": true,
     "module": "esnext",
