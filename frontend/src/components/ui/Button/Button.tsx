@@ -1,6 +1,6 @@
 'use client'
 
-import cx from 'classnames'
+import classNames from 'classnames'
 import { motion, MotionProps } from 'framer-motion'
 import { ButtonHTMLAttributes, ElementType, ReactNode } from 'react'
 
@@ -73,27 +73,27 @@ export const Button = ({
   const ButtonElement = motionProps ? motion.button : ('button' as ElementType)
   const hoverVariant = variantsHover[variantHover || variant]
 
+  const classNameFinal = classNames(
+    'flex flex-row items-center justify-center',
+    'relative rounded-md px-8 py-2 font-medium drop-shadow-2xl transition-colors',
+    'disabled:cursor-not-allowed',
+    'text-nowrap',
+    {
+      'pl-6': iconLeft,
+      'pr-6': iconRight,
+      'emboss-effect': variant !== 'text',
+    },
+    variants[variant],
+    hoverVariant,
+    className,
+  )
+
+  const content = <span>{label || children}</span>
+
   return (
-    <ButtonElement
-      {...props}
-      {...motionProps}
-      className={cx(
-        'flex flex-row items-center justify-center',
-        'relative rounded-md px-8 py-2 font-medium drop-shadow-2xl transition-colors',
-        'disabled:cursor-not-allowed',
-        'text-nowrap',
-        {
-          'pl-6': iconLeft,
-          'pr-6': iconRight,
-          'emboss-effect': variant !== 'text',
-        },
-        variants[variant],
-        hoverVariant,
-        className,
-      )}
-    >
+    <ButtonElement {...props} {...motionProps} className={classNameFinal}>
       {iconLeft}
-      <span>{label || children}</span>
+      {content}
       {iconRight}
     </ButtonElement>
   )
