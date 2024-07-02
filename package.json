@@ -1,0 +1,8 @@
+{
+  "private": true,
+  "scripts": {
+    "dev:be": "cd backend && node src/index.js",
+    "dev:fe": "cd frontend && npm run dev",
+    "dev": "npm run dev:be & npm run dev:fe"
+  }
+}
