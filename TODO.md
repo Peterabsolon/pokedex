@@ -1,5 +1,4 @@
 # TODO
 
-- framer-motion
-- storybook
 - playwright
+- framer-motion
