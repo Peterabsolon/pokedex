@@ -28,7 +28,7 @@ export interface AlertProps {
   children: React.ReactNode
 
   /**
-   *
+   * Props for animating with framer-motion
    */
   motion?: MotionProps
 }

@@ -58,8 +58,8 @@ IconRight.args = {
   iconRight: <TrashIcon className="ml-2 size-5" />,
 }
 
-export const WithCustomMotion = Template.bind({})
-WithCustomMotion.args = {
+export const CustomMotionProps = Template.bind({})
+CustomMotionProps.args = {
   children: 'Hover me',
   motion: {
     // layout: true,
