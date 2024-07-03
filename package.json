@@ -13,10 +13,5 @@
   "devDependencies": {
     "@playwright/test": "^1.45.1",
     "@types/node": "^20.14.9"
-  },
-  "dependencies": {
-    "mobx": "^6.13.0",
-    "mobx-react-lite": "^4.0.7",
-    "sonner": "^1.5.0"
   }
 }
