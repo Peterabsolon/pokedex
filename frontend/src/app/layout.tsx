@@ -6,7 +6,6 @@ import { font } from '~/assets'
 
 export const metadata: Metadata = {
   title: 'Pokedex',
-  // description: '',
 }
 
 interface RootLayoutProps {

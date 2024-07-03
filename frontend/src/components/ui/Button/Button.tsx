@@ -4,7 +4,12 @@ import classNames from 'classnames'
 import { motion, MotionProps } from 'framer-motion'
 import { ButtonHTMLAttributes, ElementType, ReactNode } from 'react'
 
-export type ButtonVariant = 'primary' | 'secondary' | 'text' | 'danger'
+const DEFAULT_MOTION = {
+  whileHover: { scale: 1.05 },
+  whileTap: { scale: 0.95 },
+}
+
+export type ButtonVariant = keyof typeof variantStyles
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   /**
@@ -40,21 +45,6 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   motion?: MotionProps
 }
 
-/** TODO: Enable Tailwind VSCode extension setting such that intellisense works outside of JSX */
-const variants: { [key in ButtonVariant]: string } = {
-  text: '',
-  primary: 'bg-blue-500',
-  secondary: 'border border-blue-400 bg-slate-900 disabled:opacity-60',
-  danger: 'bg-red-600',
-}
-
-const variantsHover: { [key in ButtonVariant]: string } = {
-  text: 'hover:bg-blue-400',
-  primary: 'hover:bg-blue-400',
-  secondary: 'hover:bg-blue-400 disabled:hover:bg-slate-900',
-  danger: 'hover:bg-red-500 hover:border-red-800',
-}
-
 export const Button = ({
   children,
   label,
@@ -65,36 +55,43 @@ export const Button = ({
   iconRight,
   ...props
 }: ButtonProps) => {
-  const motionProps = props.motion ?? {
-    whileHover: { scale: 1.05 },
-    whileTap: { scale: 0.95 },
-  }
-
+  const motionProps = props.motion ?? DEFAULT_MOTION
   const Element = motionProps ? motion.button : ('button' as ElementType)
-  const hoverVariant = variantsHover[variantHover || variant]
-
-  const classNameFinal = classNames(
-    'flex flex-row items-center justify-center',
-    'relative rounded-md px-8 py-2 font-medium drop-shadow-2xl transition-colors',
-    'disabled:cursor-not-allowed',
-    'text-nowrap',
-    {
-      'pl-6': iconLeft,
-      'pr-6': iconRight,
-      'emboss-effect': variant !== 'text',
-    },
-    variants[variant],
-    hoverVariant,
-    className,
-  )
-
-  const content = <span>{label || children}</span>
 
   return (
-    <Element {...props} {...motionProps} className={classNameFinal}>
+    <Element
+      {...props}
+      {...motionProps}
+      className={classNames(
+        'relative flex flex-row items-center justify-center text-nowrap rounded-md px-8 py-2',
+        'font-medium drop-shadow-2xl transition-colors disabled:cursor-not-allowed',
+        {
+          'emboss-effect': variant !== 'text',
+          'pl-6': iconLeft,
+          'pr-6': iconRight,
+        },
+        variantStyles[variant],
+        variantHoverStyles[variantHover || variant],
+        className,
+      )}
+    >
       {iconLeft}
-      {content}
+      <span>{label || children}</span>
       {iconRight}
     </Element>
   )
+}
+
+const variantStyles = {
+  text: '',
+  primary: 'bg-blue-500',
+  secondary: 'border border-blue-400 bg-slate-900 disabled:opacity-60',
+  danger: 'bg-red-600',
+}
+
+const variantHoverStyles = {
+  text: 'hover:bg-blue-400',
+  primary: 'hover:bg-blue-400',
+  secondary: 'hover:bg-blue-400 disabled:hover:bg-slate-900',
+  danger: 'hover:bg-red-500 hover:border-red-800',
 }

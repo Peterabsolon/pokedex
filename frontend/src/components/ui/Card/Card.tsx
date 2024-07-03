@@ -1,7 +1,14 @@
+'use client'
+
 import cx from 'classnames'
 import { motion, MotionProps } from 'framer-motion'
 import { observer } from 'mobx-react-lite'
 import { HTMLAttributes, ReactNode } from 'react'
+
+const DEFAULT_MOTION = {
+  whileHover: { scale: 1.05 },
+  whileTap: { scale: 0.95 },
+}
 
 export interface CardProps extends HTMLAttributes<HTMLDivElement> {
   /**
@@ -21,11 +28,7 @@ export interface CardProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 export const Card = observer(({ animate = true, children, className, onClick, style, ...props }: CardProps) => {
-  const motionProps = props.motion ?? {
-    whileHover: { scale: 1.05 },
-    whileTap: { scale: 0.95 },
-  }
-
+  const motionProps = props.motion ?? DEFAULT_MOTION
   const Element = motionProps ? motion.div : ('div' as React.ElementType)
 
   return (
