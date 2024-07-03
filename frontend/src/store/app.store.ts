@@ -1,15 +1,7 @@
-import { makeAutoObservable } from 'mobx'
+import { toast } from 'sonner'
 
-import { NotificationsStore } from './notifications.store'
-
-export class AppStore {
-  notifications: NotificationsStore
-
-  constructor() {
-    makeAutoObservable(this)
-
-    this.notifications = new NotificationsStore()
-  }
+class AppStore {
+  toast = toast
 }
 
 export const app = new AppStore()
