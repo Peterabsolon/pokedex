@@ -1,4 +1,3 @@
 # TODO
 
-- framer-motion
 - Apollo
