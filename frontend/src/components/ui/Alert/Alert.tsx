@@ -3,22 +3,11 @@
 import classNames from 'classnames'
 import { motion, MotionProps } from 'framer-motion'
 import { observer } from 'mobx-react-lite'
-
-const DEFAULT_MOTION = {
-  layout: true,
-  initial: { scale: 0.9, opacity: 0 },
-  animate: { scale: 1, opacity: 1 },
-  exit: { scale: 0.8, opacity: 0 },
-}
+import { HTMLAttributes } from 'react'
 
 export type AlertLevel = keyof typeof levelStyles
 
-export interface AlertProps {
-  /**
-   * Root element className
-   */
-  className?: string
-
+export interface AlertProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * The alert level
    */
@@ -52,6 +41,13 @@ export const Alert = observer(({ children, level = 'info', ...props }: AlertProp
     </Element>
   )
 })
+
+const DEFAULT_MOTION = {
+  // layout: true,
+  initial: { scale: 0.9, opacity: 0 },
+  animate: { scale: 1, opacity: 1 },
+  exit: { scale: 0.8, opacity: 0 },
+}
 
 const levelStyles = {
   info: 'border-blue-600 bg-blue-500',
