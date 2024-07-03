@@ -70,7 +70,7 @@ export const Button = ({
     whileTap: { scale: 0.95 },
   }
 
-  const ButtonElement = motionProps ? motion.button : ('button' as ElementType)
+  const Element = motionProps ? motion.button : ('button' as ElementType)
   const hoverVariant = variantsHover[variantHover || variant]
 
   const classNameFinal = classNames(
@@ -91,10 +91,10 @@ export const Button = ({
   const content = <span>{label || children}</span>
 
   return (
-    <ButtonElement {...props} {...motionProps} className={classNameFinal}>
+    <Element {...props} {...motionProps} className={classNameFinal}>
       {iconLeft}
       {content}
       {iconRight}
-    </ButtonElement>
+    </Element>
   )
 }
