@@ -5,6 +5,7 @@
     "dev:be": "cd backend && node src/index.js",
     "dev:fe": "cd frontend && npm run dev",
     "dev": "npm run dev:be & npm run dev:fe",
+    "build": "cd frontend && npm run build",
     "test:e2e": "npx playwright test",
     "test:e2e:ui": "npx playwright test --ui",
     "test": "npm run test:e2e",
