@@ -2,6 +2,7 @@ import { SelectOption } from '~/components'
 
 type Options = readonly SelectOption<string>[]
 
+// TODO: store as strings only, add/use onValueChange to <Select />
 export const initialState = {
   types: [] as Options,
   typesSelected: [] as Options,
