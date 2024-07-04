@@ -1,22 +1,19 @@
 'use client'
 
-import { useFavoritePokemonMutation, usePokemonsQuery, useUnFavoritePokemonMutation } from '~/hooks'
+import { useDebouncedValue, usePokemonsQuery } from '~/hooks'
+
+import { PokemonListItem } from './components'
 
 export default function PokemonsPage() {
-  const { pokemons } = usePokemonsQuery({ search: 'B' })
-  const { handleFavorite } = useFavoritePokemonMutation()
-  const { handleUnFavorite } = useUnFavoritePokemonMutation()
+  const debounced = useDebouncedValue()
+  const { pokemons } = usePokemonsQuery({ search: debounced.value })
 
   return (
     <div>
-      {pokemons.map((pokemon) => (
-        <div key={pokemon.id}>
-          {pokemon.name}
+      <input className="text-black" value={debounced.input} onChange={debounced.onInputChange} />
 
-          <button onClick={() => (pokemon.isFavorite ? handleUnFavorite(pokemon.id) : handleFavorite(pokemon.id))}>
-            {pokemon.isFavorite ? 'Unfavorite' : 'Favorite'}
-          </button>
-        </div>
+      {pokemons.map((pokemon) => (
+        <PokemonListItem key={pokemon.id} pokemon={pokemon} />
       ))}
     </div>
   )
