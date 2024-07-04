@@ -1,37 +1,42 @@
 import { SelectOption } from '~/components'
 
+type Options = readonly SelectOption<string>[]
+
 export const initialState = {
-  pokemonTypes: [] as readonly SelectOption<string>[],
-  pokemonTypesSelected: [] as readonly SelectOption<string>[],
+  types: [] as Options,
+  typesSelected: [] as Options,
 
-  pokemonWeaknesses: [] as readonly SelectOption<string>[],
-  pokemonWeaknessesSelected: [] as readonly SelectOption<string>[],
+  weaknesses: [] as Options,
+  weaknessesSelected: [] as Options,
 
-  pokemonResistances: [] as readonly SelectOption<string>[],
-  pokemonResistancesSelected: [] as readonly SelectOption<string>[],
+  resistances: [] as Options,
+  resistancesSelected: [] as Options,
 }
 
-export const actions = (
-  _: typeof initialState,
-  setState: React.Dispatch<React.SetStateAction<typeof initialState>>,
-) => ({
-  setTypes: (pokemonTypes: readonly SelectOption<string>[]) => {
-    setState((prev) => ({ ...prev, pokemonTypes }))
+export type PokemonsState = typeof initialState
+
+export const actions = (_: PokemonsState, setState: React.Dispatch<React.SetStateAction<PokemonsState>>) => ({
+  setTypes: (types: Options) => {
+    setState((prev) => ({ ...prev, types }))
   },
 
-  setSelectedTypes: (pokemonTypesSelected: readonly SelectOption<string>[]) => {
-    setState((prev) => ({ ...prev, pokemonTypesSelected }))
+  setTypesSelected: (typesSelected: Options) => {
+    setState((prev) => ({ ...prev, typesSelected }))
   },
 
-  setWeaknesses: (pokemonWeaknesses: readonly SelectOption<string>[]) => {
-    setState((prev) => ({ ...prev, pokemonWeaknesses }))
+  setWeaknesses: (weaknesses: Options) => {
+    setState((prev) => ({ ...prev, weaknesses }))
   },
 
-  setSelectedWeaknesses: (selectedPokemonWeaknesses: readonly SelectOption<string>[]) => {
-    setState((prev) => ({ ...prev, selectedPokemonWeaknesses }))
+  setWeaknessesSelected: (weaknessesSelected: Options) => {
+    setState((prev) => ({ ...prev, weaknessesSelected }))
   },
 
-  setResistances: (pokemonResistances: readonly SelectOption<string>[]) => {
-    setState((prev) => ({ ...prev, pokemonResistances }))
+  setResistances: (resistances: Options) => {
+    setState((prev) => ({ ...prev, resistances }))
+  },
+
+  setResistancesSelected: (resistancesSelected: Options) => {
+    setState((prev) => ({ ...prev, resistancesSelected }))
   },
 })

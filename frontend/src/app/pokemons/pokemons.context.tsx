@@ -30,7 +30,7 @@ export const PokemonsContextProvider = ({ children }: PropsWithChildren) => {
   const pokemonsQuery = usePokemonsQuery({
     search: searchQuery.value,
     filter: {
-      type: state.pokemonTypesSelected[0]?.value,
+      type: state.typesSelected[0]?.value,
     },
   })
 
