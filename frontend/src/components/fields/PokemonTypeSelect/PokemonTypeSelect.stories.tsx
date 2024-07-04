@@ -11,9 +11,9 @@ export default {
 } as Meta<typeof PokemonTypeSelect>
 
 const Template: StoryFn<typeof PokemonTypeSelect> = () => {
-  const [value, setValue] = useState('banana')
+  const [value, setValue] = useState<readonly string[]>([])
 
-  return <PokemonTypeSelect value={value} onChange={setValue} />
+  return <PokemonTypeSelect<true> value={value} onChange={setValue} />
 }
 
 export const Default = Template.bind({})

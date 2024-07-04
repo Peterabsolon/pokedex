@@ -1,11 +1,12 @@
 import { usePokemonWeaknessesQuery } from '~/hooks'
 
-import { ButtonSelect, ButtonSelectProps } from '../ButtonSelect'
+import { Select, SelectProps } from '../Select'
 
-export interface PokemonWeaknessSelectProps extends Omit<ButtonSelectProps<string>, 'options'> {}
+export interface PokemonWeaknessSelectProps<IsMulti extends boolean = false>
+  extends Omit<SelectProps<string, IsMulti, any>, 'options'> {}
 
-export const PokemonWeaknessSelect = (props: PokemonWeaknessSelectProps) => {
+export const PokemonWeaknessSelect = <IsMulti extends boolean = false>(props: PokemonWeaknessSelectProps<IsMulti>) => {
   const { options } = usePokemonWeaknessesQuery()
 
-  return <ButtonSelect options={options} {...props} />
+  return <Select<string, IsMulti, any> options={options} {...props} />
 }

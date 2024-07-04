@@ -1,15 +1,15 @@
 import { PokemonTypeSelect, PokemonWeaknessSelect } from '~/components'
 
-export interface PokemonFiltersProps {
-  foo?: string
-}
+import { usePokemonsContext } from '../pokemons.context'
 
-export const PokemonFilters = ({ foo }: PokemonFiltersProps) => {
-  console.log({ foo })
+export const PokemonFilters = () => {
+  const { state, actions } = usePokemonsContext()
 
   return (
     <div>
-      <PokemonTypeSelect />
+      <PokemonTypeSelect value={state.pokemonTypesSelected} onChange={actions.setSelectedTypes} />
+      <PokemonWeaknessSelect value={state.pokemonWeaknessesSelected} onChange={actions.setSelectedWeaknesses} />
+
       <PokemonWeaknessSelect />
     </div>
   )
