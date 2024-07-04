@@ -1,23 +1,27 @@
 'use client'
 
-import { useDebouncedValue, usePokemonsQuery } from '~/hooks'
+import { PokemonFilters, PokemonListItem } from './components'
+import { PokemonsContextProvider, usePokemonsContext } from './pokemons.context'
 
-import { PokemonListItem, PokemonTypes } from './components'
-import { PokemonsContextProvider } from './pokemons.context'
-
-export default function PokemonsPage() {
-  const debounced = useDebouncedValue({ debounceMs: 250 })
-  const { pokemons } = usePokemonsQuery({ search: debounced.value })
+const PokemonsPage = () => {
+  const { queries } = usePokemonsContext()
+  const { pokemonsQuery } = queries
 
   return (
-    <PokemonsContextProvider>
-      <input className="text-black" value={debounced.input} onChange={debounced.onInputChange} />
+    <>
+      <PokemonFilters />
 
-      <PokemonTypes />
-
-      {pokemons.map((pokemon) => (
+      {pokemonsQuery.pokemons.map((pokemon) => (
         <PokemonListItem key={pokemon.id} pokemon={pokemon} />
       ))}
+    </>
+  )
+}
+
+export default function Page() {
+  return (
+    <PokemonsContextProvider>
+      <PokemonsPage />
     </PokemonsContextProvider>
   )
 }

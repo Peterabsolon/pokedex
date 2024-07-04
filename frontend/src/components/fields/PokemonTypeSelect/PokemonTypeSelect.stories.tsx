@@ -1,6 +1,7 @@
 import { Meta, StoryFn } from '@storybook/react'
 import { useState } from 'react'
 
+import { SelectOption } from '../Select'
 import { PokemonTypeSelect } from './PokemonTypeSelect'
 
 export default {
@@ -11,7 +12,7 @@ export default {
 } as Meta<typeof PokemonTypeSelect>
 
 const Template: StoryFn<typeof PokemonTypeSelect> = () => {
-  const [value, setValue] = useState<readonly string[]>([])
+  const [value, setValue] = useState<readonly SelectOption<string>[]>([])
 
   return <PokemonTypeSelect<true> value={value} onChange={setValue} />
 }

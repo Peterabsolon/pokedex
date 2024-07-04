@@ -3,14 +3,23 @@ import { PokemonTypeSelect, PokemonWeaknessSelect } from '~/components'
 import { usePokemonsContext } from '../pokemons.context'
 
 export const PokemonFilters = () => {
-  const { state, actions } = usePokemonsContext()
+  const { state, actions, searchQuery } = usePokemonsContext()
 
   return (
     <div>
-      <PokemonTypeSelect<true> value={state.pokemonTypesSelected} onChange={actions.setSelectedTypes} />
-      <PokemonWeaknessSelect<true> value={state.pokemonWeaknessesSelected} onChange={actions.setSelectedWeaknesses} />
+      <input className="text-black" value={searchQuery.input} onChange={searchQuery.onInputChange} />
 
-      <PokemonWeaknessSelect />
+      <PokemonTypeSelect<true>
+        isMulti
+        value={state.pokemonTypesSelected}
+        onChange={(v) => actions.setSelectedTypes(v)}
+      />
+
+      <PokemonWeaknessSelect<true>
+        isMulti
+        value={state.pokemonWeaknessesSelected}
+        onChange={actions.setSelectedWeaknesses}
+      />
     </div>
   )
 }
