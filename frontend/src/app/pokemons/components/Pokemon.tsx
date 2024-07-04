@@ -1,11 +1,9 @@
-import { PokemonModel } from '../pokemon.model'
-
 export interface PokemonProps {
-  pokemon: PokemonModel
+  // pokemon: PokemonInfoFragment
 }
 
-export const Pokemon = ({ pokemon }: PokemonProps) => {
-  const { name } = pokemon.props
+export const Pokemon = ({}: PokemonProps) => {
+  // const { name } = pokemon.props
 
-  return <div>{name}</div>
+  return <div>Pokemon</div>
 }

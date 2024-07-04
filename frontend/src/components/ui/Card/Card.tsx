@@ -2,7 +2,6 @@
 
 import cx from 'classnames'
 import { motion, MotionProps } from 'framer-motion'
-import { observer } from 'mobx-react-lite'
 import { HTMLAttributes, ReactNode } from 'react'
 
 const DEFAULT_MOTION: MotionProps = {
@@ -23,7 +22,7 @@ export interface CardProps extends HTMLAttributes<HTMLDivElement> {
   motion?: MotionProps
 }
 
-export const Card = observer(({ children, className, onClick, style, ...props }: CardProps) => {
+export const Card = ({ children, className, onClick, style, ...props }: CardProps) => {
   const motionProps = props.motion ?? DEFAULT_MOTION
   const Element = motionProps ? motion.div : ('div' as React.ElementType)
 
@@ -37,4 +36,4 @@ export const Card = observer(({ children, className, onClick, style, ...props }:
       {children}
     </Element>
   )
-})
+}

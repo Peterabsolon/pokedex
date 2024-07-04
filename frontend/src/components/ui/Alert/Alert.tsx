@@ -2,7 +2,6 @@
 
 import classNames from 'classnames'
 import { motion, MotionProps } from 'framer-motion'
-import { observer } from 'mobx-react-lite'
 import { HTMLAttributes } from 'react'
 
 export type AlertLevel = keyof typeof levelStyles
@@ -24,7 +23,7 @@ export interface AlertProps extends HTMLAttributes<HTMLDivElement> {
   motion?: MotionProps
 }
 
-export const Alert = observer(({ children, level = 'info', ...props }: AlertProps) => {
+export const Alert = ({ children, level = 'info', ...props }: AlertProps) => {
   const motionProps = props.motion ?? DEFAULT_MOTION
   const Element = motionProps ? motion.button : ('button' as React.ElementType)
 
@@ -40,7 +39,7 @@ export const Alert = observer(({ children, level = 'info', ...props }: AlertProp
       {children}
     </Element>
   )
-})
+}
 
 const DEFAULT_MOTION = {
   // layout: true,
