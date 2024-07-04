@@ -108,7 +108,9 @@ export type Query = {
   __typename?: 'Query'
   pokemonById?: Maybe<Pokemon>
   pokemonByName?: Maybe<Pokemon>
+  pokemonResistances: Array<Scalars['String']['output']>
   pokemonTypes: Array<Scalars['String']['output']>
+  pokemonWeaknesses: Array<Scalars['String']['output']>
   pokemons: PokemonConnection
 }
 
@@ -264,13 +266,20 @@ export type GetPokemonByNameQuery = {
   } | null
 }
 
+export type GetPokemonResistancesQueryVariables = Exact<{ [key: string]: never }>
+
+export type GetPokemonResistancesQuery = { __typename?: 'Query'; pokemonResistances: Array<string> }
+
 export type GetPokemonTypesQueryVariables = Exact<{ [key: string]: never }>
 
 export type GetPokemonTypesQuery = { __typename?: 'Query'; pokemonTypes: Array<string> }
 
+export type GetPokemonWeaknessesQueryVariables = Exact<{ [key: string]: never }>
+
+export type GetPokemonWeaknessesQuery = { __typename?: 'Query'; pokemonWeaknesses: Array<string> }
+
 export type GetPokemonsQueryVariables = Exact<{
-  limit?: InputMaybe<Scalars['Int']['input']>
-  offset?: InputMaybe<Scalars['Int']['input']>
+  query: PokemonsQueryInput
 }>
 
 export type GetPokemonsQuery = {
@@ -906,6 +915,20 @@ export const GetPokemonByNameDocument = {
     },
   ],
 } as unknown as DocumentNode<GetPokemonByNameQuery, GetPokemonByNameQueryVariables>
+export const GetPokemonResistancesDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'query',
+      name: { kind: 'Name', value: 'getPokemonResistances' },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [{ kind: 'Field', name: { kind: 'Name', value: 'pokemonResistances' } }],
+      },
+    },
+  ],
+} as unknown as DocumentNode<GetPokemonResistancesQuery, GetPokemonResistancesQueryVariables>
 export const GetPokemonTypesDocument = {
   kind: 'Document',
   definitions: [
@@ -920,6 +943,20 @@ export const GetPokemonTypesDocument = {
     },
   ],
 } as unknown as DocumentNode<GetPokemonTypesQuery, GetPokemonTypesQueryVariables>
+export const GetPokemonWeaknessesDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'query',
+      name: { kind: 'Name', value: 'getPokemonWeaknesses' },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [{ kind: 'Field', name: { kind: 'Name', value: 'pokemonWeaknesses' } }],
+      },
+    },
+  ],
+} as unknown as DocumentNode<GetPokemonWeaknessesQuery, GetPokemonWeaknessesQueryVariables>
 export const GetPokemonsDocument = {
   kind: 'Document',
   definitions: [
@@ -930,13 +967,11 @@ export const GetPokemonsDocument = {
       variableDefinitions: [
         {
           kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'limit' } },
-          type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } },
-        },
-        {
-          kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'offset' } },
-          type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } },
+          variable: { kind: 'Variable', name: { kind: 'Name', value: 'query' } },
+          type: {
+            kind: 'NonNullType',
+            type: { kind: 'NamedType', name: { kind: 'Name', value: 'PokemonsQueryInput' } },
+          },
         },
       ],
       selectionSet: {
@@ -949,21 +984,7 @@ export const GetPokemonsDocument = {
               {
                 kind: 'Argument',
                 name: { kind: 'Name', value: 'query' },
-                value: {
-                  kind: 'ObjectValue',
-                  fields: [
-                    {
-                      kind: 'ObjectField',
-                      name: { kind: 'Name', value: 'limit' },
-                      value: { kind: 'Variable', name: { kind: 'Name', value: 'limit' } },
-                    },
-                    {
-                      kind: 'ObjectField',
-                      name: { kind: 'Name', value: 'offset' },
-                      value: { kind: 'Variable', name: { kind: 'Name', value: 'offset' } },
-                    },
-                  ],
-                },
+                value: { kind: 'Variable', name: { kind: 'Name', value: 'query' } },
               },
             ],
             selectionSet: {

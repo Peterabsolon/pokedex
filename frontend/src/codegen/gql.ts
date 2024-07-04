@@ -23,8 +23,10 @@ const documents = {
     types.GetPokemonByIdDocument,
   '\n  \n\n  query getPokemonByName($name: String!) {\n    pokemonByName(name: $name) {\n      ...PokemonDetails\n    }\n  }\n':
     types.GetPokemonByNameDocument,
+  '\n  query getPokemonResistances {\n    pokemonResistances\n  }\n': types.GetPokemonResistancesDocument,
   '\n  query getPokemonTypes {\n    pokemonTypes\n  }\n': types.GetPokemonTypesDocument,
-  '\n  \n\n  query getPokemons($limit: Int, $offset: Int) {\n    pokemons(query: { limit: $limit, offset: $offset }) {\n      edges {\n        ...PokemonInfo\n      }\n    }\n  }\n':
+  '\n  query getPokemonWeaknesses {\n    pokemonWeaknesses\n  }\n': types.GetPokemonWeaknessesDocument,
+  '\n  \n\n  query getPokemons($query: PokemonsQueryInput!) {\n    pokemons(query: $query) {\n      edges {\n        ...PokemonInfo\n      }\n    }\n  }\n':
     types.GetPokemonsDocument,
   '\n  \n\n  mutation unFavoritePokemon($id: ID!) {\n    unFavoritePokemon(id: $id) {\n      ...PokemonDetails\n    }\n  }\n':
     types.UnFavoritePokemonDocument,
@@ -78,14 +80,26 @@ export function graphql(
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(
+  source: '\n  query getPokemonResistances {\n    pokemonResistances\n  }\n',
+): (typeof documents)['\n  query getPokemonResistances {\n    pokemonResistances\n  }\n']
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(
   source: '\n  query getPokemonTypes {\n    pokemonTypes\n  }\n',
 ): (typeof documents)['\n  query getPokemonTypes {\n    pokemonTypes\n  }\n']
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(
-  source: '\n  \n\n  query getPokemons($limit: Int, $offset: Int) {\n    pokemons(query: { limit: $limit, offset: $offset }) {\n      edges {\n        ...PokemonInfo\n      }\n    }\n  }\n',
-): (typeof documents)['\n  \n\n  query getPokemons($limit: Int, $offset: Int) {\n    pokemons(query: { limit: $limit, offset: $offset }) {\n      edges {\n        ...PokemonInfo\n      }\n    }\n  }\n']
+  source: '\n  query getPokemonWeaknesses {\n    pokemonWeaknesses\n  }\n',
+): (typeof documents)['\n  query getPokemonWeaknesses {\n    pokemonWeaknesses\n  }\n']
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(
+  source: '\n  \n\n  query getPokemons($query: PokemonsQueryInput!) {\n    pokemons(query: $query) {\n      edges {\n        ...PokemonInfo\n      }\n    }\n  }\n',
+): (typeof documents)['\n  \n\n  query getPokemons($query: PokemonsQueryInput!) {\n    pokemons(query: $query) {\n      edges {\n        ...PokemonInfo\n      }\n    }\n  }\n']
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

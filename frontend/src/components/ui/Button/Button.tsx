@@ -4,7 +4,7 @@ import classNames from 'classnames'
 import { motion, MotionProps } from 'framer-motion'
 import { ButtonHTMLAttributes, ElementType, ReactNode } from 'react'
 
-const DEFAULT_MOTION: MotionProps = {
+export const DEFAULT_BUTTON_MOTION: MotionProps = {
   whileHover: { scale: 1.05 },
   whileTap: { scale: 0.95 },
 }
@@ -55,7 +55,7 @@ export const Button = ({
   iconRight,
   ...props
 }: ButtonProps) => {
-  const motionProps = props.motion ?? DEFAULT_MOTION
+  const motionProps = props.motion ?? DEFAULT_BUTTON_MOTION
   const Element = motionProps ? motion.button : ('button' as ElementType)
 
   return (

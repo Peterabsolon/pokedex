@@ -2,7 +2,7 @@
 
 import { useDebouncedValue, usePokemonsQuery } from '~/hooks'
 
-import { PokemonListItem } from './components'
+import { PokemonListItem, PokemonTypes } from './components'
 
 export default function PokemonsPage() {
   const debounced = useDebouncedValue()
@@ -11,6 +11,8 @@ export default function PokemonsPage() {
   return (
     <div>
       <input className="text-black" value={debounced.input} onChange={debounced.onInputChange} />
+
+      <PokemonTypes />
 
       {pokemons.map((pokemon) => (
         <PokemonListItem key={pokemon.id} pokemon={pokemon} />

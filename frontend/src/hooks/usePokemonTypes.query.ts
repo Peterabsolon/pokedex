@@ -6,7 +6,7 @@ import { GET_POKEMON_TYPES_QUERY } from '~/graphql'
 
 export const usePokemonTypesQuery = () => {
   const pokemonTypesQuery = useQuery<GetPokemonTypesQuery>(GET_POKEMON_TYPES_QUERY)
-  const types = useMemo(() => pokemonTypesQuery.data ?? [], [pokemonTypesQuery])
+  const types = useMemo(() => pokemonTypesQuery.data?.pokemonTypes ?? [], [pokemonTypesQuery])
 
   return { pokemonTypesQuery, types }
 }
