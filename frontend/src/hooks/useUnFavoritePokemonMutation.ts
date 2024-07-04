@@ -2,9 +2,8 @@ import { useMutation } from '@apollo/client'
 import { set } from 'lodash'
 import { useCallback } from 'react'
 
-import { GetPokemonsQuery, UnFavoritePokemonMutation } from '~/gql/graphql'
-
-import { GET_POKEMONS_QUERY, UNFAVORITE_POKEMON_MUTATION } from '../graphql'
+import { GetPokemonsQuery, UnFavoritePokemonMutation } from '~/codegen/graphql'
+import { GET_POKEMONS_QUERY, UNFAVORITE_POKEMON_MUTATION } from '~/graphql'
 
 export const useUnFavoritePokemonMutation = () => {
   const [mutate, result] = useMutation<UnFavoritePokemonMutation>(UNFAVORITE_POKEMON_MUTATION, {

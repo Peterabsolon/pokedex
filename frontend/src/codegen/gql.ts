@@ -13,7 +13,7 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
-  '\n  mutation favoritePokemon($id: ID!) {\n    favoritePokemon(id: $id) {\n      id\n      name\n      isFavorite\n    }\n  }\n':
+  '\n  \n\n  mutation favoritePokemon($id: ID!) {\n    favoritePokemon(id: $id) {\n      ...PokemonDetails\n    }\n  }\n':
     types.FavoritePokemonDocument,
   '\n  \n\n  fragment PokemonDetails on Pokemon {\n    ...PokemonInfo\n\n    resistant\n    weaknesses\n\n    weight {\n      minimum\n      maximum\n    }\n\n    height {\n      minimum\n      maximum\n    }\n\n    evolutionRequirements {\n      amount\n      name\n    }\n\n    evolutions {\n      id\n      name\n    }\n\n    attacks {\n      fast {\n        name\n        type\n        damage\n      }\n\n      special {\n        name\n        type\n        damage\n      }\n    }\n  }\n':
     types.PokemonDetailsFragmentDoc,
@@ -26,7 +26,7 @@ const documents = {
   '\n  query getPokemonTypes {\n    pokemonTypes\n  }\n': types.GetPokemonTypesDocument,
   '\n  \n\n  query getPokemons($limit: Int, $offset: Int) {\n    pokemons(query: { limit: $limit, offset: $offset }) {\n      edges {\n        ...PokemonInfo\n      }\n    }\n  }\n':
     types.GetPokemonsDocument,
-  '\n  mutation unFavoritePokemon($id: ID!) {\n    unFavoritePokemon(id: $id) {\n      id\n      name\n    }\n  }\n':
+  '\n  \n\n  mutation unFavoritePokemon($id: ID!) {\n    unFavoritePokemon(id: $id) {\n      ...PokemonDetails\n    }\n  }\n':
     types.UnFavoritePokemonDocument,
 }
 
@@ -48,8 +48,8 @@ export function graphql(source: string): unknown
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(
-  source: '\n  mutation favoritePokemon($id: ID!) {\n    favoritePokemon(id: $id) {\n      id\n      name\n      isFavorite\n    }\n  }\n',
-): (typeof documents)['\n  mutation favoritePokemon($id: ID!) {\n    favoritePokemon(id: $id) {\n      id\n      name\n      isFavorite\n    }\n  }\n']
+  source: '\n  \n\n  mutation favoritePokemon($id: ID!) {\n    favoritePokemon(id: $id) {\n      ...PokemonDetails\n    }\n  }\n',
+): (typeof documents)['\n  \n\n  mutation favoritePokemon($id: ID!) {\n    favoritePokemon(id: $id) {\n      ...PokemonDetails\n    }\n  }\n']
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -90,8 +90,8 @@ export function graphql(
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(
-  source: '\n  mutation unFavoritePokemon($id: ID!) {\n    unFavoritePokemon(id: $id) {\n      id\n      name\n    }\n  }\n',
-): (typeof documents)['\n  mutation unFavoritePokemon($id: ID!) {\n    unFavoritePokemon(id: $id) {\n      id\n      name\n    }\n  }\n']
+  source: '\n  \n\n  mutation unFavoritePokemon($id: ID!) {\n    unFavoritePokemon(id: $id) {\n      ...PokemonDetails\n    }\n  }\n',
+): (typeof documents)['\n  \n\n  mutation unFavoritePokemon($id: ID!) {\n    unFavoritePokemon(id: $id) {\n      ...PokemonDetails\n    }\n  }\n']
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {}

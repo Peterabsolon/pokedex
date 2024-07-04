@@ -135,7 +135,30 @@ export type FavoritePokemonMutationVariables = Exact<{
 
 export type FavoritePokemonMutation = {
   __typename?: 'Mutation'
-  favoritePokemon?: { __typename?: 'Pokemon'; id: string; name: string; isFavorite: boolean } | null
+  favoritePokemon?: {
+    __typename?: 'Pokemon'
+    resistant: Array<string>
+    weaknesses: Array<string>
+    id: string
+    name: string
+    classification: string
+    types: Array<string>
+    sound: string
+    image: string
+    isFavorite: boolean
+    fleeRate: number
+    maxCP: number
+    maxHP: number
+    weight: { __typename?: 'PokemonDimension'; minimum: string; maximum: string }
+    height: { __typename?: 'PokemonDimension'; minimum: string; maximum: string }
+    evolutionRequirements?: { __typename?: 'PokemonEvolutionRequirement'; amount: number; name: string } | null
+    evolutions: Array<{ __typename?: 'Pokemon'; id: string; name: string }>
+    attacks: {
+      __typename?: 'PokemonAttack'
+      fast: Array<{ __typename?: 'Attack'; name: string; type: string; damage: number }>
+      special: Array<{ __typename?: 'Attack'; name: string; type: string; damage: number }>
+    }
+  } | null
 }
 
 export type PokemonDetailsFragment = {
@@ -276,7 +299,30 @@ export type UnFavoritePokemonMutationVariables = Exact<{
 
 export type UnFavoritePokemonMutation = {
   __typename?: 'Mutation'
-  unFavoritePokemon?: { __typename?: 'Pokemon'; id: string; name: string } | null
+  unFavoritePokemon?: {
+    __typename?: 'Pokemon'
+    resistant: Array<string>
+    weaknesses: Array<string>
+    id: string
+    name: string
+    classification: string
+    types: Array<string>
+    sound: string
+    image: string
+    isFavorite: boolean
+    fleeRate: number
+    maxCP: number
+    maxHP: number
+    weight: { __typename?: 'PokemonDimension'; minimum: string; maximum: string }
+    height: { __typename?: 'PokemonDimension'; minimum: string; maximum: string }
+    evolutionRequirements?: { __typename?: 'PokemonEvolutionRequirement'; amount: number; name: string } | null
+    evolutions: Array<{ __typename?: 'Pokemon'; id: string; name: string }>
+    attacks: {
+      __typename?: 'PokemonAttack'
+      fast: Array<{ __typename?: 'Attack'; name: string; type: string; damage: number }>
+      special: Array<{ __typename?: 'Attack'; name: string; type: string; damage: number }>
+    }
+  } | null
 }
 
 export const PokemonInfoFragmentDoc = {
@@ -448,10 +494,116 @@ export const FavoritePokemonDocument = {
             ],
             selectionSet: {
               kind: 'SelectionSet',
+              selections: [{ kind: 'FragmentSpread', name: { kind: 'Name', value: 'PokemonDetails' } }],
+            },
+          },
+        ],
+      },
+    },
+    {
+      kind: 'FragmentDefinition',
+      name: { kind: 'Name', value: 'PokemonInfo' },
+      typeCondition: { kind: 'NamedType', name: { kind: 'Name', value: 'Pokemon' } },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'classification' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'types' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'sound' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'image' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'isFavorite' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'fleeRate' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'maxCP' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'maxHP' } },
+        ],
+      },
+    },
+    {
+      kind: 'FragmentDefinition',
+      name: { kind: 'Name', value: 'PokemonDetails' },
+      typeCondition: { kind: 'NamedType', name: { kind: 'Name', value: 'Pokemon' } },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          { kind: 'FragmentSpread', name: { kind: 'Name', value: 'PokemonInfo' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'resistant' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'weaknesses' } },
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'weight' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'minimum' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'maximum' } },
+              ],
+            },
+          },
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'height' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'minimum' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'maximum' } },
+              ],
+            },
+          },
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'evolutionRequirements' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'amount' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+              ],
+            },
+          },
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'evolutions' },
+            selectionSet: {
+              kind: 'SelectionSet',
               selections: [
                 { kind: 'Field', name: { kind: 'Name', value: 'id' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'name' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'isFavorite' } },
+              ],
+            },
+          },
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'attacks' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'fast' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'type' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'damage' } },
+                    ],
+                  },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'special' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'type' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'damage' } },
+                    ],
+                  },
+                },
               ],
             },
           },
@@ -882,9 +1034,116 @@ export const UnFavoritePokemonDocument = {
             ],
             selectionSet: {
               kind: 'SelectionSet',
+              selections: [{ kind: 'FragmentSpread', name: { kind: 'Name', value: 'PokemonDetails' } }],
+            },
+          },
+        ],
+      },
+    },
+    {
+      kind: 'FragmentDefinition',
+      name: { kind: 'Name', value: 'PokemonInfo' },
+      typeCondition: { kind: 'NamedType', name: { kind: 'Name', value: 'Pokemon' } },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'classification' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'types' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'sound' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'image' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'isFavorite' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'fleeRate' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'maxCP' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'maxHP' } },
+        ],
+      },
+    },
+    {
+      kind: 'FragmentDefinition',
+      name: { kind: 'Name', value: 'PokemonDetails' },
+      typeCondition: { kind: 'NamedType', name: { kind: 'Name', value: 'Pokemon' } },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          { kind: 'FragmentSpread', name: { kind: 'Name', value: 'PokemonInfo' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'resistant' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'weaknesses' } },
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'weight' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'minimum' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'maximum' } },
+              ],
+            },
+          },
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'height' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'minimum' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'maximum' } },
+              ],
+            },
+          },
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'evolutionRequirements' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'amount' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+              ],
+            },
+          },
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'evolutions' },
+            selectionSet: {
+              kind: 'SelectionSet',
               selections: [
                 { kind: 'Field', name: { kind: 'Name', value: 'id' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+              ],
+            },
+          },
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'attacks' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'fast' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'type' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'damage' } },
+                    ],
+                  },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'special' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'type' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'damage' } },
+                    ],
+                  },
+                },
               ],
             },
           },

@@ -1,6 +1,6 @@
 'use client'
 
-import { useFavoritePokemonMutation, usePokemonsQuery, useUnFavoritePokemonMutation } from './hooks'
+import { useFavoritePokemonMutation, usePokemonsQuery, useUnFavoritePokemonMutation } from '~/hooks'
 
 export default function PokemonsPage() {
   const { pokemons } = usePokemonsQuery()
@@ -12,6 +12,7 @@ export default function PokemonsPage() {
       {pokemons.map((pokemon) => (
         <div key={pokemon.id}>
           {pokemon.name}
+
           <button onClick={() => (pokemon.isFavorite ? handleUnFavorite(pokemon.id) : handleFavorite(pokemon.id))}>
             {pokemon.isFavorite ? 'Unfavorite' : 'Favorite'}
           </button>
