@@ -5,7 +5,7 @@ import { useEffect } from 'react'
 
 import { pokemons } from './pokemons.store'
 
-export const PokemonsPage = observer(() => {
+const PokemonsPage = observer(() => {
   useEffect(() => pokemons.mount(), [])
 
   return <div>PokemonsPage</div>
