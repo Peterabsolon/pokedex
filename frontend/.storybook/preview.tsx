@@ -1,16 +1,19 @@
 import '../src/assets/globals.css'
 
-import React from 'react'
 import type { Preview } from '@storybook/react'
+import React from 'react'
 
 import { font } from '../src/assets'
+import { ApolloWrapper } from '../src/lib/apollo.wrapper'
 
 const preview: Preview = {
   decorators: [
     (Story) => (
-      <div className={font.className}>
-        <Story />
-      </div>
+      <ApolloWrapper>
+        <div className={font.className}>
+          <Story />
+        </div>
+      </ApolloWrapper>
     ),
   ],
 

@@ -5,7 +5,7 @@ import { useDebouncedValue, usePokemonsQuery } from '~/hooks'
 import { PokemonListItem, PokemonTypes } from './components'
 
 export default function PokemonsPage() {
-  const debounced = useDebouncedValue()
+  const debounced = useDebouncedValue({ debounceMs: 250 })
   const { pokemons } = usePokemonsQuery({ search: debounced.value })
 
   return (
