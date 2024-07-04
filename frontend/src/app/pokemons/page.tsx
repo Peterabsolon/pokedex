@@ -3,7 +3,7 @@
 import { useFavoritePokemonMutation, usePokemonsQuery, useUnFavoritePokemonMutation } from '~/hooks'
 
 export default function PokemonsPage() {
-  const { pokemons } = usePokemonsQuery()
+  const { pokemons } = usePokemonsQuery({ search: 'B' })
   const { handleFavorite } = useFavoritePokemonMutation()
   const { handleUnFavorite } = useUnFavoritePokemonMutation()
 
