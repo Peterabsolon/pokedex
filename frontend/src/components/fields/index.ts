@@ -1,2 +1,4 @@
 export * from './ButtonSelect'
-export * from './MultiSelect'
+export * from './PokemonTypeSelect'
+export * from './PokemonWeaknessSelect'
+export * from './Select'

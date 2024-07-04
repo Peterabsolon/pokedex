@@ -1,6 +1,6 @@
 import { usePokemonTypesQuery } from '~/hooks'
 
-import { ButtonSelect, ButtonSelectProps } from '../../ButtonSelect'
+import { ButtonSelect, ButtonSelectProps } from '../ButtonSelect'
 
 export interface PokemonTypeSelectProps extends Omit<ButtonSelectProps<string>, 'options'> {}
 

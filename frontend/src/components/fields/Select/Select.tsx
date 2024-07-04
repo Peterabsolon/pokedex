@@ -2,10 +2,6 @@ import ReactSelect, { GroupBase, Props as ReactSelectProps } from 'react-select'
 
 import { Field, FieldProps } from '~/components/ui'
 
-export type { ReactSelectProps as SelectProps }
-
-interface SelectPropsExtra extends FieldProps {}
-
 export const Select = <
   Option = unknown,
   IsMulti extends boolean = boolean,
@@ -14,10 +10,12 @@ export const Select = <
   name,
   label,
   ...props
-}: ReactSelectProps<Option, IsMulti, Group> & SelectPropsExtra) => {
+}: ReactSelectProps<Option, IsMulti, Group> & FieldProps) => {
   return (
     <Field name={name} label={label}>
-      <ReactSelect {...props} name={name} />
+      <ReactSelect<Option, IsMulti, Group> {...props} name={name} />
     </Field>
   )
 }
+
+export type SelectProps = React.ComponentProps<typeof Select>
