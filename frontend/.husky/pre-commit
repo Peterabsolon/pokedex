@@ -1,1 +1,1 @@
-cd frontend && npm run check:style
+cd frontend && npm run check:style && npm run ts:check
