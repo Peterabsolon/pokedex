@@ -1,11 +1,11 @@
 import { usePokemonTypesQuery } from '~/hooks'
 
-import { Select, SelectProps } from '../../Select'
+import { ButtonSelect, ButtonSelectProps } from '../../ButtonSelect'
 
-export interface PokemonTypeSelectProps extends Omit<SelectProps<string>, 'options'> {}
+export interface PokemonTypeSelectProps extends Omit<ButtonSelectProps<string>, 'options'> {}
 
 export const PokemonTypeSelect = (props: PokemonTypeSelectProps) => {
   const { options } = usePokemonTypesQuery()
 
-  return <Select options={options} {...props} />
+  return <ButtonSelect options={options} {...props} />
 }

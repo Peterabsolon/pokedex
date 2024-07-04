@@ -2,19 +2,19 @@ import { ReactNode } from 'react'
 
 import { Button, DEFAULT_BUTTON_MOTION } from '~/components/ui'
 
-export interface SelectOption<T extends string> {
+export interface ButtonSelectOption<T extends string> {
   icon?: ReactNode
   value: T
   label: ReactNode
 }
 
-export interface SelectOptionProps<T extends string> {
+export interface ButtonSelectOptionProps<T extends string> {
   value?: T
-  option: SelectOption<T>
+  option: ButtonSelectOption<T>
   onSelect?: (value: T) => void
 }
 
-export const SelectOption = <T extends string>({ option, value, onSelect }: SelectOptionProps<T>) => {
+export const ButtonSelectOption = <T extends string>({ option, value, onSelect }: ButtonSelectOptionProps<T>) => {
   const { label, icon } = option
 
   const handleClick = () => {
