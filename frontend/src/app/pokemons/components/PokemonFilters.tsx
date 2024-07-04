@@ -7,8 +7,8 @@ export const PokemonFilters = () => {
 
   return (
     <div>
-      <PokemonTypeSelect value={state.pokemonTypesSelected} onChange={actions.setSelectedTypes} />
-      <PokemonWeaknessSelect value={state.pokemonWeaknessesSelected} onChange={actions.setSelectedWeaknesses} />
+      <PokemonTypeSelect<true> value={state.pokemonTypesSelected} onChange={actions.setSelectedTypes} />
+      <PokemonWeaknessSelect<true> value={state.pokemonWeaknessesSelected} onChange={actions.setSelectedWeaknesses} />
 
       <PokemonWeaknessSelect />
     </div>
