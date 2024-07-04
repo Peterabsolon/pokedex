@@ -1,6 +1,7 @@
 import '../assets/globals.css'
 
 import type { Metadata } from 'next'
+import { Toaster } from 'sonner'
 
 import { font } from '~/assets'
 
@@ -17,6 +18,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <html lang="en">
       <body className={`${font.className} flex flex-col items-stretch justify-stretch bg-slate-950`}>
         <header>Header</header>
+        <Toaster richColors={true} position="top-right" />
         <main className="z-20 flex flex-1 items-stretch justify-center overflow-auto px-8">{children}</main>
         <header>Footer</header>
       </body>
