@@ -6,8 +6,6 @@ import { observer } from 'mobx-react-lite'
 import { HTMLAttributes, ReactNode } from 'react'
 
 const DEFAULT_MOTION: MotionProps = {
-  whileHover: { scale: 1.05 },
-  whileTap: { scale: 0.95 },
   initial: { scale: 0.9, opacity: 0, y: 20 },
   animate: { scale: 1, opacity: 1, y: 0 },
   exit: { scale: 0.8, opacity: 0, y: -10 },

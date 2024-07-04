@@ -4,7 +4,7 @@ import classNames from 'classnames'
 import { motion, MotionProps } from 'framer-motion'
 import { ButtonHTMLAttributes, ElementType, ReactNode } from 'react'
 
-const DEFAULT_MOTION = {
+const DEFAULT_MOTION: MotionProps = {
   whileHover: { scale: 1.05 },
   whileTap: { scale: 0.95 },
 }

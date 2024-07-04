@@ -1,12 +1,19 @@
 'use client'
 
-import { makeAutoObservable } from 'mobx'
+import { makeAutoObservable, observable } from 'mobx'
 
+import { GetPokemonsQuery } from '~/gql/graphql'
 import { app } from '~/store'
 
-import { POKEMONS_QUERY } from './pokemons.graphql'
+import { GET_POKEMONS_QUERY } from './graphql/get-pokemons.query'
+import { PokemonModel } from './pokemon.model'
 
 export class PokemonsStore {
+  // ====================================================
+  // State
+  // ====================================================
+  pokemons = observable<PokemonModel>([])
+
   constructor() {
     makeAutoObservable(this)
   }
@@ -16,11 +23,9 @@ export class PokemonsStore {
   // ====================================================
   private fetchPokemons = async () => {
     try {
-      console.log('app.apollo', app.apollo)
-
-      const res = await app.apollo.query({ query: POKEMONS_QUERY })
-
-      console.log({ res })
+      const res = await app.apollo.query<GetPokemonsQuery>({ query: GET_POKEMONS_QUERY })
+      const pokemons = res.data.pokemons.edges.map((pokemon) => new PokemonModel(pokemon))
+      this.pokemons.replace(pokemons)
     } catch (err) {
       console.error(`Failed to fetch pokemons`, err)
     }
@@ -34,4 +39,4 @@ export class PokemonsStore {
   }
 }
 
-export const pokemons = new PokemonsStore()
+export const pokemonsStore = new PokemonsStore()
