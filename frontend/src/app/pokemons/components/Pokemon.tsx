@@ -1,6 +1,6 @@
 import { PokemonModel } from '../pokemon.model'
 
-export type PokemonProps = {
+export interface PokemonProps {
   pokemon: PokemonModel
 }
 

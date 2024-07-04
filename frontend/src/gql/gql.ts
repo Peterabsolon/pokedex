@@ -13,7 +13,7 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
-  '\n  query getPokemons($limit: Int, $offset: Int) {\n    pokemons(query: { limit: $limit, offset: $offset }) {\n      edges {\n        id\n        name\n      }\n    }\n  }\n':
+  '\n  query getPokemons($limit: Int, $offset: Int) {\n    pokemons(query: { limit: $limit, offset: $offset }) {\n      edges {\n        id\n        name\n        classification\n        types\n        resistant\n        weaknesses\n        weight {\n          minimum\n          maximum\n        }\n        height {\n          minimum\n          maximum\n        }\n        fleeRate\n        evolutionRequirements {\n          amount\n          name\n        }\n        evolutions {\n          id\n          name\n        }\n        maxCP\n        maxHP\n        attacks {\n          fast {\n            name\n            type\n            damage\n          }\n          special {\n            name\n            type\n            damage\n          }\n        }\n      }\n    }\n  }\n':
     types.GetPokemonsDocument,
 }
 
@@ -35,8 +35,8 @@ export function graphql(source: string): unknown
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(
-  source: '\n  query getPokemons($limit: Int, $offset: Int) {\n    pokemons(query: { limit: $limit, offset: $offset }) {\n      edges {\n        id\n        name\n      }\n    }\n  }\n',
-): (typeof documents)['\n  query getPokemons($limit: Int, $offset: Int) {\n    pokemons(query: { limit: $limit, offset: $offset }) {\n      edges {\n        id\n        name\n      }\n    }\n  }\n']
+  source: '\n  query getPokemons($limit: Int, $offset: Int) {\n    pokemons(query: { limit: $limit, offset: $offset }) {\n      edges {\n        id\n        name\n        classification\n        types\n        resistant\n        weaknesses\n        weight {\n          minimum\n          maximum\n        }\n        height {\n          minimum\n          maximum\n        }\n        fleeRate\n        evolutionRequirements {\n          amount\n          name\n        }\n        evolutions {\n          id\n          name\n        }\n        maxCP\n        maxHP\n        attacks {\n          fast {\n            name\n            type\n            damage\n          }\n          special {\n            name\n            type\n            damage\n          }\n        }\n      }\n    }\n  }\n',
+): (typeof documents)['\n  query getPokemons($limit: Int, $offset: Int) {\n    pokemons(query: { limit: $limit, offset: $offset }) {\n      edges {\n        id\n        name\n        classification\n        types\n        resistant\n        weaknesses\n        weight {\n          minimum\n          maximum\n        }\n        height {\n          minimum\n          maximum\n        }\n        fleeRate\n        evolutionRequirements {\n          amount\n          name\n        }\n        evolutions {\n          id\n          name\n        }\n        maxCP\n        maxHP\n        attacks {\n          fast {\n            name\n            type\n            damage\n          }\n          special {\n            name\n            type\n            damage\n          }\n        }\n      }\n    }\n  }\n']
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {}

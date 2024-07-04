@@ -1,8 +1,10 @@
+'use client'
+
 import { makeAutoObservable } from 'mobx'
 
 import { GetPokemonsQuery } from '~/gql/graphql'
 
-type PokemonModelProps = GetPokemonsQuery['pokemons']['edges'][number]
+export type PokemonModelProps = GetPokemonsQuery['pokemons']['edges'][number]
 
 export class PokemonModel {
   // ====================================================
