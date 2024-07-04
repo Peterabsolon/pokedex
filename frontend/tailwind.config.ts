@@ -13,16 +13,16 @@ const config: Config = {
   theme: {
     extend: {
       animation: {
-        appear: 'fadeIn .3s ease, moveUp .3s ease',
+        appear: 'appear-fadeIn .3s ease, appear-moveUp .3s ease',
       },
 
       keyframes: {
-        fadeIn: {
+        'appear-fadeIn': {
           from: { opacity: '0' },
           to: { opacity: '1' },
         },
 
-        moveUp: {
+        'appear-moveUp': {
           from: { transform: 'translateY(15px)' },
           to: { transform: 'translateY(0px)' },
         },

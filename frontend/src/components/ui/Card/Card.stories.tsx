@@ -24,10 +24,9 @@ export const Primary: Story = {
 export const CustomMotion: Story = {
   args: {
     children: 'Custom motion - hover me',
-    animate: false,
     motion: {
       transition: { type: 'spring' },
-      whileHover: { scale: 2 },
+      whileHover: { scale: 2, rotate: 5 },
     },
   },
 }
