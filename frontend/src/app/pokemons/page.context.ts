@@ -1,5 +1,5 @@
-import { createContext, useContext } from 'react'
+// import { createContext, useContext } from 'react'
 
-const context = createContext({})
+// const context = createContext({})
 
-export const usePokemonsContext = () => useContext(context)
+// export const usePokemonsContext = () => useContext(context)

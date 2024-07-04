@@ -1,1 +1,7 @@
+export * from './favorite-pokemon.mutation'
+export * from './fragments'
+export * from './get-pokemon-by-id.query'
+export * from './get-pokemon-by-name.query'
+export * from './get-pokemon-types.query'
 export * from './get-pokemons.query'
+export * from './unfavorite-pokemon.mutation'

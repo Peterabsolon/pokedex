@@ -1,10 +1,11 @@
-import { ApolloClient, InMemoryCache } from '@apollo/client'
+import { ApolloClient, HttpLink, InMemoryCache } from '@apollo/client'
+import { registerApolloClient } from '@apollo/experimental-nextjs-app-support'
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL
-
-export const createApolloClient = () => {
+export const { getClient } = registerApolloClient(() => {
   return new ApolloClient({
-    uri: API_URL,
     cache: new InMemoryCache(),
+    link: new HttpLink({
+      uri: process.env.NEXT_PUBLIC_API_URL,
+    }),
   })
-}
+})
