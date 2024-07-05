@@ -9,7 +9,8 @@ import { usePokemonsContext } from '../pokemons.context'
 
 const MOTION_PROPS = {
   ...DEFAULT_CARD_MOTION,
-  whileHover: { scale: 1.06 },
+  whileHover: { scale: 1.05 },
+  whileTap: { scale: 0.95 },
 }
 
 export interface PokemonListItemProps {
@@ -34,7 +35,10 @@ export const PokemonListItem = ({ pokemon }: PokemonListItemProps) => {
 
   return (
     <Card onClick={handleViewDetail} motion={MOTION_PROPS}>
-      <div className="h-64 w-64 bg-contain bg-center bg-no-repeat" style={{ backgroundImage: `url("${image}")` }} />
+      <div
+        className="mx-auto mb-4 h-64 w-64 bg-contain bg-center bg-no-repeat"
+        style={{ backgroundImage: `url("${image}")` }}
+      />
 
       <h2 className="mb-1 text-lg font-bold">{name}</h2>
 

@@ -19,19 +19,19 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <html lang="en">
       {/* TODO: Use NextJS 14 template.tsx, which is client-side, so this can be run on server */}
       <ApolloWrapper>
-        <body className={`${font.className} flex flex-col items-stretch justify-stretch bg-slate-100`}>
+        <body className={`${font.className} flex flex-col items-stretch justify-stretch bg-slate-900`}>
           <Toaster richColors={true} position="top-right" />
 
           <header className="flex items-center justify-between p-8">
             <div className="flex items-center">
               <img className="mr-4 w-12" alt="Pokeball logo" src="/pokeball.svg" />
-              <h1 className="font-medium">Pokedex</h1>
+              <h1 className="font-medium text-white">Pokedex</h1>
             </div>
           </header>
 
           <main className="z-20 flex flex-1 items-stretch justify-center overflow-auto">{children}</main>
 
-          <footer className="absolute inset-0 top-auto z-20 p-8 text-right">
+          <footer className="absolute inset-0 top-auto z-20 p-8 text-right text-white">
             Made with 💜 by <a href="https://www.linkedin.com/in/peter-absolon">Peter Absolon</a>
           </footer>
         </body>

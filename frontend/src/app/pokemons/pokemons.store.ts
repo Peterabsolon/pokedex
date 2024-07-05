@@ -41,7 +41,6 @@ export const createActions = (setState: React.Dispatch<React.SetStateAction<Poke
   },
 
   setTypeFilterOperator: (typeFilterOperator: FilterOperatorOption) => {
-    console.log({ typeFilterOperator })
     setState((prev) => ({ ...prev, typeFilterOperator }))
   },
 
