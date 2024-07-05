@@ -1,9 +1,11 @@
-export const initialState = {}
+export const initialState = {
+  pokemonId: undefined as string | undefined,
+}
 
 export type PokemonsState = typeof initialState
 
 export const createActions = (setState: React.Dispatch<React.SetStateAction<PokemonsState>>) => ({
-  // setSearchQuery: (searchQuery: string) => {
-  //   setState((prev) => ({ ...prev, searchQuery }))
-  // },
+  setPokemonId: (pokemonId: string) => {
+    setState((prev) => ({ ...prev, pokemonId }))
+  },
 })

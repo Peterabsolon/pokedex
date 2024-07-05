@@ -32,7 +32,7 @@ const PokemonsContext = createContext<PokemonsContextType>({
 export const PokemonsContextProvider = ({ children }: PropsWithChildren) => {
   const [state, setState] = useState(initialState)
 
-  const pokemonQuery = usePokemonByIdQuery()
+  const pokemonQuery = usePokemonByIdQuery({ id: state.pokemonId })
 
   const queries = useMemo(() => ({ pokemonQuery }), [pokemonQuery])
 
