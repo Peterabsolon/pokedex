@@ -1,9 +1,12 @@
-import { createContext, PropsWithChildren, useContext, useState } from 'react'
+import { createContext, PropsWithChildren, useCallback, useContext, useMemo, useState } from 'react'
 
-import { useDebouncedValue, usePokemonsQuery } from '~/hooks'
+import { usePokemonsQuery } from '~/hooks'
 
 import { actions, initialState } from './pokemons.store'
 
+// ====================================================
+// Types
+// ====================================================
 interface PokemonsContextQueries {
   pokemonsQuery: ReturnType<typeof usePokemonsQuery>
 }
@@ -12,38 +15,53 @@ interface PokemonsContextType {
   state: typeof initialState
   actions: ReturnType<typeof actions>
   queries: PokemonsContextQueries
-  searchQuery: ReturnType<typeof useDebouncedValue>
 }
 
+// ====================================================
+// Context
+// ====================================================
 const PokemonsContext = createContext<PokemonsContextType>({
   state: initialState,
-  actions: actions(initialState, () => {}),
+  actions: actions(() => {}),
   queries: {} as PokemonsContextQueries,
-  searchQuery: {} as ReturnType<typeof useDebouncedValue>,
 })
 
+// ====================================================
+// Provider
+// ====================================================
 export const PokemonsContextProvider = ({ children }: PropsWithChildren) => {
   const [state, setState] = useState(initialState)
 
-  const searchQuery = useDebouncedValue({ debounceMs: 250 })
+  const filter = useMemo(
+    () => ({
+      type: state.typesSelected[0]?.value,
+    }),
+    [state],
+  )
 
   const pokemonsQuery = usePokemonsQuery({
-    search: searchQuery.value,
-    filter: {
-      type: state.typesSelected[0]?.value,
-    },
+    search: state.searchQuery,
+    filter,
   })
 
-  const queries = {
-    pokemonsQuery,
-  }
+  const queries = useMemo(() => ({ pokemonsQuery }), [pokemonsQuery])
 
-  const context = {
-    state,
-    actions: actions(state, setState),
-    queries,
-    searchQuery,
-  }
+  const actionsMemo = useMemo(() => actions(setState), [setState])
+
+  const setSearchQuery = useCallback((searchQuery?: string) => {
+    setState((prev) => ({ ...prev, searchQuery }))
+  }, [])
+
+  const context = useMemo(
+    () => ({
+      state,
+      actions: actionsMemo,
+      queries,
+    }),
+    [queries, state, actionsMemo],
+  )
+
+  console.log('context')
 
   return <PokemonsContext.Provider value={context}>{children}</PokemonsContext.Provider>
 }

@@ -23,9 +23,12 @@ export const useDebouncedValue = (props: Props = { debounceMs: 500 }) => {
     [setValueDebounced],
   )
 
-  return {
-    input,
-    value,
-    onInputChange,
-  }
+  return useMemo(
+    () => ({
+      input,
+      value,
+      onInputChange,
+    }),
+    [input, value, onInputChange],
+  )
 }

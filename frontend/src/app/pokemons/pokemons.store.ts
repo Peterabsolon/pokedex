@@ -4,7 +4,7 @@ type Options = readonly SelectOption<string>[]
 
 // TODO: store as strings only, add/use onValueChange to <Select />
 export const initialState = {
-  searchQuery: '',
+  searchQuery: '' as string | undefined,
 
   types: [] as Options,
   typesSelected: [] as Options,
@@ -18,8 +18,8 @@ export const initialState = {
 
 export type PokemonsState = typeof initialState
 
-export const actions = (_: PokemonsState, setState: React.Dispatch<React.SetStateAction<PokemonsState>>) => ({
-  setSearchQuery: (searchQuery: string) => {
+export const actions = (setState: React.Dispatch<React.SetStateAction<PokemonsState>>) => ({
+  setSearchQuery: (searchQuery?: string) => {
     setState((prev) => ({ ...prev, searchQuery }))
   },
 

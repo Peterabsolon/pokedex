@@ -1,3 +1,5 @@
+'use client'
+
 import { usePokemonTypesQuery } from '~/hooks'
 
 import { Select, SelectOption, SelectProps } from '../Select'

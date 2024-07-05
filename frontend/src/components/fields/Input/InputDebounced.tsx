@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 
 import { useDebouncedValue } from '~/hooks'
 
-import { InputProps } from './Input'
+import { Input, InputProps } from './Input'
 
 export interface InputDebouncedProps extends InputProps {
   /**
@@ -25,5 +25,5 @@ export const InputDebounced = ({ debounceMs = 500, onChange, onValueChange, ...p
     }
   }, [onValueChange, debounced.value])
 
-  return <input value={debounced.input} onChange={debounced.onInputChange} />
+  return <Input {...props} value={debounced.input} onChange={debounced.onInputChange} />
 }

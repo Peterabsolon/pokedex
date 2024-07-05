@@ -1,4 +1,5 @@
 export * from './ButtonSelect'
+export * from './Input'
 export * from './PokemonTypeSelect'
 export * from './PokemonWeaknessSelect'
 export * from './Select'
