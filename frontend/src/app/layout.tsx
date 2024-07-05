@@ -17,6 +17,7 @@ interface RootLayoutProps {
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en">
+      {/* TODO: Use NextJS 14 template.tsx, which is client-side, so this can be run on server */}
       <ApolloWrapper>
         <body className={`${font.className} flex flex-col items-stretch justify-stretch bg-slate-950`}>
           <Toaster richColors={true} position="top-right" />
