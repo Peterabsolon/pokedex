@@ -47,6 +47,47 @@ const resolvers = {
           }
         }
 
+        if (filter.weakness) {
+          if (!filter.weaknessOperator || filter.weaknessOperator === "AND") {
+            filter.weakness.forEach((weakness) => {
+              const regex = new RegExp(weakness, "i");
+
+              pokemons = _.filter(pokemons, (p) =>
+                _.every(p.weaknesses, (t) => t.match(regex)),
+              );
+            });
+          } else if (filter.weaknessOperator === "OR") {
+            pokemons = _.filter(pokemons, (p) =>
+              _.some(filter.weakness, (weakness) => {
+                const regex = new RegExp(weakness, "i");
+                return _.some(p.weaknesses, (t) => t.match(regex));
+              }),
+            );
+          }
+        }
+
+        if (filter.resistance) {
+          if (
+            !filter.resistanceOperator ||
+            filter.resistanceOperator === "AND"
+          ) {
+            filter.resistance.forEach((resistance) => {
+              const regex = new RegExp(resistance, "i");
+
+              pokemons = _.filter(pokemons, (p) =>
+                _.every(p.resistances, (t) => t.match(regex)),
+              );
+            });
+          } else if (filter.resistanceOperator === "OR") {
+            pokemons = _.filter(pokemons, (p) =>
+              _.some(filter.resistance, (resistance) => {
+                const regex = new RegExp(resistance, "i");
+                return _.some(p.resistances, (t) => t.match(regex));
+              }),
+            );
+          }
+        }
+
         if (filter.isFavorite) {
           pokemons = _.filter(pokemons, (p) => !!favorites.get(p.id));
         }
