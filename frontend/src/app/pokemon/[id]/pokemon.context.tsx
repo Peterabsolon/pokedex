@@ -1,8 +1,8 @@
-import { createContext, PropsWithChildren, useContext, useState } from 'react'
+import { createContext, PropsWithChildren, useContext, useMemo, useState } from 'react'
 
 import { usePokemonByIdQuery } from '~/hooks'
 
-import { actions, initialState } from './pokemon.store'
+import { createActions, initialState } from './pokemon.store'
 
 // ====================================================
 // Types
@@ -13,7 +13,7 @@ interface PokemonsContextQueries {
 
 interface PokemonsContextType {
   state: typeof initialState
-  actions: ReturnType<typeof actions>
+  actions: ReturnType<typeof createActions>
   queries: PokemonsContextQueries
 }
 
@@ -22,7 +22,7 @@ interface PokemonsContextType {
 // ====================================================
 const PokemonsContext = createContext<PokemonsContextType>({
   state: initialState,
-  actions: actions(initialState, () => {}),
+  actions: createActions(() => {}),
   queries: {} as PokemonsContextQueries,
 })
 
@@ -34,15 +34,18 @@ export const PokemonsContextProvider = ({ children }: PropsWithChildren) => {
 
   const pokemonQuery = usePokemonByIdQuery()
 
-  const queries = {
-    pokemonQuery,
-  }
+  const queries = useMemo(() => ({ pokemonQuery }), [pokemonQuery])
 
-  const context = {
-    state,
-    actions: actions(state, setState),
-    queries,
-  }
+  const actions = useMemo(() => createActions(setState), [setState])
+
+  const context = useMemo(
+    () => ({
+      state,
+      actions,
+      queries,
+    }),
+    [state, actions, queries],
+  )
 
   return <PokemonsContext.Provider value={context}>{children}</PokemonsContext.Provider>
 }
