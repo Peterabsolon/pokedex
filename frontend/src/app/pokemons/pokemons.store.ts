@@ -2,23 +2,23 @@ import { SelectOption } from '~/components'
 import { FILTER_OPERATOR_OPTIONS } from '~/constants'
 
 type Options = readonly SelectOption<string>[]
-type FilterOperatorState = (typeof FILTER_OPERATOR_OPTIONS)[0] | null | undefined
+type FilterOperatorOption = (typeof FILTER_OPERATOR_OPTIONS)[0] | null | undefined
 
-// TODO: store as strings only, add/use onValueChange to <Select />
 export const initialState = {
   searchQuery: '' as string | undefined,
+  showDetailInfo: false,
 
   types: [] as Options,
   typesSelected: [] as Options,
-  typeFilterOperator: FILTER_OPERATOR_OPTIONS[0] as FilterOperatorState,
+  typeFilterOperator: FILTER_OPERATOR_OPTIONS[0] as FilterOperatorOption,
 
   weaknesses: [] as Options,
   weaknessesSelected: [] as Options,
-  weaknessesFilterOperator: FILTER_OPERATOR_OPTIONS[0] as FilterOperatorState,
+  weaknessesFilterOperator: FILTER_OPERATOR_OPTIONS[0] as FilterOperatorOption,
 
   resistances: [] as Options,
   resistancesSelected: [] as Options,
-  resistancesFilterOperator: FILTER_OPERATOR_OPTIONS[0] as FilterOperatorState,
+  resistancesFilterOperator: FILTER_OPERATOR_OPTIONS[0] as FilterOperatorOption,
 }
 
 export type PokemonsState = typeof initialState
@@ -26,6 +26,10 @@ export type PokemonsState = typeof initialState
 export const createActions = (setState: React.Dispatch<React.SetStateAction<PokemonsState>>) => ({
   setSearchQuery: (searchQuery?: string) => {
     setState((prev) => ({ ...prev, searchQuery }))
+  },
+
+  toggleDetailedInfo: () => {
+    setState((prev) => ({ ...prev, showDetailInfo: !prev.showDetailInfo }))
   },
 
   setTypes: (types: Options) => {
@@ -36,7 +40,7 @@ export const createActions = (setState: React.Dispatch<React.SetStateAction<Poke
     setState((prev) => ({ ...prev, typesSelected }))
   },
 
-  setTypeFilterOperator: (typeFilterOperator: FilterOperatorState) => {
+  setTypeFilterOperator: (typeFilterOperator: FilterOperatorOption) => {
     console.log({ typeFilterOperator })
     setState((prev) => ({ ...prev, typeFilterOperator }))
   },
@@ -49,7 +53,7 @@ export const createActions = (setState: React.Dispatch<React.SetStateAction<Poke
     setState((prev) => ({ ...prev, weaknessesSelected }))
   },
 
-  setWeaknessFilterOperator: (weaknessFilterOperator: FilterOperatorState) => {
+  setWeaknessFilterOperator: (weaknessFilterOperator: FilterOperatorOption) => {
     setState((prev) => ({ ...prev, weaknessFilterOperator }))
   },
 
@@ -61,7 +65,7 @@ export const createActions = (setState: React.Dispatch<React.SetStateAction<Poke
     setState((prev) => ({ ...prev, resistancesSelected }))
   },
 
-  setResistancesFilterOperator: (resistancesFilterOperator: FilterOperatorState) => {
+  setResistancesFilterOperator: (resistancesFilterOperator: FilterOperatorOption) => {
     setState((prev) => ({ ...prev, resistancesFilterOperator }))
   },
 })

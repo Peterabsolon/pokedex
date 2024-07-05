@@ -7,9 +7,10 @@ import {
   PokemonResistancesSelect,
   PokemonTypeSelect,
   PokemonWeaknessSelect,
+  Toggle,
 } from '~/components'
 
-import { usePokemonsContext } from '../pokemons.context'
+import { usePokemonsContext } from '../../pokemons.context'
 
 export const PokemonFilters: React.FC = () => {
   const { state, actions } = usePokemonsContext()
@@ -22,6 +23,7 @@ export const PokemonFilters: React.FC = () => {
     weaknessesFilterOperator,
     resistancesSelected,
     resistancesFilterOperator,
+    showDetailInfo,
   } = state
 
   const {
@@ -32,14 +34,17 @@ export const PokemonFilters: React.FC = () => {
     setWeaknessFilterOperator,
     setResistancesSelected,
     setResistancesFilterOperator,
+    toggleDetailedInfo,
   } = actions
 
   return (
     <Card>
-      <InputDebounced value={searchQuery} onValueChange={setSearchQuery} />
+      <InputDebounced label="Search by name" value={searchQuery} onValueChange={setSearchQuery} className="mb-4" />
+
+      <Toggle label="Show detailed info" checked={showDetailInfo} onChange={toggleDetailedInfo} className="mb-4" />
 
       <PokemonTypeSelect<true> label="Types" isMulti value={typesSelected} onChange={setTypesSelected} />
-      <FilterOperatorSelect value={typeFilterOperator} onChange={setTypeFilterOperator} />
+      <FilterOperatorSelect value={typeFilterOperator} onChange={setTypeFilterOperator} className="mb-4" />
 
       <PokemonResistancesSelect<true>
         label="Resistances"
@@ -47,7 +52,11 @@ export const PokemonFilters: React.FC = () => {
         value={resistancesSelected}
         onChange={setResistancesSelected}
       />
-      <FilterOperatorSelect value={resistancesFilterOperator} onChange={setResistancesFilterOperator} />
+      <FilterOperatorSelect
+        value={resistancesFilterOperator}
+        onChange={setResistancesFilterOperator}
+        className="mb-4"
+      />
 
       <PokemonWeaknessSelect<true>
         label="Weaknesses"
@@ -55,7 +64,7 @@ export const PokemonFilters: React.FC = () => {
         value={weaknessesSelected}
         onChange={setWeaknessesSelected}
       />
-      <FilterOperatorSelect value={weaknessesFilterOperator} onChange={setWeaknessFilterOperator} />
+      <FilterOperatorSelect value={weaknessesFilterOperator} onChange={setWeaknessFilterOperator} className="mb-4" />
     </Card>
   )
 }

@@ -11,7 +11,12 @@ const PokemonsPage = () => {
 
   return (
     <div className="flex max-w-full flex-1 overflow-hidden p-8">
-      <div className="mr-8 flex flex-1 flex-row flex-wrap items-start justify-start gap-4 self-start">
+      <div
+        className="mr-8 grid flex-1 gap-4 self-start"
+        style={{
+          gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+        }}
+      >
         {pokemonsQuery.pokemons.map((pokemon) => (
           <PokemonListItem key={pokemon.id} pokemon={pokemon} />
         ))}

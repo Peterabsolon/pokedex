@@ -1,11 +1,13 @@
 'use client'
 
+import { FieldProps } from '~/components/ui'
 import { usePokemonWeaknessesQuery } from '~/hooks'
 
 import { Select, SelectOption, SelectProps } from '../Select'
 
 export interface PokemonWeaknessSelectProps<IsMulti extends boolean = false>
-  extends Omit<SelectProps<SelectOption<string>, IsMulti, any>, 'options'> {}
+  extends Omit<SelectProps<SelectOption<string>, IsMulti, any>, 'options'>,
+    FieldProps {}
 
 export const PokemonWeaknessSelect = <IsMulti extends boolean = false>(props: PokemonWeaknessSelectProps<IsMulti>) => {
   const { options } = usePokemonWeaknessesQuery()

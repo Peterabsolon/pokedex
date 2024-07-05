@@ -1,11 +1,13 @@
 'use client'
 
+import { FieldProps } from '~/components/ui'
 import { usePokemonResistancesQuery } from '~/hooks'
 
 import { Select, SelectOption, SelectProps } from '../Select'
 
 export interface PokemonResistancesSelectProps<IsMulti extends boolean = false>
-  extends Omit<SelectProps<SelectOption<string>, IsMulti, any>, 'options'> {}
+  extends Omit<SelectProps<SelectOption<string>, IsMulti, any>, 'options'>,
+    FieldProps {}
 
 export const PokemonResistancesSelect = <IsMulti extends boolean = false>(
   props: PokemonResistancesSelectProps<IsMulti>,

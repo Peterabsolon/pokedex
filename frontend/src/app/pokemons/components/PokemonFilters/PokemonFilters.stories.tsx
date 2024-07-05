@@ -1,6 +1,6 @@
 import { Meta, StoryFn } from '@storybook/react'
 
-import { PokemonsContextProvider } from '../pokemons.context'
+import { PokemonsContextProvider } from '../../pokemons.context'
 import { PokemonFilters } from './PokemonFilters'
 
 export default {

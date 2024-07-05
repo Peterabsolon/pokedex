@@ -1,16 +1,17 @@
 import { FilterOperator } from '~/codegen/graphql'
 import { FILTER_OPERATOR_OPTIONS } from '~/constants'
 
-import { Select, SelectOption } from '../Select'
+import { Select, SelectOption, SelectProps } from '../Select'
 
-export interface FilterOperatorSelectProps {
+export interface FilterOperatorSelectProps extends SelectProps<SelectOption<FilterOperator>, false, any> {
   value?: SelectOption<FilterOperator> | null
   onChange: (value: SelectOption<FilterOperator> | null) => void
 }
 
-export const FilterOperatorSelect = ({ value, onChange }: FilterOperatorSelectProps) => {
+export const FilterOperatorSelect = ({ value, onChange, ...props }: FilterOperatorSelectProps) => {
   return (
     <Select<SelectOption<FilterOperator>, false, any>
+      {...props}
       value={value}
       options={FILTER_OPERATOR_OPTIONS}
       onChange={onChange}

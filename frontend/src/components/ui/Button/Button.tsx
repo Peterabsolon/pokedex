@@ -84,9 +84,9 @@ export const Button = ({
 
 const variantStyles = {
   text: '',
-  primary: 'bg-blue-500',
-  secondary: 'border border-blue-400 bg-slate-900 disabled:opacity-60',
-  danger: 'bg-red-600',
+  primary: 'text-white bg-blue-500',
+  secondary: 'text-white border border-blue-400 bg-slate-900 disabled:opacity-60',
+  danger: 'text-white bg-red-600',
 }
 
 const variantHoverStyles = {

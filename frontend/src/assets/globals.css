@@ -47,3 +47,8 @@ html {
   /* bg-slate-950 */
   background: '#020617';
 }
+
+img {
+  max-width: 100%;
+  height: auto;
+}
