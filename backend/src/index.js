@@ -16,6 +16,29 @@ app.get("/sounds/:id", (req, res) =>
   res.sendFile(`${__dirname}/sounds/${req.params.id}.mp3`),
 );
 
+function applyFilter(pokemons, filterAttribute, filterValues, operator) {
+  if (filterValues) {
+    if (!operator || operator === "AND") {
+      filterValues.forEach((value) => {
+        const regex = new RegExp(value, "i");
+        pokemons = _.filter(pokemons, (p) =>
+          _.some(p[filterAttribute], (attrValue) => attrValue.match(regex)),
+        );
+      });
+    } else if (operator === "OR") {
+      pokemons = _.filter(pokemons, (p) =>
+        _.some(filterValues, (value) => {
+          const regex = new RegExp(value, "i");
+          return _.some(p[filterAttribute], (attrValue) =>
+            attrValue.match(regex),
+          );
+        }),
+      );
+    }
+  }
+  return pokemons;
+}
+
 const resolvers = {
   Query: {
     pokemons: (__, args) => {
@@ -29,63 +52,30 @@ const resolvers = {
 
       if (filter) {
         if (filter.type) {
-          if (!filter.typeOperator || filter.typeOperator === "AND") {
-            filter.type.forEach((type) => {
-              const regex = new RegExp(type, "i");
-
-              pokemons = _.filter(pokemons, (p) =>
-                _.every(p.types, (t) => t.match(regex)),
-              );
-            });
-          } else if (filter.typeOperator === "OR") {
-            pokemons = _.filter(pokemons, (p) =>
-              _.some(filter.type, (type) => {
-                const regex = new RegExp(type, "i");
-                return _.some(p.types, (t) => t.match(regex));
-              }),
-            );
-          }
+          pokemons = applyFilter(
+            pokemons,
+            "types",
+            filter.type,
+            filter.typeOperator,
+          );
         }
 
         if (filter.weakness) {
-          if (!filter.weaknessOperator || filter.weaknessOperator === "AND") {
-            filter.weakness.forEach((weakness) => {
-              const regex = new RegExp(weakness, "i");
-
-              pokemons = _.filter(pokemons, (p) =>
-                _.every(p.weaknesses, (t) => t.match(regex)),
-              );
-            });
-          } else if (filter.weaknessOperator === "OR") {
-            pokemons = _.filter(pokemons, (p) =>
-              _.some(filter.weakness, (weakness) => {
-                const regex = new RegExp(weakness, "i");
-                return _.some(p.weaknesses, (t) => t.match(regex));
-              }),
-            );
-          }
+          pokemons = applyFilter(
+            pokemons,
+            "weaknesses",
+            filter.weakness,
+            filter.weaknessOperator,
+          );
         }
 
         if (filter.resistance) {
-          if (
-            !filter.resistanceOperator ||
-            filter.resistanceOperator === "AND"
-          ) {
-            filter.resistance.forEach((resistance) => {
-              const regex = new RegExp(resistance, "i");
-
-              pokemons = _.filter(pokemons, (p) =>
-                _.every(p.resistances, (t) => t.match(regex)),
-              );
-            });
-          } else if (filter.resistanceOperator === "OR") {
-            pokemons = _.filter(pokemons, (p) =>
-              _.some(filter.resistance, (resistance) => {
-                const regex = new RegExp(resistance, "i");
-                return _.some(p.resistances, (t) => t.match(regex));
-              }),
-            );
-          }
+          pokemons = applyFilter(
+            pokemons,
+            "resistances",
+            filter.resistance,
+            filter.resistanceOperator,
+          );
         }
 
         if (filter.isFavorite) {
