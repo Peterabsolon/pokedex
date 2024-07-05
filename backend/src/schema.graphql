@@ -39,10 +39,18 @@ input PokemonsQueryInput {
   filter: PokemonFilterInput
 }
 
+enum FilterOperator {
+  AND
+  OR
+}
+
 input PokemonFilterInput {
   type: [String]
+  typeOperator: FilterOperator
   weakness: [String]
+  weaknessOperator: FilterOperator
   resistance: [String]
+  resistancesOperator: FilterOperator
   isFavorite: Boolean
 }
 

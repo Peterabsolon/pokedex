@@ -29,13 +29,22 @@ const resolvers = {
 
       if (filter) {
         if (filter.type) {
-          // TODO: AND/OR
-          filter.type.forEach((type) => {
-            const regex = new RegExp(type, "i");
+          if (!filter.typeOperator || filter.typeOperator === "AND") {
+            filter.type.forEach((type) => {
+              const regex = new RegExp(type, "i");
+
+              pokemons = _.filter(pokemons, (p) =>
+                _.every(p.types, (t) => t.match(regex)),
+              );
+            });
+          } else if (filter.typeOperator === "OR") {
             pokemons = _.filter(pokemons, (p) =>
-              _.some(p.types, (t) => t.match(regex)),
+              _.some(filter.type, (type) => {
+                const regex = new RegExp(type, "i");
+                return _.some(p.types, (t) => t.match(regex));
+              }),
             );
-          });
+          }
         }
 
         if (filter.isFavorite) {
