@@ -1,8 +1,8 @@
-import { createContext, PropsWithChildren, useCallback, useContext, useMemo, useState } from 'react'
+import { createContext, PropsWithChildren, useContext, useMemo, useState } from 'react'
 
 import { usePokemonsQuery } from '~/hooks'
 
-import { actions, initialState } from './pokemons.store'
+import { createActions, initialState } from './pokemons.store'
 
 // ====================================================
 // Types
@@ -13,7 +13,7 @@ interface PokemonsContextQueries {
 
 interface PokemonsContextType {
   state: typeof initialState
-  actions: ReturnType<typeof actions>
+  actions: ReturnType<typeof createActions>
   queries: PokemonsContextQueries
 }
 
@@ -22,7 +22,7 @@ interface PokemonsContextType {
 // ====================================================
 const PokemonsContext = createContext<PokemonsContextType>({
   state: initialState,
-  actions: actions(() => {}),
+  actions: createActions(() => {}),
   queries: {} as PokemonsContextQueries,
 })
 
@@ -36,7 +36,7 @@ export const PokemonsContextProvider = ({ children }: PropsWithChildren) => {
     () => ({
       type: state.typesSelected[0]?.value,
     }),
-    [state],
+    [state.typesSelected],
   )
 
   const pokemonsQuery = usePokemonsQuery({
@@ -46,22 +46,16 @@ export const PokemonsContextProvider = ({ children }: PropsWithChildren) => {
 
   const queries = useMemo(() => ({ pokemonsQuery }), [pokemonsQuery])
 
-  const actionsMemo = useMemo(() => actions(setState), [setState])
-
-  const setSearchQuery = useCallback((searchQuery?: string) => {
-    setState((prev) => ({ ...prev, searchQuery }))
-  }, [])
+  const actions = useMemo(() => createActions(setState), [setState])
 
   const context = useMemo(
     () => ({
       state,
-      actions: actionsMemo,
+      actions,
       queries,
     }),
-    [queries, state, actionsMemo],
+    [queries, state, actions],
   )
-
-  console.log('context')
 
   return <PokemonsContext.Provider value={context}>{children}</PokemonsContext.Provider>
 }
