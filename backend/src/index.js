@@ -73,7 +73,7 @@ const resolvers = {
         if (filter.resistance) {
           pokemons = applyFilter(
             pokemons,
-            "resistances",
+            "resistant",
             filter.resistance,
             filter.resistanceOperator,
           );

@@ -8,9 +8,6 @@ export const POKEMON_DETAILS_FRAGMENT = gql`
   fragment PokemonDetails on Pokemon {
     ...PokemonInfo
 
-    resistant
-    weaknesses
-
     weight {
       minimum
       maximum

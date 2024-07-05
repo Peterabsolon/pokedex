@@ -100,7 +100,7 @@ export type PokemonEvolutionRequirement = {
 export type PokemonFilterInput = {
   isFavorite?: InputMaybe<Scalars['Boolean']['input']>
   resistance?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
-  resistancesOperator?: InputMaybe<FilterOperator>
+  resistanceOperator?: InputMaybe<FilterOperator>
   type?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
   typeOperator?: InputMaybe<FilterOperator>
   weakness?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
@@ -149,8 +149,6 @@ export type FavoritePokemonMutation = {
   __typename?: 'Mutation'
   favoritePokemon?: {
     __typename?: 'Pokemon'
-    resistant: Array<string>
-    weaknesses: Array<string>
     id: string
     name: string
     classification: string
@@ -158,6 +156,8 @@ export type FavoritePokemonMutation = {
     sound: string
     image: string
     isFavorite: boolean
+    resistant: Array<string>
+    weaknesses: Array<string>
     fleeRate: number
     maxCP: number
     maxHP: number
@@ -175,8 +175,6 @@ export type FavoritePokemonMutation = {
 
 export type PokemonDetailsFragment = {
   __typename?: 'Pokemon'
-  resistant: Array<string>
-  weaknesses: Array<string>
   id: string
   name: string
   classification: string
@@ -184,6 +182,8 @@ export type PokemonDetailsFragment = {
   sound: string
   image: string
   isFavorite: boolean
+  resistant: Array<string>
+  weaknesses: Array<string>
   fleeRate: number
   maxCP: number
   maxHP: number
@@ -207,6 +207,8 @@ export type PokemonInfoFragment = {
   sound: string
   image: string
   isFavorite: boolean
+  resistant: Array<string>
+  weaknesses: Array<string>
   fleeRate: number
   maxCP: number
   maxHP: number
@@ -220,8 +222,6 @@ export type GetPokemonByIdQuery = {
   __typename?: 'Query'
   pokemonById?: {
     __typename?: 'Pokemon'
-    resistant: Array<string>
-    weaknesses: Array<string>
     id: string
     name: string
     classification: string
@@ -229,6 +229,8 @@ export type GetPokemonByIdQuery = {
     sound: string
     image: string
     isFavorite: boolean
+    resistant: Array<string>
+    weaknesses: Array<string>
     fleeRate: number
     maxCP: number
     maxHP: number
@@ -252,8 +254,6 @@ export type GetPokemonByNameQuery = {
   __typename?: 'Query'
   pokemonByName?: {
     __typename?: 'Pokemon'
-    resistant: Array<string>
-    weaknesses: Array<string>
     id: string
     name: string
     classification: string
@@ -261,6 +261,8 @@ export type GetPokemonByNameQuery = {
     sound: string
     image: string
     isFavorite: boolean
+    resistant: Array<string>
+    weaknesses: Array<string>
     fleeRate: number
     maxCP: number
     maxHP: number
@@ -305,6 +307,8 @@ export type GetPokemonsQuery = {
       sound: string
       image: string
       isFavorite: boolean
+      resistant: Array<string>
+      weaknesses: Array<string>
       fleeRate: number
       maxCP: number
       maxHP: number
@@ -320,8 +324,6 @@ export type UnFavoritePokemonMutation = {
   __typename?: 'Mutation'
   unFavoritePokemon?: {
     __typename?: 'Pokemon'
-    resistant: Array<string>
-    weaknesses: Array<string>
     id: string
     name: string
     classification: string
@@ -329,6 +331,8 @@ export type UnFavoritePokemonMutation = {
     sound: string
     image: string
     isFavorite: boolean
+    resistant: Array<string>
+    weaknesses: Array<string>
     fleeRate: number
     maxCP: number
     maxHP: number
@@ -361,6 +365,8 @@ export const PokemonInfoFragmentDoc = {
           { kind: 'Field', name: { kind: 'Name', value: 'sound' } },
           { kind: 'Field', name: { kind: 'Name', value: 'image' } },
           { kind: 'Field', name: { kind: 'Name', value: 'isFavorite' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'resistant' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'weaknesses' } },
           { kind: 'Field', name: { kind: 'Name', value: 'fleeRate' } },
           { kind: 'Field', name: { kind: 'Name', value: 'maxCP' } },
           { kind: 'Field', name: { kind: 'Name', value: 'maxHP' } },
@@ -380,8 +386,6 @@ export const PokemonDetailsFragmentDoc = {
         kind: 'SelectionSet',
         selections: [
           { kind: 'FragmentSpread', name: { kind: 'Name', value: 'PokemonInfo' } },
-          { kind: 'Field', name: { kind: 'Name', value: 'resistant' } },
-          { kind: 'Field', name: { kind: 'Name', value: 'weaknesses' } },
           {
             kind: 'Field',
             name: { kind: 'Name', value: 'weight' },
@@ -476,6 +480,8 @@ export const PokemonDetailsFragmentDoc = {
           { kind: 'Field', name: { kind: 'Name', value: 'sound' } },
           { kind: 'Field', name: { kind: 'Name', value: 'image' } },
           { kind: 'Field', name: { kind: 'Name', value: 'isFavorite' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'resistant' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'weaknesses' } },
           { kind: 'Field', name: { kind: 'Name', value: 'fleeRate' } },
           { kind: 'Field', name: { kind: 'Name', value: 'maxCP' } },
           { kind: 'Field', name: { kind: 'Name', value: 'maxHP' } },
@@ -533,6 +539,8 @@ export const FavoritePokemonDocument = {
           { kind: 'Field', name: { kind: 'Name', value: 'sound' } },
           { kind: 'Field', name: { kind: 'Name', value: 'image' } },
           { kind: 'Field', name: { kind: 'Name', value: 'isFavorite' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'resistant' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'weaknesses' } },
           { kind: 'Field', name: { kind: 'Name', value: 'fleeRate' } },
           { kind: 'Field', name: { kind: 'Name', value: 'maxCP' } },
           { kind: 'Field', name: { kind: 'Name', value: 'maxHP' } },
@@ -547,8 +555,6 @@ export const FavoritePokemonDocument = {
         kind: 'SelectionSet',
         selections: [
           { kind: 'FragmentSpread', name: { kind: 'Name', value: 'PokemonInfo' } },
-          { kind: 'Field', name: { kind: 'Name', value: 'resistant' } },
-          { kind: 'Field', name: { kind: 'Name', value: 'weaknesses' } },
           {
             kind: 'Field',
             name: { kind: 'Name', value: 'weight' },
@@ -680,6 +686,8 @@ export const GetPokemonByIdDocument = {
           { kind: 'Field', name: { kind: 'Name', value: 'sound' } },
           { kind: 'Field', name: { kind: 'Name', value: 'image' } },
           { kind: 'Field', name: { kind: 'Name', value: 'isFavorite' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'resistant' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'weaknesses' } },
           { kind: 'Field', name: { kind: 'Name', value: 'fleeRate' } },
           { kind: 'Field', name: { kind: 'Name', value: 'maxCP' } },
           { kind: 'Field', name: { kind: 'Name', value: 'maxHP' } },
@@ -694,8 +702,6 @@ export const GetPokemonByIdDocument = {
         kind: 'SelectionSet',
         selections: [
           { kind: 'FragmentSpread', name: { kind: 'Name', value: 'PokemonInfo' } },
-          { kind: 'Field', name: { kind: 'Name', value: 'resistant' } },
-          { kind: 'Field', name: { kind: 'Name', value: 'weaknesses' } },
           {
             kind: 'Field',
             name: { kind: 'Name', value: 'weight' },
@@ -827,6 +833,8 @@ export const GetPokemonByNameDocument = {
           { kind: 'Field', name: { kind: 'Name', value: 'sound' } },
           { kind: 'Field', name: { kind: 'Name', value: 'image' } },
           { kind: 'Field', name: { kind: 'Name', value: 'isFavorite' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'resistant' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'weaknesses' } },
           { kind: 'Field', name: { kind: 'Name', value: 'fleeRate' } },
           { kind: 'Field', name: { kind: 'Name', value: 'maxCP' } },
           { kind: 'Field', name: { kind: 'Name', value: 'maxHP' } },
@@ -841,8 +849,6 @@ export const GetPokemonByNameDocument = {
         kind: 'SelectionSet',
         selections: [
           { kind: 'FragmentSpread', name: { kind: 'Name', value: 'PokemonInfo' } },
-          { kind: 'Field', name: { kind: 'Name', value: 'resistant' } },
-          { kind: 'Field', name: { kind: 'Name', value: 'weaknesses' } },
           {
             kind: 'Field',
             name: { kind: 'Name', value: 'weight' },
@@ -1028,6 +1034,8 @@ export const GetPokemonsDocument = {
           { kind: 'Field', name: { kind: 'Name', value: 'sound' } },
           { kind: 'Field', name: { kind: 'Name', value: 'image' } },
           { kind: 'Field', name: { kind: 'Name', value: 'isFavorite' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'resistant' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'weaknesses' } },
           { kind: 'Field', name: { kind: 'Name', value: 'fleeRate' } },
           { kind: 'Field', name: { kind: 'Name', value: 'maxCP' } },
           { kind: 'Field', name: { kind: 'Name', value: 'maxHP' } },
@@ -1085,6 +1093,8 @@ export const UnFavoritePokemonDocument = {
           { kind: 'Field', name: { kind: 'Name', value: 'sound' } },
           { kind: 'Field', name: { kind: 'Name', value: 'image' } },
           { kind: 'Field', name: { kind: 'Name', value: 'isFavorite' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'resistant' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'weaknesses' } },
           { kind: 'Field', name: { kind: 'Name', value: 'fleeRate' } },
           { kind: 'Field', name: { kind: 'Name', value: 'maxCP' } },
           { kind: 'Field', name: { kind: 'Name', value: 'maxHP' } },
@@ -1099,8 +1109,6 @@ export const UnFavoritePokemonDocument = {
         kind: 'SelectionSet',
         selections: [
           { kind: 'FragmentSpread', name: { kind: 'Name', value: 'PokemonInfo' } },
-          { kind: 'Field', name: { kind: 'Name', value: 'resistant' } },
-          { kind: 'Field', name: { kind: 'Name', value: 'weaknesses' } },
           {
             kind: 'Field',
             name: { kind: 'Name', value: 'weight' },

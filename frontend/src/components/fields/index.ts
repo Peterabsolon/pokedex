@@ -1,6 +1,7 @@
 export * from './ButtonSelect'
 export * from './FilterOperatorSelect'
 export * from './Input'
+export * from './PokemonResistancesSelect'
 export * from './PokemonTypeSelect'
 export * from './PokemonWeaknessSelect'
 export * from './Select'

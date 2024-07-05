@@ -50,7 +50,7 @@ input PokemonFilterInput {
   weakness: [String]
   weaknessOperator: FilterOperator
   resistance: [String]
-  resistancesOperator: FilterOperator
+  resistanceOperator: FilterOperator
   isFavorite: Boolean
 }
 

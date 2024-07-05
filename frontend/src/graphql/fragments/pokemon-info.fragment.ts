@@ -9,6 +9,8 @@ export const POKEMON_INFO_FRAGMENT = gql`
     sound
     image
     isFavorite
+    resistant
+    weaknesses
     fleeRate
     maxCP
     maxHP

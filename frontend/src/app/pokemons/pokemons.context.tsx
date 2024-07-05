@@ -30,19 +30,38 @@ const PokemonsContext = createContext<PokemonsContextType>({
 // Provider
 // ====================================================
 export const PokemonsContextProvider = ({ children }: PropsWithChildren) => {
+  /**
+   * State
+   */
   const [state, setState] = useState(initialState)
 
+  /**
+   * Filters
+   */
   const type = state.typesSelected.map((opt) => opt.value)
   const typeOperator = state.typeFilterOperator?.value
+
+  const weakness = state.weaknessesSelected.map((opt) => opt.value)
+  const weaknessOperator = state.weaknessesFilterOperator?.value
+
+  const resistance = state.resistancesSelected.map((opt) => opt.value)
+  const resistanceOperator = state.resistancesFilterOperator?.value
 
   const filter = useMemo(
     () => ({
       type,
       typeOperator,
+      weakness,
+      weaknessOperator,
+      resistance,
+      resistanceOperator,
     }),
-    [type, typeOperator],
+    [type, typeOperator, weakness, weaknessOperator, resistance, resistanceOperator],
   )
 
+  /**
+   * Queries
+   */
   const pokemonsQuery = usePokemonsQuery({
     search: state.searchQuery,
     filter,
@@ -50,6 +69,9 @@ export const PokemonsContextProvider = ({ children }: PropsWithChildren) => {
 
   const queries = useMemo(() => ({ pokemonsQuery }), [pokemonsQuery])
 
+  /**
+   * Context
+   */
   const actions = useMemo(() => createActions(setState), [setState])
 
   const context = useMemo(

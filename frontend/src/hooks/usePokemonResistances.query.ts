@@ -6,7 +6,9 @@ import { GET_POKEMON_RESISTANCES_QUERY } from '~/graphql'
 
 export const usePokemonResistancesQuery = () => {
   const pokemonResistancesQuery = useQuery<GetPokemonResistancesQuery>(GET_POKEMON_RESISTANCES_QUERY)
-  const types = useMemo(() => pokemonResistancesQuery.data?.pokemonResistances ?? [], [pokemonResistancesQuery])
 
-  return { pokemonResistancesQuery, types }
+  const types = useMemo(() => pokemonResistancesQuery.data?.pokemonResistances ?? [], [pokemonResistancesQuery])
+  const options = useMemo(() => types.map((t) => ({ value: t, label: t })), [types])
+
+  return { pokemonResistancesQuery, types, options }
 }
