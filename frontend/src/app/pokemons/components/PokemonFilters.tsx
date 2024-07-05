@@ -1,6 +1,7 @@
 'use client'
 
 import {
+  Card,
   FilterOperatorSelect,
   InputDebounced,
   PokemonResistancesSelect,
@@ -34,7 +35,7 @@ export const PokemonFilters: React.FC = () => {
   } = actions
 
   return (
-    <div>
+    <Card>
       <InputDebounced value={searchQuery} onValueChange={setSearchQuery} />
 
       <PokemonTypeSelect<true> label="Types" isMulti value={typesSelected} onChange={setTypesSelected} />
@@ -55,6 +56,6 @@ export const PokemonFilters: React.FC = () => {
         onChange={setWeaknessesSelected}
       />
       <FilterOperatorSelect value={weaknessesFilterOperator} onChange={setWeaknessFilterOperator} />
-    </div>
+    </Card>
   )
 }

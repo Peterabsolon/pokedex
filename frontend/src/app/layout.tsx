@@ -29,7 +29,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
             </div>
           </header>
 
-          <main className="z-20 flex flex-1 items-stretch justify-center overflow-auto px-8">{children}</main>
+          <main className="z-20 flex flex-1 items-stretch justify-center overflow-auto">{children}</main>
 
           <footer className="absolute inset-0 top-auto z-20 p-8 text-right">
             Made with 💜 by <a href="https://www.linkedin.com/in/peter-absolon">Peter Absolon</a>

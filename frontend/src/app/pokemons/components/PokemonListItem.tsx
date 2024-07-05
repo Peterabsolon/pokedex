@@ -1,7 +1,7 @@
 import { useRouter } from 'next/navigation'
 
 import { PokemonInfoFragment } from '~/codegen/graphql'
-import { Button } from '~/components'
+import { Button, Card } from '~/components'
 import { ROUTES } from '~/constants'
 import { useFavoritePokemonMutation, useUnFavoritePokemonMutation } from '~/hooks'
 
@@ -29,7 +29,7 @@ export const PokemonListItem = ({ pokemon }: PokemonListItemProps) => {
   }
 
   return (
-    <div className="border bg-white p-4">
+    <Card>
       <div>{name}</div>
       <div>Types: {types.join(',')}</div>
       <div>Resistant: {resistant.join(',')}</div>
@@ -37,6 +37,6 @@ export const PokemonListItem = ({ pokemon }: PokemonListItemProps) => {
 
       <Button onClick={handleToggleFavorite}>{isFavorite ? 'Unfavorite' : 'Favorite'}</Button>
       <Button onClick={handleViewDetail}>View detail</Button>
-    </div>
+    </Card>
   )
 }

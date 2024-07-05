@@ -9,7 +9,7 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement>, Field
 export const Input = ({ name, label, ...props }: InputProps) => {
   return (
     <Field name={name} label={label}>
-      <input className="text-black" {...props} />
+      <input className="border border-black text-black" {...props} />
     </Field>
   )
 }
