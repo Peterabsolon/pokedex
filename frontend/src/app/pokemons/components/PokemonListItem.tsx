@@ -10,7 +10,7 @@ export interface PokemonListItemProps {
 }
 
 export const PokemonListItem = ({ pokemon }: PokemonListItemProps) => {
-  const { id, name, isFavorite } = pokemon
+  const { id, name, isFavorite, types } = pokemon
   const router = useRouter()
 
   const { handleFavorite } = useFavoritePokemonMutation()
@@ -30,7 +30,8 @@ export const PokemonListItem = ({ pokemon }: PokemonListItemProps) => {
 
   return (
     <div>
-      {name}
+      <div>{name}</div>
+      <div>{types.join(',')}</div>
 
       <Button onClick={handleToggleFavorite}>{isFavorite ? 'Unfavorite' : 'Favorite'}</Button>
       <Button onClick={handleViewDetail}>View detail</Button>

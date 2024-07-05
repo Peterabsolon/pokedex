@@ -29,10 +29,13 @@ const resolvers = {
 
       if (filter) {
         if (filter.type) {
-          const regex = new RegExp(filter.type, "i");
-          pokemons = _.filter(pokemons, (p) =>
-            _.some(p.types, (t) => t.match(regex)),
-          );
+          // TODO: AND/OR
+          filter.type.forEach((type) => {
+            const regex = new RegExp(type, "i");
+            pokemons = _.filter(pokemons, (p) =>
+              _.some(p.types, (t) => t.match(regex)),
+            );
+          });
         }
 
         if (filter.isFavorite) {

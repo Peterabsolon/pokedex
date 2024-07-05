@@ -94,7 +94,9 @@ export type PokemonEvolutionRequirement = {
 
 export type PokemonFilterInput = {
   isFavorite?: InputMaybe<Scalars['Boolean']['input']>
-  type?: InputMaybe<Scalars['String']['input']>
+  resistance?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
+  type?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
+  weakness?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
 }
 
 export type PokemonsQueryInput = {

@@ -32,12 +32,9 @@ const PokemonsContext = createContext<PokemonsContextType>({
 export const PokemonsContextProvider = ({ children }: PropsWithChildren) => {
   const [state, setState] = useState(initialState)
 
-  const filter = useMemo(
-    () => ({
-      type: state.typesSelected[0]?.value,
-    }),
-    [state.typesSelected],
-  )
+  const type = state.typesSelected.map((opt) => opt.value)
+
+  const filter = useMemo(() => ({ type }), [type])
 
   const pokemonsQuery = usePokemonsQuery({
     search: state.searchQuery,
