@@ -8,7 +8,7 @@ interface PageParams {
   params: { id: string }
 }
 
-export const PokemonDetailPage = ({ params }: PageParams) => {
+const PokemonDetailPage = ({ params }: PageParams) => {
   const { actions, queries } = usePokemonsContext()
 
   useEffect(() => {
