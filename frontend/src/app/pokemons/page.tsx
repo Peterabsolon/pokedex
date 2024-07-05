@@ -3,18 +3,24 @@
 import { PokemonFilters, PokemonListItem } from './components'
 import { PokemonsContextProvider, usePokemonsContext } from './pokemons.context'
 
+const SIDEBAR_WIDTH_PX = 460
+
 const PokemonsPage = () => {
   const { queries } = usePokemonsContext()
   const { pokemonsQuery } = queries
 
   return (
-    <>
-      <PokemonFilters />
+    <div className="flex max-w-full flex-1 overflow-hidden py-8">
+      <main className="mr-8 flex flex-row flex-wrap items-start justify-start gap-4">
+        {pokemonsQuery.pokemons.map((pokemon) => (
+          <PokemonListItem key={pokemon.id} pokemon={pokemon} />
+        ))}
+      </main>
 
-      {pokemonsQuery.pokemons.map((pokemon) => (
-        <PokemonListItem key={pokemon.id} pokemon={pokemon} />
-      ))}
-    </>
+      <div style={{ width: SIDEBAR_WIDTH_PX }} className="flex-shrink-0">
+        <PokemonFilters />
+      </div>
+    </div>
   )
 }
 

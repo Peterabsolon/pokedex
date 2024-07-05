@@ -29,7 +29,7 @@ export const PokemonListItem = ({ pokemon }: PokemonListItemProps) => {
   }
 
   return (
-    <div>
+    <div className="border bg-white p-4">
       <div>{name}</div>
       <div>Types: {types.join(',')}</div>
       <div>Resistant: {resistant.join(',')}</div>

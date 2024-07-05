@@ -37,14 +37,24 @@ export const PokemonFilters: React.FC = () => {
     <div>
       <InputDebounced value={searchQuery} onValueChange={setSearchQuery} />
 
-      <PokemonTypeSelect<true> isMulti value={typesSelected} onChange={setTypesSelected} />
+      <PokemonTypeSelect<true> label="Types" isMulti value={typesSelected} onChange={setTypesSelected} />
       <FilterOperatorSelect value={typeFilterOperator} onChange={setTypeFilterOperator} />
 
-      <PokemonWeaknessSelect<true> isMulti value={weaknessesSelected} onChange={setWeaknessesSelected} />
-      <FilterOperatorSelect value={weaknessesFilterOperator} onChange={setWeaknessFilterOperator} />
-
-      <PokemonResistancesSelect<true> isMulti value={resistancesSelected} onChange={setResistancesSelected} />
+      <PokemonResistancesSelect<true>
+        label="Resistances"
+        isMulti
+        value={resistancesSelected}
+        onChange={setResistancesSelected}
+      />
       <FilterOperatorSelect value={resistancesFilterOperator} onChange={setResistancesFilterOperator} />
+
+      <PokemonWeaknessSelect<true>
+        label="Weaknesses"
+        isMulti
+        value={weaknessesSelected}
+        onChange={setWeaknessesSelected}
+      />
+      <FilterOperatorSelect value={weaknessesFilterOperator} onChange={setWeaknessFilterOperator} />
     </div>
   )
 }
