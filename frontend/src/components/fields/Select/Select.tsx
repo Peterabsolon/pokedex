@@ -1,3 +1,6 @@
+'use client'
+
+import { useId } from 'react'
 import ReactSelect, { GroupBase, Props as ReactSelectProps } from 'react-select'
 
 import { Field, FieldProps } from '~/components/ui'
@@ -25,7 +28,7 @@ export const Select = <
 }: SelectProps<Option, IsMulti, Group>) => {
   return (
     <Field name={name} label={label}>
-      <ReactSelect<Option, IsMulti, Group> {...props} name={name} />
+      <ReactSelect<Option, IsMulti, Group> {...props} name={name} instanceId={useId()} />
     </Field>
   )
 }
