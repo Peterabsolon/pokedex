@@ -1,6 +1,8 @@
 import { SelectOption } from '~/components'
+import { FILTER_OPERATOR_OPTIONS } from '~/constants'
 
 type Options = readonly SelectOption<string>[]
+type FilterOperatorState = (typeof FILTER_OPERATOR_OPTIONS)[0] | null | undefined
 
 // TODO: store as strings only, add/use onValueChange to <Select />
 export const initialState = {
@@ -8,12 +10,15 @@ export const initialState = {
 
   types: [] as Options,
   typesSelected: [] as Options,
+  typeFilterOperator: FILTER_OPERATOR_OPTIONS[0] as FilterOperatorState,
 
   weaknesses: [] as Options,
   weaknessesSelected: [] as Options,
+  weaknessesFilterOperator: FILTER_OPERATOR_OPTIONS[0] as FilterOperatorState,
 
   resistances: [] as Options,
   resistancesSelected: [] as Options,
+  resistancesFilterOperator: FILTER_OPERATOR_OPTIONS[0] as FilterOperatorState,
 }
 
 export type PokemonsState = typeof initialState
@@ -31,6 +36,11 @@ export const createActions = (setState: React.Dispatch<React.SetStateAction<Poke
     setState((prev) => ({ ...prev, typesSelected }))
   },
 
+  setTypeFilterOperator: (typeFilterOperator: FilterOperatorState) => {
+    console.log({ typeFilterOperator })
+    setState((prev) => ({ ...prev, typeFilterOperator }))
+  },
+
   setWeaknesses: (weaknesses: Options) => {
     setState((prev) => ({ ...prev, weaknesses }))
   },
@@ -39,11 +49,19 @@ export const createActions = (setState: React.Dispatch<React.SetStateAction<Poke
     setState((prev) => ({ ...prev, weaknessesSelected }))
   },
 
+  setWeaknessFilterOperator: (weaknessFilterOperator: FilterOperatorState) => {
+    setState((prev) => ({ ...prev, weaknessFilterOperator }))
+  },
+
   setResistances: (resistances: Options) => {
     setState((prev) => ({ ...prev, resistances }))
   },
 
   setResistancesSelected: (resistancesSelected: Options) => {
     setState((prev) => ({ ...prev, resistancesSelected }))
+  },
+
+  setResistancesFilterOperator: (resistancesFilterOperator: FilterOperatorState) => {
+    setState((prev) => ({ ...prev, resistancesFilterOperator }))
   },
 })

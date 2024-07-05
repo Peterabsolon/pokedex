@@ -33,8 +33,15 @@ export const PokemonsContextProvider = ({ children }: PropsWithChildren) => {
   const [state, setState] = useState(initialState)
 
   const type = state.typesSelected.map((opt) => opt.value)
+  const typeOperator = state.typeFilterOperator?.value
 
-  const filter = useMemo(() => ({ type }), [type])
+  const filter = useMemo(
+    () => ({
+      type,
+      typeOperator,
+    }),
+    [type, typeOperator],
+  )
 
   const pokemonsQuery = usePokemonsQuery({
     search: state.searchQuery,

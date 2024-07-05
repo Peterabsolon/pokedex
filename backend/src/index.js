@@ -36,6 +36,7 @@ function applyFilter(pokemons, filterAttribute, filterValues, operator) {
       );
     }
   }
+
   return pokemons;
 }
 

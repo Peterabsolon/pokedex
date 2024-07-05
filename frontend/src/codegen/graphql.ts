@@ -30,6 +30,11 @@ export enum CacheControlScope {
   Public = 'PUBLIC',
 }
 
+export enum FilterOperator {
+  And = 'AND',
+  Or = 'OR',
+}
+
 export type Mutation = {
   __typename?: 'Mutation'
   favoritePokemon?: Maybe<Pokemon>
@@ -95,8 +100,11 @@ export type PokemonEvolutionRequirement = {
 export type PokemonFilterInput = {
   isFavorite?: InputMaybe<Scalars['Boolean']['input']>
   resistance?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
+  resistancesOperator?: InputMaybe<FilterOperator>
   type?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
+  typeOperator?: InputMaybe<FilterOperator>
   weakness?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
+  weaknessOperator?: InputMaybe<FilterOperator>
 }
 
 export type PokemonsQueryInput = {
