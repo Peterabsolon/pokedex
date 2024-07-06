@@ -77,7 +77,7 @@ export default defineConfig({
   webServer: {
     // in real world setting I'd run this against precompiled prod build
     command: 'npm run dev',
-    url: 'http://127.0.0.1:3000',
+    url: 'http://localhost:3000',
     reuseExistingServer: !process.env.CI,
   },
 })
