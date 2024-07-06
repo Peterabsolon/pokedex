@@ -39,6 +39,7 @@ export const PokemonsContextProvider = ({ children }: PropsWithChildren) => {
    * Filters
    */
   const search = state.searchQuery
+  const isFavorite = state.showFavoritesOnly
 
   const type = state.typesSelected.map((opt) => opt.value)
   const typeOperator = state.typeFilterOperator?.value
@@ -57,8 +58,9 @@ export const PokemonsContextProvider = ({ children }: PropsWithChildren) => {
       weaknessOperator,
       resistance,
       resistanceOperator,
+      isFavorite,
     }),
-    [type, typeOperator, weakness, weaknessOperator, resistance, resistanceOperator],
+    [type, typeOperator, weakness, weaknessOperator, resistance, resistanceOperator, isFavorite],
   )
 
   /**

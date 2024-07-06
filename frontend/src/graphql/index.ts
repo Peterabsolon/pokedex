@@ -1,3 +1,4 @@
+export * from './cache'
 export * from './favorite-pokemon.mutation'
 export * from './fragments'
 export * from './get-pokemon-by-id.query'

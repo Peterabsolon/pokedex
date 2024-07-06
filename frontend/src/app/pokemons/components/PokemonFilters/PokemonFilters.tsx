@@ -10,6 +10,7 @@ export const PokemonFilters: React.FC = () => {
     resistancesSelected,
     searchQuery,
     showDetailInfo,
+    showFavoritesOnly,
     typeFilterOperator,
     typesSelected,
     weaknessesFilterOperator,
@@ -25,6 +26,7 @@ export const PokemonFilters: React.FC = () => {
     setWeaknessesSelected,
     setWeaknessFilterOperator,
     toggleDetailedInfo,
+    toggleShowFavoritesOnly,
   } = actions
 
   return (
@@ -39,6 +41,13 @@ export const PokemonFilters: React.FC = () => {
       />
 
       <Toggle label="Show detailed info" checked={showDetailInfo} onChange={toggleDetailedInfo} className="mb-4" />
+
+      <Toggle
+        label="Show favorites only"
+        checked={showFavoritesOnly}
+        onChange={toggleShowFavoritesOnly}
+        className="mb-4"
+      />
 
       <PokemonTypeSelect<true>
         name="types"

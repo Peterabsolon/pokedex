@@ -4,6 +4,7 @@ export const POKEMON_INFO_FRAGMENT = gql`
   fragment PokemonInfo on Pokemon {
     id
     name
+    number
     classification
     types
     sound

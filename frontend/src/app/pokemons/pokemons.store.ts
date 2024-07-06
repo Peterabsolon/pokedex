@@ -5,6 +5,7 @@ type Options = readonly SelectOption<string>[]
 export const initialState = {
   searchQuery: '' as string | undefined,
   showDetailInfo: false,
+  showFavoritesOnly: false,
 
   types: [] as Options,
   typesSelected: [] as Options,
@@ -26,6 +27,10 @@ export const createActions = (setState: React.Dispatch<React.SetStateAction<Poke
 
   toggleDetailedInfo: () => {
     setState((prev) => ({ ...prev, showDetailInfo: !prev.showDetailInfo }))
+  },
+
+  toggleShowFavoritesOnly: () => {
+    setState((prev) => ({ ...prev, showFavoritesOnly: !prev.showFavoritesOnly }))
   },
 
   setTypes: (types: Options) => {

@@ -118,9 +118,7 @@ export type Query = {
   __typename?: 'Query'
   pokemonById?: Maybe<Pokemon>
   pokemonByName?: Maybe<Pokemon>
-  pokemonResistances: Array<Scalars['String']['output']>
   pokemonTypes: Array<Scalars['String']['output']>
-  pokemonWeaknesses: Array<Scalars['String']['output']>
   pokemons: PokemonConnection
 }
 
@@ -151,6 +149,7 @@ export type FavoritePokemonMutation = {
     __typename?: 'Pokemon'
     id: string
     name: string
+    number: number
     classification: string
     types: Array<string>
     sound: string
@@ -177,6 +176,7 @@ export type PokemonDetailsFragment = {
   __typename?: 'Pokemon'
   id: string
   name: string
+  number: number
   classification: string
   types: Array<string>
   sound: string
@@ -202,6 +202,7 @@ export type PokemonInfoFragment = {
   __typename?: 'Pokemon'
   id: string
   name: string
+  number: number
   classification: string
   types: Array<string>
   sound: string
@@ -224,6 +225,7 @@ export type GetPokemonByIdQuery = {
     __typename?: 'Pokemon'
     id: string
     name: string
+    number: number
     classification: string
     types: Array<string>
     sound: string
@@ -256,6 +258,7 @@ export type GetPokemonByNameQuery = {
     __typename?: 'Pokemon'
     id: string
     name: string
+    number: number
     classification: string
     types: Array<string>
     sound: string
@@ -278,17 +281,9 @@ export type GetPokemonByNameQuery = {
   } | null
 }
 
-export type GetPokemonResistancesQueryVariables = Exact<{ [key: string]: never }>
-
-export type GetPokemonResistancesQuery = { __typename?: 'Query'; pokemonResistances: Array<string> }
-
 export type GetPokemonTypesQueryVariables = Exact<{ [key: string]: never }>
 
 export type GetPokemonTypesQuery = { __typename?: 'Query'; pokemonTypes: Array<string> }
-
-export type GetPokemonWeaknessesQueryVariables = Exact<{ [key: string]: never }>
-
-export type GetPokemonWeaknessesQuery = { __typename?: 'Query'; pokemonWeaknesses: Array<string> }
 
 export type GetPokemonsQueryVariables = Exact<{
   query: PokemonsQueryInput
@@ -302,6 +297,7 @@ export type GetPokemonsQuery = {
       __typename?: 'Pokemon'
       id: string
       name: string
+      number: number
       classification: string
       types: Array<string>
       sound: string
@@ -326,6 +322,7 @@ export type UnFavoritePokemonMutation = {
     __typename?: 'Pokemon'
     id: string
     name: string
+    number: number
     classification: string
     types: Array<string>
     sound: string
@@ -360,6 +357,7 @@ export const PokemonInfoFragmentDoc = {
         selections: [
           { kind: 'Field', name: { kind: 'Name', value: 'id' } },
           { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'number' } },
           { kind: 'Field', name: { kind: 'Name', value: 'classification' } },
           { kind: 'Field', name: { kind: 'Name', value: 'types' } },
           { kind: 'Field', name: { kind: 'Name', value: 'sound' } },
@@ -475,6 +473,7 @@ export const PokemonDetailsFragmentDoc = {
         selections: [
           { kind: 'Field', name: { kind: 'Name', value: 'id' } },
           { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'number' } },
           { kind: 'Field', name: { kind: 'Name', value: 'classification' } },
           { kind: 'Field', name: { kind: 'Name', value: 'types' } },
           { kind: 'Field', name: { kind: 'Name', value: 'sound' } },
@@ -534,6 +533,7 @@ export const FavoritePokemonDocument = {
         selections: [
           { kind: 'Field', name: { kind: 'Name', value: 'id' } },
           { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'number' } },
           { kind: 'Field', name: { kind: 'Name', value: 'classification' } },
           { kind: 'Field', name: { kind: 'Name', value: 'types' } },
           { kind: 'Field', name: { kind: 'Name', value: 'sound' } },
@@ -681,6 +681,7 @@ export const GetPokemonByIdDocument = {
         selections: [
           { kind: 'Field', name: { kind: 'Name', value: 'id' } },
           { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'number' } },
           { kind: 'Field', name: { kind: 'Name', value: 'classification' } },
           { kind: 'Field', name: { kind: 'Name', value: 'types' } },
           { kind: 'Field', name: { kind: 'Name', value: 'sound' } },
@@ -828,6 +829,7 @@ export const GetPokemonByNameDocument = {
         selections: [
           { kind: 'Field', name: { kind: 'Name', value: 'id' } },
           { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'number' } },
           { kind: 'Field', name: { kind: 'Name', value: 'classification' } },
           { kind: 'Field', name: { kind: 'Name', value: 'types' } },
           { kind: 'Field', name: { kind: 'Name', value: 'sound' } },
@@ -931,20 +933,6 @@ export const GetPokemonByNameDocument = {
     },
   ],
 } as unknown as DocumentNode<GetPokemonByNameQuery, GetPokemonByNameQueryVariables>
-export const GetPokemonResistancesDocument = {
-  kind: 'Document',
-  definitions: [
-    {
-      kind: 'OperationDefinition',
-      operation: 'query',
-      name: { kind: 'Name', value: 'getPokemonResistances' },
-      selectionSet: {
-        kind: 'SelectionSet',
-        selections: [{ kind: 'Field', name: { kind: 'Name', value: 'pokemonResistances' } }],
-      },
-    },
-  ],
-} as unknown as DocumentNode<GetPokemonResistancesQuery, GetPokemonResistancesQueryVariables>
 export const GetPokemonTypesDocument = {
   kind: 'Document',
   definitions: [
@@ -959,20 +947,6 @@ export const GetPokemonTypesDocument = {
     },
   ],
 } as unknown as DocumentNode<GetPokemonTypesQuery, GetPokemonTypesQueryVariables>
-export const GetPokemonWeaknessesDocument = {
-  kind: 'Document',
-  definitions: [
-    {
-      kind: 'OperationDefinition',
-      operation: 'query',
-      name: { kind: 'Name', value: 'getPokemonWeaknesses' },
-      selectionSet: {
-        kind: 'SelectionSet',
-        selections: [{ kind: 'Field', name: { kind: 'Name', value: 'pokemonWeaknesses' } }],
-      },
-    },
-  ],
-} as unknown as DocumentNode<GetPokemonWeaknessesQuery, GetPokemonWeaknessesQueryVariables>
 export const GetPokemonsDocument = {
   kind: 'Document',
   definitions: [
@@ -1029,6 +1003,7 @@ export const GetPokemonsDocument = {
         selections: [
           { kind: 'Field', name: { kind: 'Name', value: 'id' } },
           { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'number' } },
           { kind: 'Field', name: { kind: 'Name', value: 'classification' } },
           { kind: 'Field', name: { kind: 'Name', value: 'types' } },
           { kind: 'Field', name: { kind: 'Name', value: 'sound' } },
@@ -1088,6 +1063,7 @@ export const UnFavoritePokemonDocument = {
         selections: [
           { kind: 'Field', name: { kind: 'Name', value: 'id' } },
           { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'number' } },
           { kind: 'Field', name: { kind: 'Name', value: 'classification' } },
           { kind: 'Field', name: { kind: 'Name', value: 'types' } },
           { kind: 'Field', name: { kind: 'Name', value: 'sound' } },

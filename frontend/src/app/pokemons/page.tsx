@@ -8,9 +8,10 @@ const SIDEBAR_WIDTH_PX = 460
 const ITEM_MIN_WIDTH_PX = 360
 
 const PokemonsPage = () => {
-  const { queries } = usePokemonsContext()
+  const { queries, state } = usePokemonsContext()
   const { pokemonsQuery } = queries
-  const { pokemons } = pokemonsQuery
+
+  const pokemons = pokemonsQuery.pokemons.filter((p) => (state.showFavoritesOnly ? p.isFavorite : true))
 
   return (
     <div className="max-w-screen flex flex-auto overflow-hidden p-8">

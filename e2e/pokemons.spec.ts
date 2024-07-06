@@ -33,16 +33,26 @@ test.describe('Required features', () => {
   })
 
   test('can filter pokemons by type', async ({ page, browser }) => {
-    // const request = waitForGraphQLRequest(page, 'getPokemons')
-    await selectOption({ page, browser, testId: 'types', options: ['Bug'], operationName })
-    // await request
+    await selectOption({
+      page,
+      browser,
+      testId: 'types',
+      options: ['Bug'],
+      operationName,
+    })
 
     const count = await page.getByTestId('pokemons').locator('> *').count()
     expect(count).toBe(10)
   })
 
   test('can filter pokemons by matching types, using AND logic', async ({ page, browser }) => {
-    await selectOption({ page, browser, testId: 'typesFilterOperator', options: ['And'], operationName })
+    await selectOption({
+      page,
+      browser,
+      testId: 'typesFilterOperator',
+      options: ['And'],
+      operationName,
+    })
 
     await selectOption({
       page,
@@ -57,7 +67,13 @@ test.describe('Required features', () => {
   })
 
   test('can filter pokemons by matching types, using OR logic', async ({ page, browser }) => {
-    await selectOption({ page, browser, testId: 'typesFilterOperator', options: ['Or'], operationName })
+    await selectOption({
+      page,
+      browser,
+      testId: 'typesFilterOperator',
+      options: ['Or'],
+      operationName,
+    })
 
     await selectOption({
       page,
@@ -70,4 +86,7 @@ test.describe('Required features', () => {
     await expect(page.getByText('Caterpie')).toBeVisible() // Bug
     await expect(page.getByText('Pikachu')).toBeVisible() // Electric
   })
+
+  // TODO
+  // test('can view favorites only', () => {})
 })
