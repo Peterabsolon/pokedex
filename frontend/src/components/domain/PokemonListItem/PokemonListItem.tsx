@@ -33,11 +33,17 @@ export const PokemonListItem = ({
   onResistanceClick,
   onWeaknessClick,
 }: PokemonListItemProps) => {
+  // ====================================================
+  // Props
+  // ====================================================
   const { id, name, isFavorite, types, weaknesses, resistant, image } = pokemon
 
   const { handleFavorite } = useFavoritePokemonMutation()
   const { handleUnFavorite } = useUnFavoritePokemonMutation()
 
+  // ====================================================
+  // Click handlers
+  // ====================================================
   const handleToggleFavorite = useCallback(() => {
     isFavorite ? handleUnFavorite(id) : handleFavorite(id)
   }, [isFavorite, id, handleFavorite, handleUnFavorite])
@@ -78,9 +84,15 @@ export const PokemonListItem = ({
     [onWeaknessClick],
   )
 
+  // ====================================================
+  // Computed
+  // ====================================================
   const color = types[0] ? POKEMON_TYPE_COLORS[types[0] as PokemonType] : '#fff'
   const colorBackground = chroma.mix(color, '#fff', 0.4).hex()
 
+  // ====================================================
+  // JSX
+  // ====================================================
   return (
     <Card onClick={handleClick} motion={MOTION_PROPS} style={{ background: colorBackground }} className="p-4">
       <div className="mb-4 rounded-lg bg-white p-4">

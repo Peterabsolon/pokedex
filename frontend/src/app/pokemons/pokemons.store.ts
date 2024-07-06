@@ -7,7 +7,7 @@ type Options = readonly Option[]
 
 export const initialState = {
   searchQuery: '' as string | undefined,
-  showDetailInfo: false,
+  showDetailInfo: true,
   showFavoritesOnly: false,
 
   types: [] as Options,
