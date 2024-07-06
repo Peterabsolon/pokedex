@@ -6,24 +6,24 @@ export const PokemonFilters: React.FC = () => {
   const { state, actions } = usePokemonsContext()
 
   const {
-    searchQuery,
-    typesSelected,
-    typeFilterOperator,
-    weaknessesSelected,
-    weaknessesFilterOperator,
-    resistancesSelected,
     resistancesFilterOperator,
+    resistancesSelected,
+    searchQuery,
     showDetailInfo,
+    typeFilterOperator,
+    typesSelected,
+    weaknessesFilterOperator,
+    weaknessesSelected,
   } = state
 
   const {
+    setResistancesFilterOperator,
+    setResistancesSelected,
     setSearchQuery,
-    setTypesSelected,
     setTypeFilterOperator,
+    setTypesSelected,
     setWeaknessesSelected,
     setWeaknessFilterOperator,
-    setResistancesSelected,
-    setResistancesFilterOperator,
     toggleDetailedInfo,
   } = actions
 

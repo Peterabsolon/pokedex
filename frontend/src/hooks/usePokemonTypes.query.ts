@@ -14,5 +14,5 @@ export const usePokemonTypesQuery = () => {
     [types],
   )
 
-  return { pokemonTypesQuery, types, options }
+  return useMemo(() => ({ pokemonTypesQuery, types, options }), [pokemonTypesQuery, types, options])
 }

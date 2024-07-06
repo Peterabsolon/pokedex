@@ -1,4 +1,5 @@
 import { useQuery } from '@apollo/client'
+import { useMemo } from 'react'
 
 import { GetPokemonByIdQuery } from '~/codegen/graphql'
 import { GET_POKEMON_BY_ID_QUERY } from '~/graphql'
@@ -15,8 +16,13 @@ export const usePokemonByIdQuery = ({ id }: Props) => {
 
   const pokemonById = pokemonByIdQuery.data?.pokemonById
 
-  return {
-    pokemonByIdQuery,
-    pokemonById,
-  }
+  console.log('usePokemonByIdQuery')
+
+  return useMemo(
+    () => ({
+      pokemonById,
+      pokemonByIdQuery,
+    }),
+    [pokemonById, pokemonByIdQuery],
+  )
 }
