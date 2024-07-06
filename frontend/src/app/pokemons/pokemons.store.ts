@@ -1,4 +1,4 @@
-import { uniq } from 'lodash'
+import { uniqBy } from 'lodash'
 
 import { FILTER_OPERATOR_OPTIONS, FilterOperatorOption, SelectOption } from '~/components'
 
@@ -45,7 +45,7 @@ export const createActions = (setState: React.Dispatch<React.SetStateAction<Poke
   },
 
   addTypeSelected: (typeSelected: Option) => {
-    setState((prev) => ({ ...prev, typesSelected: uniq([...prev.typesSelected, typeSelected]) }))
+    setState((prev) => ({ ...prev, typesSelected: uniqBy([...prev.typesSelected, typeSelected], 'value') }))
   },
 
   setTypeFilterOperator: (typeFilterOperator: FilterOperatorOption | null) => {
@@ -57,7 +57,10 @@ export const createActions = (setState: React.Dispatch<React.SetStateAction<Poke
   },
 
   addWeaknessSelected: (weaknessSelected: Option) => {
-    setState((prev) => ({ ...prev, weaknessesSelected: uniq([...prev.weaknessesSelected, weaknessSelected]) }))
+    setState((prev) => ({
+      ...prev,
+      weaknessesSelected: uniqBy([...prev.weaknessesSelected, weaknessSelected], 'value'),
+    }))
   },
 
   setWeaknessFilterOperator: (weaknessFilterOperator: FilterOperatorOption | null) => {
@@ -69,7 +72,10 @@ export const createActions = (setState: React.Dispatch<React.SetStateAction<Poke
   },
 
   addResistanceSelected: (resistanceSelected: Option) => {
-    setState((prev) => ({ ...prev, resistancesSelected: uniq([...prev.resistancesSelected, resistanceSelected]) }))
+    setState((prev) => ({
+      ...prev,
+      resistancesSelected: uniqBy([...prev.resistancesSelected, resistanceSelected], 'value'),
+    }))
   },
 
   setResistancesFilterOperator: (resistancesFilterOperator: FilterOperatorOption | null) => {

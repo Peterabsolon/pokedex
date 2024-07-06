@@ -12,9 +12,9 @@ export const Badge = ({ children, color = '#ccc', ...props }: BadgeProps) => {
 
   return (
     <div
+      {...props}
       style={{ color: colorText, borderColor: color, background: colorLighter }}
       className="rounded-lg border px-2 py-1 text-sm"
-      {...props}
     >
       {children}
     </div>
