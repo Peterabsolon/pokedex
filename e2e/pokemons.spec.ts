@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test'
 
-import { selectOption, waitForGraphQLRequest } from './utils'
+import { selectOption } from './utils'
 
 const APP_URL = 'http://localhost:3000'
 const operationName = 'getPokemons'
@@ -16,16 +16,10 @@ const operationName = 'getPokemons'
 test.describe('Required features', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto(APP_URL)
-
-    // TODO: Remove...
-    await page.waitForTimeout(2000)
   })
 
   test('can search pokemons', async ({ page }) => {
-    const request = waitForGraphQLRequest(page, 'getPokemons')
     await page.getByTestId('search-query-input').first().fill('Zubat')
-    await request
-
     await expect(page.getByText('Zubat')).toBeVisible()
     await expect(page.getByText('Bulbasaur')).not.toBeVisible()
     const count = await page.getByTestId('pokemons').locator('> *').count()
