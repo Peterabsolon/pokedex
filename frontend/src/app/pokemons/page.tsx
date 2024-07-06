@@ -1,6 +1,11 @@
 'use client'
 
+import { useRouter } from 'next/router'
+import { useCallback } from 'react'
+
+import { PokemonInfoFragment } from '~/codegen/graphql'
 import { PokemonListItem } from '~/components'
+import { ROUTES } from '~/constants'
 
 import { PokemonFilters } from './components'
 import { PokemonsContextProvider, usePokemonsContext } from './pokemons.context'
@@ -10,10 +15,18 @@ const SIDEBAR_WIDTH_PX = 460
 const ITEM_MIN_WIDTH_PX = 360
 
 const PokemonsPage = () => {
+  const router = useRouter()
   const { queries, state } = usePokemonsContext()
   const { pokemonsQuery } = queries
 
   const pokemons = pokemonsQuery.pokemons.filter((p) => (state.showFavoritesOnly ? p.isFavorite : true))
+
+  const handleViewDetail = useCallback(
+    (pokemon: PokemonInfoFragment) => {
+      router.push(ROUTES.POKEMON_DETAIL.replace(':id', pokemon.id))
+    },
+    [router],
+  )
 
   return (
     <div className="max-w-screen flex flex-auto overflow-hidden p-8">
@@ -31,7 +44,12 @@ const PokemonsPage = () => {
           }}
         >
           {pokemons.map((pokemon) => (
-            <PokemonListItem key={pokemon.id} pokemon={pokemon} showDetailInfo={state.showDetailInfo} />
+            <PokemonListItem
+              key={pokemon.id}
+              pokemon={pokemon}
+              showDetailInfo={state.showDetailInfo}
+              onClick={handleViewDetail}
+            />
           ))}
         </div>
       </div>

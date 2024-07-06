@@ -1,24 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { PokemonInfoFragment } from '~/codegen/graphql'
+import { BULBASAUR } from '~/constants/stories'
 
 import { PokemonListItem } from './PokemonListItem'
-
-const POKEMON = {
-  id: '001',
-  number: 1,
-  sound: '',
-  image: '',
-  isFavorite: false,
-  name: 'Bulbasaur',
-  classification: 'Seed Pokémon',
-  types: ['Grass', 'Poison'],
-  resistant: ['Water', 'Electric', 'Grass', 'Fighting', 'Fairy'],
-  weaknesses: ['Fire', 'Ice', 'Flying', 'Psychic'],
-  fleeRate: 0.1,
-  maxCP: 951,
-  maxHP: 1071,
-} satisfies PokemonInfoFragment
 
 const meta = {
   title: 'domain/PokemonListItem',
@@ -35,14 +19,14 @@ type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   args: {
-    pokemon: POKEMON,
+    pokemon: BULBASAUR,
     showDetailInfo: false,
   },
 }
 
 export const WithDetails: Story = {
   args: {
-    pokemon: POKEMON,
+    pokemon: BULBASAUR,
     showDetailInfo: true,
   },
 }
