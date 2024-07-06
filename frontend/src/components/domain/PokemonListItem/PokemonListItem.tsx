@@ -1,3 +1,4 @@
+import chroma from 'chroma-js'
 import { MotionProps } from 'framer-motion'
 import { useCallback } from 'react'
 
@@ -7,6 +8,7 @@ import { PokemonType } from '~/constants/pokemonTypes'
 import { useFavoritePokemonMutation, useUnFavoritePokemonMutation } from '~/hooks'
 
 import { PokemonTypeBadge } from '../PokemonTypeBadge'
+import { POKEMON_TYPE_COLORS } from '../PokemonTypeBadge/PokemonTypeBadge.constants'
 
 const MOTION_PROPS: MotionProps = {
   ...DEFAULT_CARD_MOTION,
@@ -47,8 +49,11 @@ export const PokemonListItem = ({ pokemon, showDetailInfo, onClick, onTypeClick 
     [onTypeClick],
   )
 
+  const color = types[0] ? POKEMON_TYPE_COLORS[types[0] as PokemonType] : '#fff'
+  const colorBackground = chroma.mix(color, '#fff', 0.6).hex()
+
   return (
-    <Card onClick={handleClick} motion={MOTION_PROPS}>
+    <Card onClick={handleClick} motion={MOTION_PROPS} style={{ background: colorBackground }}>
       <div
         className="mx-auto mb-4 h-64 w-64 bg-contain bg-center bg-no-repeat"
         style={{ backgroundImage: `url("${image}")` }}

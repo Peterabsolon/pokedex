@@ -9,7 +9,7 @@ import { createActions, initialState } from './pokemons.store'
 // ====================================================
 // Types
 // ====================================================
-type PokemonsByNumberMap = {
+export type PokemonsByNumberMap = {
   [key: number]: PokemonInfoFragment
 }
 
