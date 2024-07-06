@@ -9,10 +9,10 @@ export interface FieldProps {
   label?: ReactNode
 }
 
-export const Field = ({ className, children, name, label }: FieldProps & PropsWithChildren) => {
+export const Field = ({ className, children, name, label, ...rest }: FieldProps & PropsWithChildren) => {
   return (
-    <div className={cx('flex w-full flex-col', className)}>
-      <label className="mb-2 block text-sm font-medium" htmlFor={name}>
+    <div className={cx('flex w-full flex-col', className)} {...rest}>
+      <label className="text-md mb-2 block font-medium" htmlFor={name}>
         {label}
       </label>
 

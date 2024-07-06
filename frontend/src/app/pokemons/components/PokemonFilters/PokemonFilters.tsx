@@ -41,10 +41,24 @@ export const PokemonFilters: React.FC = () => {
 
       <Toggle label="Show detailed info" checked={showDetailInfo} onChange={toggleDetailedInfo} className="mb-4" />
 
-      <PokemonTypeSelect<true> label="Types" isMulti value={typesSelected} onChange={setTypesSelected} />
-      <FilterOperatorSelect value={typeFilterOperator} onChange={setTypeFilterOperator} className="mb-4" />
+      <PokemonTypeSelect<true>
+        name="types"
+        label="Types"
+        placeholder="Select types..."
+        isMulti
+        value={typesSelected}
+        onChange={setTypesSelected}
+      />
+
+      <FilterOperatorSelect
+        name="typesFilterOperator"
+        value={typeFilterOperator}
+        onChange={setTypeFilterOperator}
+        className="mb-4"
+      />
 
       <PokemonTypeSelect<true>
+        name="resistances"
         label="Resistances"
         isMulti
         value={resistancesSelected}

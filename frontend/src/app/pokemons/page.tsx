@@ -17,6 +17,7 @@ const PokemonsPage = () => {
   return (
     <div className="flex max-w-full flex-1 overflow-hidden p-8">
       <div
+        data-testId="pokemons"
         className="mr-8 grid flex-1 gap-8 self-start"
         style={{ gridTemplateColumns: `repeat(auto-fit, minmax(${ITEM_MIN_WIDTH_PX}px, ${maxWidth}))` }}
       >

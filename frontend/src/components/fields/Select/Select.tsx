@@ -24,11 +24,21 @@ export const Select = <
 >({
   name,
   label,
+  isSearchable = true,
   ...props
 }: SelectProps<Option, IsMulti, Group>) => {
+  const id = props.id ?? name
+
   return (
-    <Field name={name} label={label}>
-      <ReactSelect<Option, IsMulti, Group> {...props} name={name} instanceId={useId()} />
+    <Field name={name} label={label} data-test-id={id}>
+      <ReactSelect<Option, IsMulti, Group>
+        {...props}
+        id={id}
+        name={name}
+        instanceId={useId()}
+        isSearchable={isSearchable}
+        closeMenuOnSelect={!props.isMulti}
+      />
     </Field>
   )
 }
