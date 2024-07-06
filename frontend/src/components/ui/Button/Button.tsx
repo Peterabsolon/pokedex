@@ -1,5 +1,5 @@
 import classNames from 'classnames'
-import { MotionProps } from 'framer-motion'
+import { motion, MotionProps } from 'framer-motion'
 import { ButtonHTMLAttributes, ElementType, ReactNode } from 'react'
 
 export const DEFAULT_BUTTON_MOTION: MotionProps = {
@@ -61,7 +61,7 @@ export const Button = ({
   ...props
 }: ButtonProps) => {
   const motionProps = props.motion ?? DEFAULT_BUTTON_MOTION
-  const Element = 'button' as ElementType
+  const Element = motionProps ? motion.button : ('button' as ElementType)
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     if (stopPropagation) {

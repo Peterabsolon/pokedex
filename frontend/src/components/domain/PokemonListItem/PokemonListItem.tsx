@@ -16,11 +16,12 @@ const MOTION_PROPS: MotionProps = {
 
 export interface PokemonListItemProps {
   onClick?: (pokemon: PokemonInfoFragment) => void
+  onTypeClick?: (type: PokemonType) => void
   pokemon: PokemonInfoFragment
   showDetailInfo: boolean
 }
 
-export const PokemonListItem = ({ pokemon, showDetailInfo, onClick }: PokemonListItemProps) => {
+export const PokemonListItem = ({ pokemon, showDetailInfo, onClick, onTypeClick }: PokemonListItemProps) => {
   const { id, name, isFavorite, types, weaknesses, resistant, image } = pokemon
 
   const { handleFavorite } = useFavoritePokemonMutation()
@@ -36,6 +37,16 @@ export const PokemonListItem = ({ pokemon, showDetailInfo, onClick }: PokemonLis
     }
   }, [pokemon, onClick])
 
+  const handleTypeClick = useCallback(
+    (event: React.MouseEvent<HTMLDivElement>, type: PokemonType) => {
+      if (onTypeClick) {
+        event.stopPropagation()
+        onTypeClick(type)
+      }
+    },
+    [onTypeClick],
+  )
+
   return (
     <Card onClick={handleClick} motion={MOTION_PROPS}>
       <div
@@ -48,7 +59,11 @@ export const PokemonListItem = ({ pokemon, showDetailInfo, onClick }: PokemonLis
 
       <h3 className="text-md mb-3 flex gap-2 font-medium">
         {types.map((type) => (
-          <PokemonTypeBadge key={type} type={type as PokemonType} />
+          <PokemonTypeBadge
+            key={type}
+            type={type as PokemonType}
+            onClick={(e) => handleTypeClick(e, type as PokemonType)}
+          />
         ))}
       </h3>
 

@@ -1,6 +1,9 @@
+import { uniq } from 'lodash'
+
 import { FILTER_OPERATOR_OPTIONS, FilterOperatorOption, SelectOption } from '~/components'
 
-type Options = readonly SelectOption<string>[]
+type Option = SelectOption<string>
+type Options = readonly Option[]
 
 export const initialState = {
   searchQuery: '' as string | undefined,
@@ -39,6 +42,10 @@ export const createActions = (setState: React.Dispatch<React.SetStateAction<Poke
 
   setTypesSelected: (typesSelected: Options) => {
     setState((prev) => ({ ...prev, typesSelected }))
+  },
+
+  addTypeSelected: (typeSelected: Option) => {
+    setState((prev) => ({ ...prev, typesSelected: uniq([...prev.typesSelected, typeSelected]) }))
   },
 
   setTypeFilterOperator: (typeFilterOperator: FilterOperatorOption | null) => {

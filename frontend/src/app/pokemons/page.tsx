@@ -16,7 +16,7 @@ const ITEM_MIN_WIDTH_PX = 360
 
 const PokemonsPage = () => {
   const router = useRouter()
-  const { queries, state } = usePokemonsContext()
+  const { queries, state, actions } = usePokemonsContext()
   const { pokemonsQuery } = queries
 
   const pokemons = pokemonsQuery.pokemons.filter((p) => (state.showFavoritesOnly ? p.isFavorite : true))
@@ -49,6 +49,7 @@ const PokemonsPage = () => {
               pokemon={pokemon}
               showDetailInfo={state.showDetailInfo}
               onClick={handleViewDetail}
+              onTypeClick={(opt) => actions.addTypeSelected({ label: opt, value: opt })}
             />
           ))}
         </div>
