@@ -36,13 +36,15 @@ export const Select = <
         instanceId={useId()}
         isSearchable={isSearchable}
         closeMenuOnSelect={!props.isMulti}
-        components={{
-          Option: (props) => (
-            <div data-testId="react-select-option">
-              <components.Option {...props} />
-            </div>
-          ),
-        }}
+        components={
+          props.components ?? {
+            Option: (props) => (
+              <div data-testId="react-select-option">
+                <components.Option {...props} />
+              </div>
+            ),
+          }
+        }
       />
     </Field>
   )
