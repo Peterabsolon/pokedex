@@ -17,6 +17,12 @@ test.describe('Required features', () => {
 
   test('can search pokemons', async ({ page }) => {
     await page.goto('/')
+
+    await page.waitForTimeout(1000)
+
+    const countFirst = await page.getByTestId('pokemons').locator('> *').count()
+    expect(countFirst).toBe(10)
+
     await page.getByTestId('search-query-input').first().fill('Zubat')
     await expect(page.getByText('Zubat')).toBeVisible()
     await expect(page.getByText('Bulbasaur')).not.toBeVisible()
