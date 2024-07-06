@@ -8,7 +8,7 @@ import {
   SSRMultipartLink,
 } from '@apollo/experimental-nextjs-app-support'
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000/graphql'
 
 function makeClient() {
   const httpLink = new HttpLink({ uri: API_URL })
