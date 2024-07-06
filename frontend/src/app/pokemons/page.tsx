@@ -12,6 +12,7 @@ const PokemonsPage = () => {
   const { pokemonsQuery } = queries
   const { pokemons } = pokemonsQuery
 
+  // TODO: Fix
   const maxWidth = pokemons.length > 4 ? '1fr' : `${ITEM_MAX_WIDTH_PX}px`
 
   return (

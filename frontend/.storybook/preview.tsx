@@ -19,8 +19,12 @@ const preview: Preview = {
 
   parameters: {
     backgrounds: {
-      default: 'dark',
+      default: 'light',
       values: [
+        {
+          name: 'light',
+          value: '#FFF',
+        },
         {
           name: 'dark',
           value: '#020617', // bg-slate-950

@@ -27,8 +27,9 @@ export const ButtonSelectOption = <T extends string>({ option, value, onSelect }
 
   return (
     <Button
-      className="flex-1 rounded-none text-sm first:rounded-bl-md first:rounded-tl-md last:rounded-br-md last:rounded-tr-md"
-      variant={isSelected ? 'primary' : 'secondary'}
+      // TODO: Fix styles for light theme
+      className="flex-1 rounded-none border text-sm first:rounded-bl-md first:rounded-tl-md last:rounded-br-md last:rounded-tr-md"
+      variant={isSelected ? 'primary' : 'text'}
       iconLeft={icon}
       onClick={handleClick}
       motion={{ ...DEFAULT_BUTTON_MOTION, whileTap: { scale: 1, zIndex: 10 } }}
