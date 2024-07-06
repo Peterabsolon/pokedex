@@ -12,18 +12,18 @@ interface PokemonsContextQueries {
 }
 
 interface PokemonsContextType {
-  state: typeof initialState
   actions: ReturnType<typeof createActions>
   queries: PokemonsContextQueries
+  state: typeof initialState
 }
 
 // ====================================================
 // Context
 // ====================================================
 const PokemonsContext = createContext<PokemonsContextType>({
-  state: initialState,
   actions: createActions(() => {}),
   queries: {} as PokemonsContextQueries,
+  state: initialState,
 })
 
 // ====================================================
@@ -38,13 +38,21 @@ export const PokemonsContextProvider = ({ children }: PropsWithChildren) => {
 
   const actions = useMemo(() => createActions(setState), [setState])
 
+  const computed = useMemo(
+    () => ({
+      pokemonsByNumber: {},
+    }),
+    [],
+  )
+
   const context = useMemo(
     () => ({
-      state,
       actions,
+      computed,
+      state,
       queries,
     }),
-    [state, actions, queries],
+    [state, actions, queries, computed],
   )
 
   return <PokemonsContext.Provider value={context}>{children}</PokemonsContext.Provider>

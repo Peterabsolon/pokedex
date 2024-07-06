@@ -82,5 +82,7 @@ test.describe('Required features', () => {
   })
 
   // TODO
+  // test('can set pokemon as favorite', () => {})
+  // test('can remove pokemon as favorite', () => {})
   // test('can view favorites only', () => {})
 })

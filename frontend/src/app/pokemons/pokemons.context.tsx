@@ -1,5 +1,7 @@
+import { keyBy } from 'lodash'
 import { createContext, PropsWithChildren, useContext, useMemo, useState } from 'react'
 
+import { PokemonInfoFragment } from '~/codegen/graphql'
 import { usePokemonsQuery } from '~/hooks'
 
 import { createActions, initialState } from './pokemons.store'
@@ -7,14 +9,23 @@ import { createActions, initialState } from './pokemons.store'
 // ====================================================
 // Types
 // ====================================================
+type PokemonsByNumberMap = {
+  [key: number]: PokemonInfoFragment
+}
+
 interface PokemonsContextQueries {
   pokemonsQuery: ReturnType<typeof usePokemonsQuery>
 }
 
+interface PokemonsContextComputed {
+  pokemonsByNumber: PokemonsByNumberMap
+}
+
 interface PokemonsContextType {
-  state: typeof initialState
   actions: ReturnType<typeof createActions>
+  computed: PokemonsContextComputed
   queries: PokemonsContextQueries
+  state: typeof initialState
 }
 
 // ====================================================
@@ -24,6 +35,7 @@ const PokemonsContext = createContext<PokemonsContextType>({
   state: initialState,
   actions: createActions(() => {}),
   queries: {} as PokemonsContextQueries,
+  computed: {} as PokemonsContextComputed,
 })
 
 // ====================================================
@@ -31,9 +43,11 @@ const PokemonsContext = createContext<PokemonsContextType>({
 // ====================================================
 export const PokemonsContextProvider = ({ children }: PropsWithChildren) => {
   /**
-   * State
+   * State & Actions
    */
   const [state, setState] = useState(initialState)
+
+  const actions = useMemo(() => createActions(setState), [setState])
 
   /**
    * Filters
@@ -71,17 +85,23 @@ export const PokemonsContextProvider = ({ children }: PropsWithChildren) => {
   const queries = useMemo(() => ({ pokemonsQuery }), [pokemonsQuery])
 
   /**
-   * Context
+   * Computed
    */
-  const actions = useMemo(() => createActions(setState), [setState])
+  const computed = useMemo(
+    () => ({
+      pokemonsByNumber: keyBy(pokemonsQuery.pokemons, 'number'),
+    }),
+    [pokemonsQuery.pokemons],
+  )
 
   const context = useMemo(
     () => ({
-      state,
       actions,
+      computed,
       queries,
+      state,
     }),
-    [queries, state, actions],
+    [actions, computed, queries, state],
   )
 
   return <PokemonsContext.Provider value={context}>{children}</PokemonsContext.Provider>
