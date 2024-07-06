@@ -40,8 +40,8 @@ export const PokemonListItem = ({ pokemon }: PokemonListItemProps) => {
         style={{ backgroundImage: `url("${image}")` }}
       />
 
+      {/* Title component */}
       <h2 className="mb-1 text-lg font-bold">{name}</h2>
-
       <h3 className="text-md mb-3 font-medium">{types.join(',')}</h3>
 
       {state.showDetailInfo && (

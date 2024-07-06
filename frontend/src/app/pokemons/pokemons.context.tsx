@@ -38,6 +38,8 @@ export const PokemonsContextProvider = ({ children }: PropsWithChildren) => {
   /**
    * Filters
    */
+  const search = state.searchQuery
+
   const type = state.typesSelected.map((opt) => opt.value)
   const typeOperator = state.typeFilterOperator?.value
 
@@ -62,10 +64,7 @@ export const PokemonsContextProvider = ({ children }: PropsWithChildren) => {
   /**
    * Queries
    */
-  const pokemonsQuery = usePokemonsQuery({
-    search: state.searchQuery,
-    filter,
-  })
+  const pokemonsQuery = usePokemonsQuery({ search, filter })
 
   const queries = useMemo(() => ({ pokemonsQuery }), [pokemonsQuery])
 

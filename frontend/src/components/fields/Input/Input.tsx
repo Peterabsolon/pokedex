@@ -10,7 +10,7 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement>, Field
 export const Input = ({ name, label, className, ...props }: InputProps) => {
   return (
     <Field name={name} label={label}>
-      <input {...props} className={cx('border border-black text-black', className)} />
+      <input {...props} id={props.id || name} name={name} className={cx('border border-black text-black', className)} />
     </Field>
   )
 }

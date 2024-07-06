@@ -1,6 +1,8 @@
 # TODO
 
-- detail view evolutions on top
-- add backend filtering support for arrays + weaknesses + resistances
-- deploy to AWS/GCP
+- show evolution level 1/2/3
+- WEAKNESS/RESISTANCES are just types...
 - stagger animation
+- detail view evolutions on top
+- deploy to AWS/GCP
+- a18y
