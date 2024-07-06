@@ -51,7 +51,7 @@ export const PokemonListItem = ({ pokemon }: PokemonListItemProps) => {
         </>
       )}
 
-      <Button className="w-full" onClick={handleToggleFavorite}>
+      <Button className="w-full" onClick={handleToggleFavorite} stopPropagation>
         {isFavorite ? 'Unfavorite' : 'Favorite'}
       </Button>
     </Card>

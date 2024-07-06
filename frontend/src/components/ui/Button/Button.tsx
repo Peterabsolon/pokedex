@@ -43,6 +43,11 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
    * Props for animating with framer-motion
    */
   motion?: MotionProps
+
+  /**
+   * If true, the onClick event is not propagated
+   */
+  stopPropagation?: boolean
 }
 
 export const Button = ({
@@ -53,15 +58,28 @@ export const Button = ({
   className,
   iconLeft,
   iconRight,
+  onClick,
+  stopPropagation,
   ...props
 }: ButtonProps) => {
   const motionProps = props.motion ?? DEFAULT_BUTTON_MOTION
   const Element = motionProps ? motion.button : ('button' as ElementType)
 
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    if (stopPropagation) {
+      e.stopPropagation()
+    }
+
+    if (onClick) {
+      onClick(e)
+    }
+  }
+
   return (
     <Element
       {...props}
       {...motionProps}
+      onClick={handleClick}
       className={classNames(
         'relative flex flex-row items-center justify-center text-nowrap rounded-md px-8 py-2',
         'font-medium drop-shadow-2xl transition-colors disabled:cursor-not-allowed',
@@ -71,7 +89,7 @@ export const Button = ({
           'pr-6': iconRight,
         },
         variantStyles[variant],
-        variantHoverStyles[variantHover || variant],
+        variantHoverStyles[variantHover ?? variant],
         className,
       )}
     >
