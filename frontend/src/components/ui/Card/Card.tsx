@@ -26,9 +26,13 @@ export const Card = ({ children, className, onClick, style, ...props }: CardProp
 
   return (
     <Element
-      className={cx('emboss-effect relative rounded-xl bg-white p-8 drop-shadow-2xl transition-colors', className, {
-        'cursor-pointer': !!onClick,
-      })}
+      className={cx(
+        'emboss-effect relative transform-gpu rounded-xl bg-white p-8 drop-shadow-2xl transition-colors',
+        className,
+        {
+          'cursor-pointer': !!onClick,
+        },
+      )}
       onClick={onClick}
       style={style}
       {...motionProps}
