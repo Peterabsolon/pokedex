@@ -2,16 +2,16 @@ import { MotionProps } from 'framer-motion'
 import { useCallback } from 'react'
 
 import { PokemonInfoFragment } from '~/codegen/graphql'
-import { Button, Card } from '~/components/ui'
+import { Button, Card, DEFAULT_CARD_MOTION } from '~/components/ui'
 import { useFavoritePokemonMutation, useUnFavoritePokemonMutation } from '~/hooks'
 
 const MOTION_PROPS: MotionProps = {
-  // ...DEFAULT_CARD_MOTION,
+  ...DEFAULT_CARD_MOTION,
   // transition: { type: 'spring', stiffness: 2000, damping: 200 },
-  // transition: { type: 'spring', stiffness: 1500, damping: 100 },
+  transition: { type: 'spring', stiffness: 1500, damping: 100 },
   // transition: { type: 'spring', stiffness: 100, damping: 10 },
-  // whileHover: { scale: 1.02 },
-  // whileTap: { scale: 0.95 },
+  whileHover: { scale: 1.02 },
+  whileTap: { scale: 0.95 },
 }
 
 export interface PokemonListItemProps {
