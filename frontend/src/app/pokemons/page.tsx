@@ -3,28 +3,34 @@
 import { PokemonFilters, PokemonListItem } from './components'
 import { PokemonsContextProvider, usePokemonsContext } from './pokemons.context'
 
+const REM_PX = 16
 const SIDEBAR_WIDTH_PX = 460
 const ITEM_MIN_WIDTH_PX = 360
-const ITEM_MAX_WIDTH_PX = 420
 
 const PokemonsPage = () => {
   const { queries } = usePokemonsContext()
   const { pokemonsQuery } = queries
   const { pokemons } = pokemonsQuery
 
-  // TODO: Fix
-  const maxWidth = pokemons.length > 4 ? '1fr' : `${ITEM_MAX_WIDTH_PX}px`
-
   return (
-    <div className="flex max-w-full flex-1 overflow-hidden p-8">
+    <div className="max-w-screen flex flex-auto overflow-hidden p-8">
       <div
-        data-testId="pokemons"
-        className="mr-8 grid flex-1 gap-8 self-start"
-        style={{ gridTemplateColumns: `repeat(auto-fit, minmax(${ITEM_MIN_WIDTH_PX}px, ${maxWidth}))` }}
+        className="mr-8 flex-1 self-start"
+        style={{
+          maxWidth: `calc(100% - ${SIDEBAR_WIDTH_PX + 2 * REM_PX}px)`,
+        }}
       >
-        {pokemonsQuery.pokemons.map((pokemon) => (
-          <PokemonListItem key={pokemon.id} pokemon={pokemon} />
-        ))}
+        <div
+          data-testId="pokemons"
+          className="grid gap-8"
+          style={{
+            gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+          }}
+        >
+          {pokemons.map((pokemon) => (
+            <PokemonListItem key={pokemon.id} pokemon={pokemon} />
+          ))}
+        </div>
       </div>
 
       <div style={{ width: SIDEBAR_WIDTH_PX }} className="flex-shrink-0">
