@@ -1,5 +1,5 @@
 import classNames from 'classnames'
-import { motion, MotionProps } from 'framer-motion'
+import { MotionProps } from 'framer-motion'
 import { ButtonHTMLAttributes, ElementType, ReactNode } from 'react'
 
 export const DEFAULT_BUTTON_MOTION: MotionProps = {
@@ -61,7 +61,7 @@ export const Button = ({
   ...props
 }: ButtonProps) => {
   const motionProps = props.motion ?? DEFAULT_BUTTON_MOTION
-  const Element = motionProps ? motion.button : ('button' as ElementType)
+  const Element = 'button' as ElementType
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     if (stopPropagation) {
@@ -79,10 +79,13 @@ export const Button = ({
       {...motionProps}
       onClick={handleClick}
       className={classNames(
+        // https://github.com/mdn/browser-compat-data/issues/17726
+        // Tailwind shadows use some unsupported Safari API, force use GPU to fix perf issues
+        'transform-gpu drop-shadow-2xl',
         'relative flex flex-row items-center justify-center text-nowrap rounded-md px-8 py-2',
-        'font-medium drop-shadow-2xl transition-colors disabled:cursor-not-allowed',
+        'font-medium transition-colors disabled:cursor-not-allowed',
         {
-          'emboss-effect': variant !== 'text',
+          // 'emboss-effect': variant !== 'text',
           'pl-6': iconLeft,
           'pr-6': iconRight,
         },

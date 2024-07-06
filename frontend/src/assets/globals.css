@@ -21,6 +21,8 @@
   }
 
   .emboss-effect::before {
+    /* force GPU use */
+    transform: translateZ(0);
     content: '';
     pointer-events: none;
     user-select: none;

@@ -1,5 +1,5 @@
 import classNames from 'classnames'
-import { motion, MotionProps } from 'framer-motion'
+import { MotionProps } from 'framer-motion'
 import { HTMLAttributes } from 'react'
 
 export type AlertLevel = keyof typeof levelStyles
@@ -23,19 +23,19 @@ export interface AlertProps extends HTMLAttributes<HTMLDivElement> {
 
 export const Alert = ({ children, level = 'info', ...props }: AlertProps) => {
   const motionProps = props.motion ?? DEFAULT_MOTION
-  const Element = motionProps ? motion.button : ('button' as React.ElementType)
+  // const Element = 'div' as React.ElementType
 
   return (
-    <Element
-      {...motionProps}
+    <div
+      // {...motionProps}
       className={classNames(
-        'emboss-effect relative w-full rounded-xl border p-6 text-white drop-shadow-2xl',
+        'relative w-full transform-gpu rounded-xl border p-6 text-white drop-shadow-2xl',
         levelStyles[level],
         props.className,
       )}
     >
       {children}
-    </Element>
+    </div>
   )
 }
 
