@@ -11,7 +11,10 @@ export const Badge = ({ children, color = '#ccc' }: BadgeProps) => {
   const colorText = getContrastingTextColor(colorLighter)
 
   return (
-    <div style={{ color: colorText, borderColor: color, background: colorLighter }} className="rounded-lg border p-2">
+    <div
+      style={{ color: colorText, borderColor: color, background: colorLighter }}
+      className="rounded-lg border px-2 py-1 text-sm"
+    >
       {children}
     </div>
   )

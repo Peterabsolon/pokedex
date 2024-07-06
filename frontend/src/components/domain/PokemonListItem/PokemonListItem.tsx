@@ -3,7 +3,10 @@ import { useCallback } from 'react'
 
 import { PokemonInfoFragment } from '~/codegen/graphql'
 import { Button, Card, DEFAULT_CARD_MOTION } from '~/components/ui'
+import { PokemonType } from '~/constants/pokemonTypes'
 import { useFavoritePokemonMutation, useUnFavoritePokemonMutation } from '~/hooks'
+
+import { PokemonTypeBadge } from '../PokemonTypeBadge'
 
 const MOTION_PROPS: MotionProps = {
   ...DEFAULT_CARD_MOTION,
@@ -42,7 +45,12 @@ export const PokemonListItem = ({ pokemon, showDetailInfo, onClick }: PokemonLis
 
       {/* TODO: Title component */}
       <h2 className="mb-1 text-lg font-bold">{name}</h2>
-      <h3 className="text-md mb-3 font-medium">{types.join(',')}</h3>
+
+      <h3 className="text-md mb-3 flex gap-2 font-medium">
+        {types.map((type) => (
+          <PokemonTypeBadge key={type} type={type as PokemonType} />
+        ))}
+      </h3>
 
       {showDetailInfo && (
         <>
