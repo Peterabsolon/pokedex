@@ -1,8 +1,6 @@
-import { SelectOption } from '~/components'
-import { FILTER_OPERATOR_OPTIONS } from '~/constants'
+import { FILTER_OPERATOR_OPTIONS, FilterOperatorOption, SelectOption } from '~/components'
 
 type Options = readonly SelectOption<string>[]
-type FilterOperatorOption = (typeof FILTER_OPERATOR_OPTIONS)[0] | null | undefined
 
 export const initialState = {
   searchQuery: '' as string | undefined,
@@ -10,15 +8,13 @@ export const initialState = {
 
   types: [] as Options,
   typesSelected: [] as Options,
-  typeFilterOperator: FILTER_OPERATOR_OPTIONS[0] as FilterOperatorOption,
+  typeFilterOperator: FILTER_OPERATOR_OPTIONS[0] as FilterOperatorOption | null,
 
-  weaknesses: [] as Options,
   weaknessesSelected: [] as Options,
-  weaknessesFilterOperator: FILTER_OPERATOR_OPTIONS[0] as FilterOperatorOption,
+  weaknessesFilterOperator: FILTER_OPERATOR_OPTIONS[0] as FilterOperatorOption | null,
 
-  resistances: [] as Options,
   resistancesSelected: [] as Options,
-  resistancesFilterOperator: FILTER_OPERATOR_OPTIONS[0] as FilterOperatorOption,
+  resistancesFilterOperator: FILTER_OPERATOR_OPTIONS[0] as FilterOperatorOption | null,
 }
 
 export type PokemonsState = typeof initialState
@@ -40,31 +36,23 @@ export const createActions = (setState: React.Dispatch<React.SetStateAction<Poke
     setState((prev) => ({ ...prev, typesSelected }))
   },
 
-  setTypeFilterOperator: (typeFilterOperator: FilterOperatorOption) => {
+  setTypeFilterOperator: (typeFilterOperator: FilterOperatorOption | null) => {
     setState((prev) => ({ ...prev, typeFilterOperator }))
-  },
-
-  setWeaknesses: (weaknesses: Options) => {
-    setState((prev) => ({ ...prev, weaknesses }))
   },
 
   setWeaknessesSelected: (weaknessesSelected: Options) => {
     setState((prev) => ({ ...prev, weaknessesSelected }))
   },
 
-  setWeaknessFilterOperator: (weaknessFilterOperator: FilterOperatorOption) => {
+  setWeaknessFilterOperator: (weaknessFilterOperator: FilterOperatorOption | null) => {
     setState((prev) => ({ ...prev, weaknessFilterOperator }))
-  },
-
-  setResistances: (resistances: Options) => {
-    setState((prev) => ({ ...prev, resistances }))
   },
 
   setResistancesSelected: (resistancesSelected: Options) => {
     setState((prev) => ({ ...prev, resistancesSelected }))
   },
 
-  setResistancesFilterOperator: (resistancesFilterOperator: FilterOperatorOption) => {
+  setResistancesFilterOperator: (resistancesFilterOperator: FilterOperatorOption | null) => {
     setState((prev) => ({ ...prev, resistancesFilterOperator }))
   },
 })

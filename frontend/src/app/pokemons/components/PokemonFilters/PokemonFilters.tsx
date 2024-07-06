@@ -1,14 +1,6 @@
 'use client'
 
-import {
-  Card,
-  FilterOperatorSelect,
-  InputDebounced,
-  PokemonResistancesSelect,
-  PokemonTypeSelect,
-  PokemonWeaknessSelect,
-  Toggle,
-} from '~/components'
+import { Card, FilterOperatorSelect, InputDebounced, PokemonTypeSelect, Toggle } from '~/components'
 
 import { usePokemonsContext } from '../../pokemons.context'
 
@@ -39,14 +31,20 @@ export const PokemonFilters: React.FC = () => {
 
   return (
     <Card>
-      <InputDebounced label="Search by name" value={searchQuery} onValueChange={setSearchQuery} className="mb-4" />
+      <InputDebounced
+        name="searchQuery"
+        label="Search by name"
+        value={searchQuery}
+        onValueChange={setSearchQuery}
+        className="mb-4"
+      />
 
       <Toggle label="Show detailed info" checked={showDetailInfo} onChange={toggleDetailedInfo} className="mb-4" />
 
       <PokemonTypeSelect<true> label="Types" isMulti value={typesSelected} onChange={setTypesSelected} />
       <FilterOperatorSelect value={typeFilterOperator} onChange={setTypeFilterOperator} className="mb-4" />
 
-      <PokemonResistancesSelect<true>
+      <PokemonTypeSelect<true>
         label="Resistances"
         isMulti
         value={resistancesSelected}
@@ -58,12 +56,7 @@ export const PokemonFilters: React.FC = () => {
         className="mb-4"
       />
 
-      <PokemonWeaknessSelect<true>
-        label="Weaknesses"
-        isMulti
-        value={weaknessesSelected}
-        onChange={setWeaknessesSelected}
-      />
+      <PokemonTypeSelect<true> label="Weaknesses" isMulti value={weaknessesSelected} onChange={setWeaknessesSelected} />
       <FilterOperatorSelect value={weaknessesFilterOperator} onChange={setWeaknessFilterOperator} className="mb-4" />
     </Card>
   )

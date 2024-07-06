@@ -1,7 +1,13 @@
 import { FilterOperator } from '~/codegen/graphql'
-import { FILTER_OPERATOR_OPTIONS } from '~/constants'
 
 import { Select, SelectOption, SelectProps } from '../Select'
+
+export const FILTER_OPERATOR_OPTIONS = Object.entries(FilterOperator).map(([key, value]) => ({
+  label: key,
+  value: value,
+}))
+
+export type FilterOperatorOption = (typeof FILTER_OPERATOR_OPTIONS)[number]
 
 export interface FilterOperatorSelectProps extends SelectProps<SelectOption<FilterOperator>, false, any> {
   value?: SelectOption<FilterOperator> | null

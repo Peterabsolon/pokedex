@@ -102,10 +102,6 @@ const resolvers = {
       ),
     pokemonTypes: () =>
       _.uniq(_.flatMap(pokemonsData, (pokemon) => pokemon.types)),
-    pokemonResistances: () =>
-      _.uniq(_.flatMap(pokemonsData, (pokemon) => pokemon.resistant)),
-    pokemonWeaknesses: () =>
-      _.uniq(_.flatMap(pokemonsData, (pokemon) => pokemon.weaknesses)),
   },
   Mutation: {
     favoritePokemon: (_, args) => {

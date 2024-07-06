@@ -74,8 +74,6 @@ type Query {
   pokemonByName(name: String!): Pokemon
   pokemonById(id: ID!): Pokemon
   pokemonTypes: [String!]!
-  pokemonResistances: [String!]!
-  pokemonWeaknesses: [String!]!
 }
 
 type Mutation {
