@@ -3,9 +3,7 @@ import { InputHTMLAttributes } from 'react'
 
 import { Field, FieldProps } from '~/components/ui'
 
-export interface InputProps extends InputHTMLAttributes<HTMLInputElement>, FieldProps {
-  foo?: string
-}
+export interface InputProps extends InputHTMLAttributes<HTMLInputElement>, FieldProps {}
 
 export const Input = ({ name, label, className, ...props }: InputProps) => {
   return (

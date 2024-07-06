@@ -27,7 +27,10 @@ export const Card = ({ children, className, onClick, style, ...props }: CardProp
   return (
     <Element
       className={cx(
-        'emboss-effect relative transform-gpu rounded-xl bg-white p-8 drop-shadow-2xl transition-colors',
+        // https://github.com/mdn/browser-compat-data/issues/17726
+        // Tailwind shadows use some unsupported Safari API, force use GPU to fix perf issues
+        'transform-gpu drop-shadow-2xl',
+        'emboss-effect relative rounded-xl bg-white p-8 transition-colors',
         className,
         {
           'cursor-pointer': !!onClick,

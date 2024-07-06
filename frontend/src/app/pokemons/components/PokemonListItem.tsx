@@ -1,5 +1,6 @@
 import { MotionProps } from 'framer-motion'
 import { useRouter } from 'next/navigation'
+import { useCallback } from 'react'
 
 import { PokemonInfoFragment } from '~/codegen/graphql'
 import { Button, Card } from '~/components'
@@ -29,13 +30,13 @@ export const PokemonListItem = ({ pokemon }: PokemonListItemProps) => {
   const { handleFavorite } = useFavoritePokemonMutation()
   const { handleUnFavorite } = useUnFavoritePokemonMutation()
 
-  const handleToggleFavorite = () => {
+  const handleToggleFavorite = useCallback(() => {
     isFavorite ? handleUnFavorite(id) : handleFavorite(id)
-  }
+  }, [isFavorite, id, handleFavorite, handleUnFavorite])
 
-  const handleViewDetail = () => {
+  const handleViewDetail = useCallback(() => {
     router.push(ROUTES.POKEMON_DETAIL.replace(':id', id))
-  }
+  }, [id, router])
 
   return (
     <Card onClick={handleViewDetail} motion={MOTION_PROPS}>

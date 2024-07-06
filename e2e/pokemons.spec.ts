@@ -1,8 +1,9 @@
 import { expect, test } from '@playwright/test'
-import { waitForGraphQLRequest } from './utils'
-import { selectOption } from './utils/selectOption'
+
+import { selectOption, waitForGraphQLRequest } from './utils'
 
 const APP_URL = 'http://localhost:3000'
+const operationName = 'getPokemons'
 
 // Search for Pokemon by text through use of a search bar.
 // Filter Pokemon by type using a dropdown.
@@ -14,13 +15,15 @@ const APP_URL = 'http://localhost:3000'
 
 test.describe('Required features', () => {
   test.beforeEach(async ({ page }) => {
+    const request = waitForGraphQLRequest(page, 'getPokemons')
     await page.goto(APP_URL)
+    await page.waitForLoadState()
+    await request
   })
 
   test('can search pokemons', async ({ page }) => {
     const request = waitForGraphQLRequest(page, 'getPokemons')
-
-    await page.getByLabel('Search by name').fill('Zubat')
+    await page.getByTestId('search-query-input').first().fill('Zubat')
     await request
 
     await expect(page.getByText('Zubat')).toBeVisible()
@@ -29,33 +32,40 @@ test.describe('Required features', () => {
     expect(count).toBe(1)
   })
 
-  test('can filter pokemons by type', async ({ page }) => {
-    const request = waitForGraphQLRequest(page, 'getPokemons')
-
-    await selectOption(page, 'types', ['Bug'])
-    await request
+  test('can filter pokemons by type', async ({ page, browser }) => {
+    // const request = waitForGraphQLRequest(page, 'getPokemons')
+    await selectOption({ page, browser, testId: 'types', options: ['Bug'], operationName })
+    // await request
 
     const count = await page.getByTestId('pokemons').locator('> *').count()
     expect(count).toBe(10)
   })
 
-  test('can filter pokemons by matching types, using AND logic', async ({ page }) => {
-    const request = waitForGraphQLRequest(page, 'getPokemons')
+  test('can filter pokemons by matching types, using AND logic', async ({ page, browser }) => {
+    await selectOption({ page, browser, testId: 'typesFilterOperator', options: ['And'], operationName })
 
-    await selectOption(page, 'typesFilterOperator', ['And'])
-    await selectOption(page, 'types', ['Bug', 'Poison'])
-    await request
+    await selectOption({
+      page,
+      browser,
+      testId: 'types',
+      options: ['Bug', 'Poison'],
+      operationName,
+    })
 
     const count = await page.getByTestId('pokemons').locator('> *').count()
     expect(count).toBe(5)
   })
 
-  test('can filter pokemons by matching types, using OR logic', async ({ page }) => {
-    const request = waitForGraphQLRequest(page, 'getPokemons')
+  test('can filter pokemons by matching types, using OR logic', async ({ page, browser }) => {
+    await selectOption({ page, browser, testId: 'typesFilterOperator', options: ['Or'], operationName })
 
-    await selectOption(page, 'typesFilterOperator', ['Or'])
-    await selectOption(page, 'types', ['Bug', 'Electric'])
-    await request
+    await selectOption({
+      page,
+      browser,
+      testId: 'types',
+      options: ['Bug', 'Electric'],
+      operationName,
+    })
 
     await expect(page.getByText('Caterpie')).toBeVisible() // Bug
     await expect(page.getByText('Pikachu')).toBeVisible() // Electric

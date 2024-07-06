@@ -1,5 +1,5 @@
 import { useId } from 'react'
-import ReactSelect, { GroupBase, Props as ReactSelectProps } from 'react-select'
+import ReactSelect, { components, GroupBase, Props as ReactSelectProps } from 'react-select'
 
 import { Field, FieldProps } from '~/components/ui'
 
@@ -36,6 +36,13 @@ export const Select = <
         instanceId={useId()}
         isSearchable={isSearchable}
         closeMenuOnSelect={!props.isMulti}
+        components={{
+          Option: (props) => (
+            <div data-testId="react-select-option">
+              <components.Option {...props} />
+            </div>
+          ),
+        }}
       />
     </Field>
   )
