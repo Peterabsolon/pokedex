@@ -15,9 +15,7 @@ const operationName = 'getPokemons'
 
 test.describe('Required features', () => {
   test.beforeEach(async ({ page }) => {
-    page.goto(APP_URL)
-
-    // TODO: Remove...
+    await page.goto(APP_URL)
     await page.waitForTimeout(1000)
   })
 
