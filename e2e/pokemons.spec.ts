@@ -15,10 +15,7 @@ const operationName = 'getPokemons'
 
 test.describe('Required features', () => {
   test.beforeEach(async ({ page }) => {
-    const request = waitForGraphQLRequest(page, 'getPokemons')
     await page.goto(APP_URL)
-    await page.waitForLoadState()
-    await request
   })
 
   test('can search pokemons', async ({ page }) => {
