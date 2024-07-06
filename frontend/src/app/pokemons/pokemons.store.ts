@@ -56,12 +56,20 @@ export const createActions = (setState: React.Dispatch<React.SetStateAction<Poke
     setState((prev) => ({ ...prev, weaknessesSelected }))
   },
 
+  addWeaknessSelected: (weaknessSelected: Option) => {
+    setState((prev) => ({ ...prev, weaknessesSelected: uniq([...prev.weaknessesSelected, weaknessSelected]) }))
+  },
+
   setWeaknessFilterOperator: (weaknessFilterOperator: FilterOperatorOption | null) => {
     setState((prev) => ({ ...prev, weaknessFilterOperator }))
   },
 
   setResistancesSelected: (resistancesSelected: Options) => {
     setState((prev) => ({ ...prev, resistancesSelected }))
+  },
+
+  addResistanceSelected: (resistanceSelected: Option) => {
+    setState((prev) => ({ ...prev, resistancesSelected: uniq([...prev.resistancesSelected, resistanceSelected]) }))
   },
 
   setResistancesFilterOperator: (resistancesFilterOperator: FilterOperatorOption | null) => {

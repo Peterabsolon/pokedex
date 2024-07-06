@@ -50,6 +50,8 @@ const PokemonsPage = () => {
               showDetailInfo={state.showDetailInfo}
               onClick={handleViewDetail}
               onTypeClick={(opt) => actions.addTypeSelected({ label: opt, value: opt })}
+              onWeaknessClick={(opt) => actions.addWeaknessSelected({ label: opt, value: opt })}
+              onResistanceClick={(opt) => actions.addResistanceSelected({ label: opt, value: opt })}
             />
           ))}
         </div>

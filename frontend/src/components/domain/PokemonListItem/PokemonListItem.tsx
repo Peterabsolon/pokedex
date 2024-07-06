@@ -19,11 +19,20 @@ const MOTION_PROPS: MotionProps = {
 export interface PokemonListItemProps {
   onClick?: (pokemon: PokemonInfoFragment) => void
   onTypeClick?: (type: PokemonType) => void
+  onResistanceClick?: (type: PokemonType) => void
+  onWeaknessClick?: (type: PokemonType) => void
   pokemon: PokemonInfoFragment
   showDetailInfo: boolean
 }
 
-export const PokemonListItem = ({ pokemon, showDetailInfo, onClick, onTypeClick }: PokemonListItemProps) => {
+export const PokemonListItem = ({
+  pokemon,
+  showDetailInfo,
+  onClick,
+  onTypeClick,
+  onResistanceClick,
+  onWeaknessClick,
+}: PokemonListItemProps) => {
   const { id, name, isFavorite, types, weaknesses, resistant, image } = pokemon
 
   const { handleFavorite } = useFavoritePokemonMutation()
@@ -49,15 +58,37 @@ export const PokemonListItem = ({ pokemon, showDetailInfo, onClick, onTypeClick 
     [onTypeClick],
   )
 
+  const handleResistanceClick = useCallback(
+    (event: React.MouseEvent<HTMLDivElement>, type: PokemonType) => {
+      if (onResistanceClick) {
+        event.stopPropagation()
+        onResistanceClick(type)
+      }
+    },
+    [onResistanceClick],
+  )
+
+  const handleWeaknessClick = useCallback(
+    (event: React.MouseEvent<HTMLDivElement>, type: PokemonType) => {
+      if (onWeaknessClick) {
+        event.stopPropagation()
+        onWeaknessClick(type)
+      }
+    },
+    [onWeaknessClick],
+  )
+
   const color = types[0] ? POKEMON_TYPE_COLORS[types[0] as PokemonType] : '#fff'
-  const colorBackground = chroma.mix(color, '#fff', 0.6).hex()
+  const colorBackground = chroma.mix(color, '#fff', 0.4).hex()
 
   return (
-    <Card onClick={handleClick} motion={MOTION_PROPS} style={{ background: colorBackground }}>
-      <div
-        className="mx-auto mb-4 h-64 w-64 bg-contain bg-center bg-no-repeat"
-        style={{ backgroundImage: `url("${image}")` }}
-      />
+    <Card onClick={handleClick} motion={MOTION_PROPS} style={{ background: colorBackground }} className="p-4">
+      <div className="mb-4 rounded-lg bg-white p-4">
+        <div
+          className="mx-auto aspect-square h-auto w-full bg-contain bg-center bg-no-repeat"
+          style={{ backgroundImage: `url("${image}")` }}
+        />
+      </div>
 
       {/* TODO: Title component */}
       <h2 className="mb-1 text-lg font-bold">{name}</h2>
@@ -77,14 +108,22 @@ export const PokemonListItem = ({ pokemon, showDetailInfo, onClick, onTypeClick 
           <div className="mb-3 flex flex-wrap gap-2 font-medium">
             <div className="w-full text-lg font-bold">Resistant</div>
             {resistant.map((type) => (
-              <PokemonTypeBadge key={type} type={type as PokemonType} />
+              <PokemonTypeBadge
+                key={type}
+                type={type as PokemonType}
+                onClick={(e) => handleResistanceClick(e, type as PokemonType)}
+              />
             ))}
           </div>
 
           <div className="mb-3 flex flex-wrap gap-2 font-medium">
             <div className="w-full text-lg font-bold">Weaknesses</div>
             {weaknesses.map((type) => (
-              <PokemonTypeBadge key={type} type={type as PokemonType} />
+              <PokemonTypeBadge
+                key={type}
+                type={type as PokemonType}
+                onClick={(e) => handleWeaknessClick(e, type as PokemonType)}
+              />
             ))}
           </div>
         </>
