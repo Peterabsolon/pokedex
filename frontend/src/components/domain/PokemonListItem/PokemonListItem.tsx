@@ -54,8 +54,19 @@ export const PokemonListItem = ({ pokemon, showDetailInfo, onClick }: PokemonLis
 
       {showDetailInfo && (
         <>
-          <div>Resistant: {resistant.join(',')}</div>
-          <div>Weakness: {weaknesses.join(',')}</div>
+          <div className="mb-3 flex flex-wrap gap-2 font-medium">
+            <div className="w-full text-lg font-bold">Resistant</div>
+            {resistant.map((type) => (
+              <PokemonTypeBadge key={type} type={type as PokemonType} />
+            ))}
+          </div>
+
+          <div className="mb-3 flex flex-wrap gap-2 font-medium">
+            <div className="w-full text-lg font-bold">Weaknesses</div>
+            {weaknesses.map((type) => (
+              <PokemonTypeBadge key={type} type={type as PokemonType} />
+            ))}
+          </div>
         </>
       )}
 
