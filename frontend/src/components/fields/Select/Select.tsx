@@ -1,5 +1,3 @@
-'use client'
-
 import { useId } from 'react'
 import ReactSelect, { GroupBase, Props as ReactSelectProps } from 'react-select'
 

@@ -1,5 +1,3 @@
-'use client'
-
 import cx from 'classnames'
 import { motion, MotionProps } from 'framer-motion'
 import { HTMLAttributes, ReactNode } from 'react'

@@ -1,5 +1,3 @@
-'use client'
-
 import { FieldProps } from '~/components/ui'
 import { usePokemonTypesQuery } from '~/hooks'
 

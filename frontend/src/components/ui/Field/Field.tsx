@@ -1,5 +1,3 @@
-'use client'
-
 import cx from 'classnames'
 import { PropsWithChildren, ReactNode } from 'react'
 

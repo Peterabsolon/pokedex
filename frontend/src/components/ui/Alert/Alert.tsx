@@ -1,5 +1,3 @@
-'use client'
-
 import classNames from 'classnames'
 import { motion, MotionProps } from 'framer-motion'
 import { HTMLAttributes } from 'react'

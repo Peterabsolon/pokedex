@@ -1,5 +1,3 @@
-'use client'
-
 import { Card, FilterOperatorSelect, InputDebounced, PokemonTypeSelect, Toggle } from '~/components'
 
 import { usePokemonsContext } from '../../pokemons.context'
