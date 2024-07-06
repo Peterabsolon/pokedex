@@ -1,6 +1,8 @@
 'use client'
 
-import { PokemonFilters, PokemonListItem } from './components'
+import { PokemonListItem } from '~/components'
+
+import { PokemonFilters } from './components'
 import { PokemonsContextProvider, usePokemonsContext } from './pokemons.context'
 
 const REM_PX = 16
@@ -29,7 +31,7 @@ const PokemonsPage = () => {
           }}
         >
           {pokemons.map((pokemon) => (
-            <PokemonListItem key={pokemon.id} pokemon={pokemon} />
+            <PokemonListItem key={pokemon.id} pokemon={pokemon} showDetailInfo={state.showDetailInfo} />
           ))}
         </div>
       </div>
