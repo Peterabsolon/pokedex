@@ -7,9 +7,6 @@ import { useFavoritePokemonMutation, useUnFavoritePokemonMutation } from '~/hook
 
 const MOTION_PROPS: MotionProps = {
   ...DEFAULT_CARD_MOTION,
-  // transition: { type: 'spring', stiffness: 2000, damping: 200 },
-  transition: { type: 'spring', stiffness: 1500, damping: 100 },
-  // transition: { type: 'spring', stiffness: 100, damping: 10 },
   whileHover: { scale: 1.02 },
   whileTap: { scale: 0.95 },
 }
