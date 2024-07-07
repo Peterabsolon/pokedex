@@ -1,6 +1,7 @@
 import { uniqBy } from 'lodash'
 
-import { FILTER_OPERATOR_OPTIONS, FilterOperatorOption, SelectOption } from '~/components'
+import { FILTER_OPERATOR_OPTIONS, FilterOperatorOption } from '~/components/fields/FilterOperatorSelect'
+import { SelectOption } from '~/components/fields/Select'
 
 type Option = SelectOption<string>
 type Options = readonly Option[]

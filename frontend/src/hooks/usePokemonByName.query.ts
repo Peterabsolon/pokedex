@@ -14,13 +14,13 @@ export const usePokemonByNameQuery = ({ name }: Props) => {
     skip: name === undefined,
   })
 
-  const pokemonByName = pokemonByNameQuery.data
+  const pokemon = pokemonByNameQuery.data?.pokemonByName ?? undefined
 
   return useMemo(
     () => ({
       pokemonByNameQuery,
-      pokemonByName,
+      pokemon,
     }),
-    [pokemonByName, pokemonByNameQuery],
+    [pokemon, pokemonByNameQuery],
   )
 }

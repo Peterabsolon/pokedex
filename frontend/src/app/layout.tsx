@@ -4,6 +4,7 @@ import type { Metadata } from 'next'
 import { Toaster } from 'sonner'
 
 import { font } from '~/assets'
+import { Logo } from '~/components/domain/Logo'
 import { ApolloWrapper } from '~/lib/apollo.wrapper'
 
 import { HEADER_HEIGHT } from './layout.constants'
@@ -24,10 +25,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           <Toaster richColors={true} position="top-right" />
 
           <header className="fixed top-0 flex items-center justify-between p-8" style={{ height: HEADER_HEIGHT }}>
-            <div className="flex items-center">
-              <img className="mr-4 w-12" alt="Pokeball logo" src="/pokeball.svg" />
-              <h1 className="font-medium text-white">Pokedex</h1>
-            </div>
+            <Logo />
           </header>
 
           <main className="z-30 flex flex-1 items-stretch justify-center" style={{ paddingTop: HEADER_HEIGHT }}>

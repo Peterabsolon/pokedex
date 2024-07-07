@@ -1,12 +1,10 @@
 import classNames from 'classnames'
 import { MotionProps } from 'framer-motion'
-import { useCallback } from 'react'
 
 import { PokemonInfoFragment } from '~/codegen/graphql'
 import { HeartIcon, SpeakerIcon } from '~/components/icons'
 import { Button, Card, CardProps, DEFAULT_CARD_MOTION } from '~/components/ui'
-import { useFavoritePokemonMutation, useUnFavoritePokemonMutation } from '~/hooks'
-import { playPokemonSound } from '~/utils'
+import { usePokemonActions } from '~/hooks'
 
 import { PokemonImage } from '../PokemonImage'
 import { PokemonInfo, PokemonInfoProps } from '../PokemonInfo'
@@ -31,43 +29,17 @@ export const PokemonGridItem = ({
   showDetailInfo,
   ...pokemonInfoProps
 }: PokemonGridItemProps) => {
-  // ====================================================
-  // Props
-  // ====================================================
-  const { id, name, isFavorite, types, weaknesses, resistant, image } = pokemon
+  const { id, isFavorite, image } = pokemon
 
-  const { handleFavorite } = useFavoritePokemonMutation()
-  const { handleUnFavorite } = useUnFavoritePokemonMutation()
+  const { handleViewDetail, handlePlaySound, handleToggleFavorite } = usePokemonActions()
 
-  // ====================================================
-  // Click handlers
-  // ====================================================
-  const handleToggleFavorite = useCallback(() => {
-    isFavorite ? handleUnFavorite(id) : handleFavorite(id)
-  }, [isFavorite, id, handleFavorite, handleUnFavorite])
-
-  const handleClick = useCallback(() => {
-    if (onClick) {
-      onClick(pokemon)
-    }
-  }, [pokemon, onClick])
-
-  const handlePlaySound = useCallback(() => {
-    playPokemonSound(pokemon.number)
-  }, [pokemon])
-
-  // ====================================================
-  // Computed
-  // ====================================================
-  // const color = types[0] ? POKEMON_TYPE_COLORS[types[0] as PokemonType] : '#fff'
-  // const colorLighter = chroma.mix(color, '#fff', 0.4).hex()
-  // const colorDarker = chroma.mix(color, '#000', 0.4).hex()
-
-  // ====================================================
-  // JSX
-  // ====================================================
   return (
-    <Card onClick={handleClick} motion={MOTION_PROPS} className={classNames('p-4', className)} style={style}>
+    <Card
+      onClick={() => handleViewDetail(pokemon)}
+      motion={MOTION_PROPS}
+      className={classNames('p-4', className)}
+      style={style}
+    >
       <div className="mb-4 rounded-lg bg-white p-4">
         <PokemonImage className="mx-auto w-full" imageSrcUrl={image} />
       </div>
@@ -77,7 +49,7 @@ export const PokemonGridItem = ({
       <div className="flex gap-2">
         <Button
           className="flex-1 pl-0 pr-0"
-          onClick={handleToggleFavorite}
+          onClick={() => handleToggleFavorite(pokemon)}
           stopPropagation
           iconLeft={<HeartIcon className="mr-2 size-5" fill={isFavorite ? 'currentColor' : 'none'} />}
         >
@@ -86,7 +58,7 @@ export const PokemonGridItem = ({
 
         <Button
           className="flex-1 pl-0 pr-0"
-          onClick={handlePlaySound}
+          onClick={() => handlePlaySound(pokemon)}
           stopPropagation
           iconLeft={<SpeakerIcon className="mr-2 size-5" />}
         >

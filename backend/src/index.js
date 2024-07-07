@@ -102,6 +102,11 @@ const resolvers = {
         .replace(/[&\\/\\\\#,+()$~%.'":*?<>{}]/g, '')
         .replace(' ', '-')}.jpg`,
     sound: (pokemon) => `${BASE_URL}/sounds/${parseInt(pokemon.id, 10)}`,
+    evolutionsPrevious: (pokemon) =>
+      _.map(pokemon.evolutionsPrevious || [], (ev) => ({
+        ...ev,
+        id: _.padStart(ev.id, 3, '0'),
+      })),
     evolutions: (pokemon) =>
       _.map(pokemon.evolutions || [], (ev) => ({
         ...ev,

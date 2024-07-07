@@ -17,6 +17,7 @@ type Pokemon {
   weaknesses: [String!]!
   fleeRate: Float!
   maxCP: Int!
+  evolutionsPrevious: [Pokemon!]!
   evolutions: [Pokemon!]!
   evolutionRequirements: PokemonEvolutionRequirement
   maxHP: Int!

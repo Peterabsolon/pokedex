@@ -11,8 +11,8 @@ const PAGE_SIZE = 20
 // ====================================================
 // Types
 // ====================================================
-export type PokemonsByNumberMap = {
-  [key: number]: PokemonInfoFragment
+export type PokemonsByIdMap = {
+  [id: string]: PokemonInfoFragment
 }
 
 interface PokemonsContextQueries {
@@ -22,7 +22,7 @@ interface PokemonsContextQueries {
 
 interface PokemonsContextComputed {
   hasMore: boolean
-  pokemonsByNumber: PokemonsByNumberMap
+  pokemonsById: PokemonsByIdMap
 }
 
 interface PokemonsContextType {
@@ -103,7 +103,7 @@ export const PokemonsContextProvider = ({ children }: PropsWithChildren) => {
 
     return {
       hasMore,
-      pokemonsByNumber: keyBy(pokemonsQuery.edges, 'number'),
+      pokemonsById: keyBy(pokemonsQuery.edges, 'id'),
     }
   }, [pokemonsQuery])
 

@@ -1,14 +1,17 @@
 import { createContext, PropsWithChildren, useContext, useMemo, useState } from 'react'
 
-import { usePokemonByIdQuery } from '~/hooks'
+import { usePokemonByNameQuery } from '~/hooks'
 
 import { createActions, initialState } from './pokemon.store'
 
 // ====================================================
 // Types
 // ====================================================
+
 interface PokemonsContextQueries {
-  pokemonQuery: ReturnType<typeof usePokemonByIdQuery>
+  pokemonQuery: ReturnType<typeof usePokemonByNameQuery>
+  pokemonEvolutionPrevQuery: ReturnType<typeof usePokemonByNameQuery>
+  pokemonEvolutionNextQuery: ReturnType<typeof usePokemonByNameQuery>
 }
 
 interface PokemonsContextType {
@@ -32,27 +35,29 @@ const PokemonsContext = createContext<PokemonsContextType>({
 export const PokemonsContextProvider = ({ children }: PropsWithChildren) => {
   const [state, setState] = useState(initialState)
 
-  const pokemonQuery = usePokemonByIdQuery({ id: state.pokemonId })
+  const pokemonQuery = usePokemonByNameQuery({ name: state.pokemonName })
 
-  const queries = useMemo(() => ({ pokemonQuery }), [pokemonQuery])
+  // TODO: Read from Apollo cache...
+  const pokemonEvolutionPrevQuery = usePokemonByNameQuery({
+    name: pokemonQuery.pokemon?.evolutionsPrevious[pokemonQuery.pokemon?.evolutionsPrevious.length - 1]?.name,
+  })
+
+  const pokemonEvolutionNextQuery = usePokemonByNameQuery({ name: pokemonQuery.pokemon?.evolutions[0]?.name })
+
+  const queries = useMemo(
+    () => ({ pokemonQuery, pokemonEvolutionPrevQuery, pokemonEvolutionNextQuery }),
+    [pokemonQuery, pokemonEvolutionPrevQuery, pokemonEvolutionNextQuery],
+  )
 
   const actions = useMemo(() => createActions(setState), [setState])
-
-  const computed = useMemo(
-    () => ({
-      pokemonsByNumber: {},
-    }),
-    [],
-  )
 
   const context = useMemo(
     () => ({
       actions,
-      computed,
       state,
       queries,
     }),
-    [state, actions, queries, computed],
+    [state, actions, queries],
   )
 
   return <PokemonsContext.Provider value={context}>{children}</PokemonsContext.Provider>

@@ -19,7 +19,9 @@ export const usePokemonActions = () => {
   )
 
   const handleViewDetail = useCallback(
-    (pokemon: PokemonInfoFragment) => router.push(ROUTES.POKEMON_DETAIL.replace(':id', pokemon.id)),
+    (pokemon: PokemonInfoFragment | string) => {
+      router.push(ROUTES.POKEMON_DETAIL.replace(':name', typeof pokemon === 'string' ? pokemon : pokemon.name))
+    },
     [router],
   )
 

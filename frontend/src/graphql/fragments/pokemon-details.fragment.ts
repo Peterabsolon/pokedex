@@ -28,6 +28,11 @@ export const POKEMON_DETAILS_FRAGMENT = gql`
       name
     }
 
+    evolutionsPrevious {
+      id
+      name
+    }
+
     attacks {
       fast {
         name

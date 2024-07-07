@@ -1,7 +1,11 @@
 /**
  * TODO: This could use more love.
  *
- * I've burned lot of time trying to make caching work perfectly, decided to focus on other things instead.
+ * I would very much like to have this working perfectly. However, I burnt lot of time already on doing so, and since
+ * infinite scrolling was an optional objective, this will have to do.
+ *
+ * The Apollo documentation is not particularly extensive on caching and I gave up trying to make cache work
+ * when searching/filtering... My apologies.
  */
 
 import { FieldFunctionOptions, FieldPolicy } from '@apollo/client'
@@ -32,7 +36,7 @@ export const pokemonsQueryFieldPolicy: FieldPolicy<
     if (args?.query) {
       const { search, filter } = args.query
 
-      // TODO: Improve somehow...
+      // TODO: Fixme
       if (search || filter?.type?.length || filter?.resistance?.length || filter?.weakness?.length) {
         return undefined
       }
@@ -45,10 +49,12 @@ export const pokemonsQueryFieldPolicy: FieldPolicy<
     if (!existing) return incoming
     if (!incoming) return existing
 
+    // TODO: Fixme
     const edges = uniqBy([...existing.edges, ...incoming.edges], '__ref')
 
     return {
       ...incoming,
+      // TODO: Fixme
       count: Math.max(existing.count, incoming.count),
       edges,
     }
