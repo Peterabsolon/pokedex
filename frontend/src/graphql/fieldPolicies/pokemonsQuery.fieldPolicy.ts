@@ -1,5 +1,7 @@
 /**
- * TODO: This could use more work...
+ * TODO: This could use more love.
+ *
+ * I've burned lot of time trying to make caching work perfectly, decided to focus on other things instead.
  */
 
 import { FieldFunctionOptions, FieldPolicy } from '@apollo/client'
@@ -13,13 +15,13 @@ export const pokemonsQueryFieldPolicy: FieldPolicy<
   PokemonConnection,
   FieldFunctionOptions<Partial<QueryPokemonsArgs>>
 > = {
-  // keyArgs: false,
+  keyArgs: false,
 
   // TODO: Cache search/filter results...
-  keyArgs: [
-    ['query', ['search']],
-    ['query', ['filter']],
-  ],
+  // keyArgs: [
+  //   ['query', ['search']],
+  //   ['query', ['filter']],
+  // ],
 
   read(existing, { args }) {
     if (!existing || !args) {

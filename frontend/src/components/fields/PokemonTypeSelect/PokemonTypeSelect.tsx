@@ -1,8 +1,9 @@
+import classNames from 'classnames'
 import { components } from 'react-select'
 
-import { POKEMON_TYPE_COLORS } from '~/components/domain/PokemonTypeBadge/PokemonTypeBadge.constants'
+import { PokemonTypeBadge } from '~/components/domain'
 import { FieldProps } from '~/components/ui'
-import { PokemonType } from '~/constants/pokemonTypes'
+import { PokemonType } from '~/constants'
 import { usePokemonTypesQuery } from '~/hooks'
 
 import { Select, SelectOption, SelectProps } from '../Select'
@@ -16,16 +17,29 @@ export const PokemonTypeSelect = <IsMulti extends boolean = boolean>(props: Poke
 
   return (
     <Select<SelectOption<string>, IsMulti, any>
-      options={options}
       {...props}
+      options={options}
       components={{
-        Option: (props) => {
-          const color = POKEMON_TYPE_COLORS[props.children as PokemonType]
-
+        MultiValue: (props) => {
           return (
-            <div style={{ color }}>
-              <components.Option {...props} />
-            </div>
+            <components.MultiValue {...props} getStyles={() => ({})}>
+              <PokemonTypeBadge
+                className="m-1"
+                onClick={(e) => props.removeProps?.onClick?.(e)}
+                onRemove={(e) => props.removeProps?.onClick?.(e)}
+                type={props.data.value as PokemonType}
+              />
+            </components.MultiValue>
+          )
+        },
+
+        MultiValueRemove: () => null,
+
+        Option: (props) => {
+          return (
+            <components.Option {...props} className={classNames(props.className, '!flex')}>
+              <PokemonTypeBadge type={props.data.value as PokemonType} />
+            </components.Option>
           )
         },
       }}
