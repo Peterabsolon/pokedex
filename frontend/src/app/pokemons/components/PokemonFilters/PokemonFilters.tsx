@@ -49,7 +49,7 @@ export const PokemonFilters: React.FC = () => {
         className="mb-4"
       />
 
-      <div className="flex gap-2">
+      <div className="mb-4 flex gap-2">
         <PokemonTypeSelect<true>
           name="types"
           label="Types"
@@ -64,11 +64,11 @@ export const PokemonFilters: React.FC = () => {
           name="typesFilterOperator"
           value={typeFilterOperator}
           onChange={setTypeFilterOperator}
-          fieldClassName="w-32 mb-4"
+          fieldClassName="!w-32"
         />
       </div>
 
-      <div className="flex gap-2">
+      <div className="mb-4 flex gap-2">
         <PokemonTypeSelect<true>
           name="resistances"
           label="Resistances"
@@ -81,11 +81,11 @@ export const PokemonFilters: React.FC = () => {
           label="&nbsp;"
           value={resistancesFilterOperator}
           onChange={setResistancesFilterOperator}
-          fieldClassName="w-32 mb-4"
+          fieldClassName="!w-32"
         />
       </div>
 
-      <div className="flex gap-2">
+      <div className="mb-4 flex gap-2">
         <PokemonTypeSelect<true>
           label="Weaknesses"
           isMulti
@@ -97,7 +97,7 @@ export const PokemonFilters: React.FC = () => {
           label="&nbsp;"
           value={weaknessesFilterOperator}
           onChange={setWeaknessFilterOperator}
-          fieldClassName="w-32 mb-4"
+          fieldClassName="!w-32"
         />
       </div>
     </Card>

@@ -8,6 +8,6 @@ import { cache } from './apollo.cache'
 export const { getClient } = registerApolloClient(() => {
   return new ApolloClient({
     cache,
-    link: new HttpLink({ uri: process.env.NEXT_PUBLIC_API_URL }),
+    link: new HttpLink({ uri: `${process.env.NEXT_PUBLIC_API_URL}/graphql` }),
   })
 })

@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 const { ApolloServer } = require('apollo-server-express')
 const express = require('express')
+const cors = require('cors')
 const fs = require('fs')
 const _ = require('lodash')
 const pokemonsData = require('./pokemons')
@@ -12,6 +13,8 @@ const typeDefs = fs.readFileSync(`${__dirname}/schema.graphql`, 'utf-8')
 let favorites = new Map()
 
 const app = express()
+app.use(cors())
+
 app.get('/sounds/:id', (req, res) => res.sendFile(`${__dirname}/sounds/${req.params.id}.mp3`))
 
 function applyFilter(pokemons, filterAttribute, filterValues, operator) {

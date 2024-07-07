@@ -86,8 +86,8 @@ export const Button = ({
         'font-medium transition-colors disabled:cursor-not-allowed',
         {
           // 'emboss-effect': variant !== 'text',
-          'pl-6': iconLeft,
-          'pr-6': iconRight,
+          'pl-6': iconLeft && !className,
+          'pr-6': iconRight && !className,
         },
         variantStyles[variant],
         variantHoverStyles[variantHover ?? variant],

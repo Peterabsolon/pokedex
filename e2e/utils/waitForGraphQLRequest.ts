@@ -1,6 +1,6 @@
 import { Page } from '@playwright/test'
 
-const GQL_API_URL = 'http://localhost:4000/graphql'
+const GQL_API_URL = 'http://localhost:4000'
 
 export const waitForGraphQLRequest = async (page: Page, operationName: string) => {
   return page.waitForRequest(

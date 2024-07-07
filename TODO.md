@@ -1,11 +1,11 @@
 # TODO
 
-- render Badge in Poke type Select
+- play sounds
 - detail view
 - /:name route opens modal
 - grid/list view
 - infinite scroll
-- play sounds
+- fix issue with infinite refetch after showing favorites only
 
 - filter out weaknesses/resistances on available data... only when at least 1 filter exists?
 - show evolution level 1/2/3

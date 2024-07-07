@@ -21,12 +21,14 @@ export const PokemonTypeSelect = <IsMulti extends boolean = boolean>(props: Poke
       options={options}
       components={{
         MultiValue: (props) => {
+          const handleRemove = (e: React.MouseEvent<HTMLDivElement>) => props.removeProps?.onClick?.(e)
+
           return (
             <components.MultiValue {...props} getStyles={() => ({})}>
               <PokemonTypeBadge
                 className="m-1"
-                onClick={(e) => props.removeProps?.onClick?.(e)}
-                onRemove={(e) => props.removeProps?.onClick?.(e)}
+                onClick={handleRemove}
+                onRemove={handleRemove}
                 type={props.data.value as PokemonType}
               />
             </components.MultiValue>
@@ -36,9 +38,11 @@ export const PokemonTypeSelect = <IsMulti extends boolean = boolean>(props: Poke
         MultiValueRemove: () => null,
 
         Option: (props) => {
+          console.log('option props', props)
+
           return (
             <components.Option {...props} className={classNames(props.className, '!flex')}>
-              <PokemonTypeBadge type={props.data.value as PokemonType} />
+              <PokemonTypeBadge onClick={props.innerProps.onClick} type={props.data.value as PokemonType} />
             </components.Option>
           )
         },

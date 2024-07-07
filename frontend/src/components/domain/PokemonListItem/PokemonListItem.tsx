@@ -2,10 +2,11 @@ import { MotionProps } from 'framer-motion'
 import { useCallback } from 'react'
 
 import { PokemonInfoFragment } from '~/codegen/graphql'
-import { HeartIcon } from '~/components/icons'
+import { HeartIcon, SpeakerIcon } from '~/components/icons'
 import { Button, Card, DEFAULT_CARD_MOTION } from '~/components/ui'
 import { PokemonType } from '~/constants'
 import { useFavoritePokemonMutation, useUnFavoritePokemonMutation } from '~/hooks'
+import { playPokemonSound } from '~/utils'
 
 import { PokemonTypeBadge } from '../PokemonTypeBadge'
 
@@ -52,6 +53,10 @@ export const PokemonListItem = ({
       onClick(pokemon)
     }
   }, [pokemon, onClick])
+
+  const handlePlaySound = useCallback(() => {
+    playPokemonSound(pokemon.number)
+  }, [pokemon])
 
   // ====================================================
   // Computed
@@ -107,14 +112,25 @@ export const PokemonListItem = ({
         </div>
       )}
 
-      <Button
-        className="w-full"
-        onClick={handleToggleFavorite}
-        stopPropagation
-        iconLeft={<HeartIcon className="mr-2 size-5" fill={isFavorite ? 'currentColor' : 'none'} />}
-      >
-        {isFavorite ? 'Unfavorite' : 'Favorite'}
-      </Button>
+      <div className="flex gap-2">
+        <Button
+          className="flex-1 pl-0 pr-0"
+          onClick={handleToggleFavorite}
+          stopPropagation
+          iconLeft={<HeartIcon className="mr-2 size-5" fill={isFavorite ? 'currentColor' : 'none'} />}
+        >
+          {isFavorite ? 'Unfavorite' : 'Favorite'}
+        </Button>
+
+        <Button
+          className="flex-1 pl-0 pr-0"
+          onClick={handlePlaySound}
+          stopPropagation
+          iconLeft={<SpeakerIcon className="mr-2 size-5" />}
+        >
+          Sound
+        </Button>
+      </div>
     </Card>
   )
 }

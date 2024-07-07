@@ -1,6 +1,7 @@
 import { Meta } from '@storybook/react'
 
 import { HeartIcon } from './Heart.icon'
+import { SpeakerIcon } from './Speaker.icon'
 import { TrashIcon } from './Trash.icon'
 
 export default {
@@ -13,5 +14,6 @@ export const Default = () => (
   <div className="flex flex-wrap gap-2">
     <TrashIcon className="size-6" />
     <HeartIcon className="size-6" />
+    <SpeakerIcon className="size-6" />
   </div>
 )
