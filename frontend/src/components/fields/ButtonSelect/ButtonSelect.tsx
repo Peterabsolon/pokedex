@@ -1,4 +1,4 @@
-import cx from 'classnames'
+import classNames from 'classnames'
 
 import { Field, FieldProps } from '~/components/ui'
 
@@ -21,7 +21,7 @@ export const ButtonSelect = <T extends string>({
 }: ButtonSelectProps<T>) => {
   return (
     <Field name={name} label={label}>
-      <div className={cx('flex', className)}>
+      <div className={classNames('flex', className)}>
         {options.map((option) => (
           <ButtonSelectOption key={option.value} option={option} onSelect={onChange} value={value} />
         ))}

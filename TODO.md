@@ -1,5 +1,6 @@
 # TODO
 
+- render Badge in Poke type Select
 - detail view
 - /:name route opens modal
 - grid/list view

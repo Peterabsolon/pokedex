@@ -1,4 +1,4 @@
-import cx from 'classnames'
+import classNames from 'classnames'
 import { motion, MotionProps } from 'framer-motion'
 import { HTMLAttributes, ReactNode } from 'react'
 
@@ -26,7 +26,7 @@ export const Card = ({ children, className, onClick, style, ...props }: CardProp
 
   return (
     <Element
-      className={cx(
+      className={classNames(
         // https://github.com/mdn/browser-compat-data/issues/17726
         // Tailwind shadows use some unsupported Safari API, force use GPU to fix perf issues
         'transform-gpu drop-shadow-2xl',

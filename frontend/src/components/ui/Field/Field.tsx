@@ -1,4 +1,4 @@
-import cx from 'classnames'
+import classNames from 'classnames'
 import { PropsWithChildren, ReactNode } from 'react'
 
 export interface FieldProps {
@@ -9,7 +9,7 @@ export interface FieldProps {
 
 export const Field = ({ className, children, name, label, ...rest }: FieldProps & PropsWithChildren) => {
   return (
-    <div className={cx('flex w-full flex-col', className)} {...rest}>
+    <div className={classNames('flex w-full flex-col', className)} {...rest}>
       <label className="text-md mb-2 block font-medium" htmlFor={name}>
         {label}
       </label>
