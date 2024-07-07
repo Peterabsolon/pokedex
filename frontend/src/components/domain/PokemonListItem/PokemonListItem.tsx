@@ -1,9 +1,10 @@
+import classNames from 'classnames'
 import { MotionProps } from 'framer-motion'
 import { useCallback } from 'react'
 
 import { PokemonInfoFragment } from '~/codegen/graphql'
 import { HeartIcon, SpeakerIcon } from '~/components/icons'
-import { Button, Card, DEFAULT_CARD_MOTION } from '~/components/ui'
+import { Button, Card, CardProps, DEFAULT_CARD_MOTION } from '~/components/ui'
 import { PokemonType } from '~/constants'
 import { useFavoritePokemonMutation, useUnFavoritePokemonMutation } from '~/hooks'
 import { playPokemonSound } from '~/utils'
@@ -16,16 +17,19 @@ const MOTION_PROPS: MotionProps = {
   whileTap: { scale: 0.98 },
 }
 
-export interface PokemonListItemProps {
+export interface PokemonListItemProps extends Omit<CardProps, 'onClick' | 'children'> {
+  pokemon: PokemonInfoFragment
+  showDetailInfo: boolean
+
   onClick?: (pokemon: PokemonInfoFragment) => void
   onTypeClick?: (type: PokemonType) => void
   onResistanceClick?: (type: PokemonType) => void
   onWeaknessClick?: (type: PokemonType) => void
-  pokemon: PokemonInfoFragment
-  showDetailInfo: boolean
 }
 
 export const PokemonListItem = ({
+  className,
+  style,
   pokemon,
   showDetailInfo,
   onClick,
@@ -69,7 +73,7 @@ export const PokemonListItem = ({
   // JSX
   // ====================================================
   return (
-    <Card onClick={handleClick} motion={MOTION_PROPS} className="border-2 p-4">
+    <Card onClick={handleClick} motion={MOTION_PROPS} className={classNames('p-4', className)} style={style}>
       <div className="mb-4 rounded-lg bg-white p-4">
         <div
           className="mx-auto aspect-square h-auto w-full bg-contain bg-center bg-no-repeat"
