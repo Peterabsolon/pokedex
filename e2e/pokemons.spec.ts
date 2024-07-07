@@ -4,8 +4,6 @@ import { selectOption } from './utils'
 
 const operationName = 'getPokemons'
 
-// Search for Pokemon by text through use of a search bar.
-// Filter Pokemon by type using a dropdown.
 // Add and remove a Pokemon to and from your Favorites by clicking the heart icon.
 // Use tabs to switch between All Pokemon and Favorite Pokemon views.
 // Change the view from either a grid or list.
@@ -81,8 +79,22 @@ test.describe('Required features', () => {
     await expect(page.getByText('Pikachu')).toBeVisible() // Electric
   })
 
-  // TODO
-  // test('can set pokemon as favorite', () => {})
-  // test('can remove pokemon as favorite', () => {})
+  test('can toggle pokemon as favorite', async ({ page }) => {
+    await page.getByRole('button', { name: 'Favorite' }).first().click()
+    await expect(page.getByText(`Bulbasaur successfully added to favorites.`)).toBeVisible()
+    await page.getByRole('button', { name: 'Unfavorite' }).first().click()
+    await expect(page.getByText(`Bulbasaur successfully removed from favorites.`)).toBeVisible()
+  })
+
+  // test('can view favorites only', async ({ page }) => {
+  //   await page.getByRole('button', { name: 'Favorite' }).first().click()
+  //   await page.reload()
+
+  //   await page.getByRole('button', { name: 'Unfavorite' }).first().click()
+  //   await page.reload()
+
+  //   await expect(page.getByText('Unfavorite')).not.toBeVisible()
+  // })
+
   // test('can view favorites only', () => {})
 })

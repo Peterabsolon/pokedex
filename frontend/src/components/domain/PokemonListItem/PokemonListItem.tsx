@@ -3,6 +3,7 @@ import { MotionProps } from 'framer-motion'
 import { useCallback } from 'react'
 
 import { PokemonInfoFragment } from '~/codegen/graphql'
+import { HeartIcon } from '~/components/icons'
 import { Button, Card, DEFAULT_CARD_MOTION } from '~/components/ui'
 import { PokemonType } from '~/constants/pokemonTypes'
 import { useFavoritePokemonMutation, useUnFavoritePokemonMutation } from '~/hooks'
@@ -113,7 +114,12 @@ export const PokemonListItem = ({
         </div>
       )}
 
-      <Button className="w-full" onClick={handleToggleFavorite} stopPropagation>
+      <Button
+        className="w-full"
+        onClick={handleToggleFavorite}
+        stopPropagation
+        iconLeft={<HeartIcon className="mr-2 size-5" fill={isFavorite ? 'currentColor' : 'none'} />}
+      >
         {isFavorite ? 'Unfavorite' : 'Favorite'}
       </Button>
     </Card>
