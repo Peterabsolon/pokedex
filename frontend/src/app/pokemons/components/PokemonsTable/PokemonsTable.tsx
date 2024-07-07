@@ -19,6 +19,7 @@ export interface PokemonsTableProps {
 
 export const PokemonsTable = ({ pokemons }: PokemonsTableProps) => {
   const { state } = usePokemonsContext()
+  const { handlePlaySound, handleToggleFavorite, handleViewDetail } = usePokemonActions()
 
   const columns: TableColumn<PokemonInfoFragment>[] = [
     {
@@ -86,23 +87,21 @@ export const PokemonsTable = ({ pokemons }: PokemonsTableProps) => {
     },
   ]
 
-  const pokemonActions = usePokemonActions()
-
   const actions: TableAction<PokemonInfoFragment>[] = [
     {
       key: 'favorite',
       label: (pokemon) => <HeartIcon className="size-4" fill={pokemon.isFavorite ? 'white' : undefined} />,
-      onClick: pokemonActions.handleToggleFavorite,
+      onClick: handleToggleFavorite,
     },
     {
       key: 'sound',
       label: <SpeakerIcon className="size-4" />,
-      onClick: pokemonActions.handlePlaySound,
+      onClick: handlePlaySound,
     },
     {
       key: 'detail',
       label: <EyeIcon className="size-4" />,
-      onClick: pokemonActions.handleViewDetail,
+      onClick: handleViewDetail,
     },
   ]
 

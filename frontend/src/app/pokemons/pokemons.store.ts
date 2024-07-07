@@ -6,6 +6,8 @@ type Option = SelectOption<string>
 type Options = readonly Option[]
 
 export const initialState = {
+  openedPokemonName: undefined as string | undefined,
+
   searchQuery: '' as string | undefined,
 
   useTableView: false,

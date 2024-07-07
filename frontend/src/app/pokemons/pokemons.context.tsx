@@ -2,7 +2,7 @@ import { keyBy } from 'lodash'
 import { createContext, PropsWithChildren, useContext, useMemo, useState } from 'react'
 
 import { PokemonInfoFragment } from '~/codegen/graphql'
-import { usePokemonsQuery } from '~/hooks'
+import { usePokemonByNameQuery, usePokemonsQuery } from '~/hooks'
 
 import { createActions, initialState } from './pokemons.store'
 
@@ -17,6 +17,7 @@ export type PokemonsByNumberMap = {
 
 interface PokemonsContextQueries {
   pokemonsQuery: ReturnType<typeof usePokemonsQuery>
+  pokemonByNameQuery: ReturnType<typeof usePokemonByNameQuery>
 }
 
 interface PokemonsContextComputed {
@@ -84,8 +85,15 @@ export const PokemonsContextProvider = ({ children }: PropsWithChildren) => {
    * Queries
    */
   const pokemonsQuery = usePokemonsQuery({ search, filter, limit: PAGE_SIZE })
+  const pokemonByNameQuery = usePokemonByNameQuery({ name: state.openedPokemonName })
 
-  const queries = useMemo(() => ({ pokemonsQuery }), [pokemonsQuery])
+  const queries = useMemo(
+    () => ({
+      pokemonsQuery,
+      pokemonByNameQuery,
+    }),
+    [pokemonsQuery, pokemonByNameQuery],
+  )
 
   /**
    * Computed

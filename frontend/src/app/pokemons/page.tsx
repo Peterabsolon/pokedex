@@ -1,38 +1,43 @@
 'use client'
 
-import { useRouter } from 'next/navigation'
+import classNames from 'classnames'
 
-import { InfiniteLoader } from '~/components'
+import { InfiniteLoader, Modal } from '~/components'
 
 import { PokemonFilters, PokemonsGrid } from './components'
 import { PokemonsTable } from './components/PokemonsTable'
 import { PokemonsContextProvider, usePokemonsContext } from './pokemons.context'
 
 const PokemonsPage = () => {
-  const router = useRouter()
   const { queries, state, computed } = usePokemonsContext()
   const { pokemonsQuery } = queries
 
   const pokemons = pokemonsQuery.edges.filter((p) => (state.showFavoritesOnly ? p.isFavorite : true))
 
   return (
-    <div className="flex flex-auto px-8">
-      <div style={CONTENT_STYLES} className="mr-8 flex-1 self-start">
-        <InfiniteLoader
-          error={pokemonsQuery.error}
-          isLoading={pokemonsQuery.loading}
-          onLoadMore={pokemonsQuery.onFetchMore}
-          pageKey={pokemonsQuery.edgesCount.toString()}
-          hasMore={!!pokemons.length && computed.hasMore}
-        >
-          {state.useTableView ? <PokemonsTable pokemons={pokemons} /> : <PokemonsGrid pokemons={pokemons} />}
-        </InfiniteLoader>
-      </div>
+    <>
+      <Modal isOpen={Boolean(state.openedPokemonName)} onClose={() => console.log('yo')}>
+        Sup
+      </Modal>
 
-      <div style={SIDEBAR_STYLES} className="fixed right-8 flex-shrink-0">
-        <PokemonFilters />
+      <div className={classNames('flex flex-auto px-8', { 'blur-sm': state.openedPokemonName })}>
+        <div style={CONTENT_STYLES} className="mr-8 flex-1 self-start">
+          <InfiniteLoader
+            error={pokemonsQuery.error}
+            isLoading={pokemonsQuery.loading}
+            onLoadMore={pokemonsQuery.onFetchMore}
+            pageKey={pokemonsQuery.edgesCount.toString()}
+            hasMore={!!pokemons.length && computed.hasMore}
+          >
+            {state.useTableView ? <PokemonsTable pokemons={pokemons} /> : <PokemonsGrid pokemons={pokemons} />}
+          </InfiniteLoader>
+        </div>
+
+        <div style={SIDEBAR_STYLES} className="fixed right-8 flex-shrink-0">
+          <PokemonFilters />
+        </div>
       </div>
-    </div>
+    </>
   )
 }
 
