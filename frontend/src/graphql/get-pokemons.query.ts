@@ -7,6 +7,7 @@ export const GET_POKEMONS_QUERY = gql`
 
   query getPokemons($query: PokemonsQueryInput!) {
     pokemons(query: $query) {
+      count
       edges {
         ...PokemonInfo
       }

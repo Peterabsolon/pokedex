@@ -17,7 +17,6 @@ interface RootLayoutProps {
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en">
-      {/* TODO: Use NextJS 14 template.tsx, which is client-side, so this can be run on server */}
       <ApolloWrapper>
         <body className={`${font.className} max-w-screen flex flex-col items-stretch justify-stretch bg-slate-900`}>
           <Toaster richColors={true} position="top-right" />
@@ -29,9 +28,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
             </div>
           </header>
 
-          <main className="z-30 flex flex-1 items-stretch justify-center overflow-auto">{children}</main>
+          <main className="z-30 flex flex-1 items-stretch justify-center">{children}</main>
 
-          <footer className="absolute inset-0 top-auto z-20 p-8 text-right text-white">
+          <footer className="fixed inset-0 top-auto z-20 p-8 text-right text-white">
             Made with 💜 by <a href="https://www.linkedin.com/in/peter-absolon">Peter Absolon</a>
           </footer>
         </body>

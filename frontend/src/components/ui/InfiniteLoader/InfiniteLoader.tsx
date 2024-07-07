@@ -1,7 +1,7 @@
-import { ReactNode } from 'react'
+import { ReactNode, RefObject } from 'react'
 import { Waypoint } from 'react-waypoint'
 
-import { Spinner } from '~/components/ui'
+import { Spinner } from '../Spinner'
 
 export interface InfiniteLoaderProps {
   /**
@@ -28,9 +28,27 @@ export interface InfiniteLoaderProps {
    * Callback function for loading data when the user reveals the Waypoint and more data is available.
    */
   onLoadMore: () => void
+
+  /**
+   * Indicates whether more data is available.
+   */
+  hasMore: boolean
+
+  /**
+   * React Ref of the scrollable ancestor area
+   */
+  scrollableAncestor?: RefObject<HTMLDivElement>
 }
 
-export const InfiniteLoader = ({ pageKey, children, isLoading, error, onLoadMore }: InfiniteLoaderProps) => {
+export const InfiniteLoader = ({
+  pageKey,
+  children,
+  isLoading,
+  error,
+  onLoadMore,
+  hasMore,
+  scrollableAncestor,
+}: InfiniteLoaderProps) => {
   return (
     <div>
       {children}
@@ -38,8 +56,8 @@ export const InfiniteLoader = ({ pageKey, children, isLoading, error, onLoadMore
       <div className="flex h-24 items-center justify-center">
         {isLoading && <Spinner />}
 
-        {!isLoading && pageKey !== undefined && !error && (
-          <Waypoint onEnter={onLoadMore} key={pageKey}>
+        {!isLoading && pageKey !== undefined && !error && hasMore && (
+          <Waypoint onEnter={onLoadMore} key={pageKey} scrollableAncestor={scrollableAncestor?.current}>
             <Spinner />
           </Waypoint>
         )}

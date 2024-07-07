@@ -6,6 +6,8 @@ import { usePokemonsQuery } from '~/hooks'
 
 import { createActions, initialState } from './pokemons.store'
 
+const PAGE_SIZE = 20
+
 // ====================================================
 // Types
 // ====================================================
@@ -18,6 +20,7 @@ interface PokemonsContextQueries {
 }
 
 interface PokemonsContextComputed {
+  hasMore: boolean
   pokemonsByNumber: PokemonsByNumberMap
 }
 
@@ -50,6 +53,11 @@ export const PokemonsContextProvider = ({ children }: PropsWithChildren) => {
   const actions = useMemo(() => createActions(setState), [setState])
 
   /**
+   * Pagination
+   */
+  const offset = state.page * PAGE_SIZE
+
+  /**
    * Filters
    */
   const search = state.searchQuery
@@ -80,7 +88,7 @@ export const PokemonsContextProvider = ({ children }: PropsWithChildren) => {
   /**
    * Queries
    */
-  const pokemonsQuery = usePokemonsQuery({ search, filter })
+  const pokemonsQuery = usePokemonsQuery({ search, filter, offset, limit: PAGE_SIZE })
 
   const queries = useMemo(() => ({ pokemonsQuery }), [pokemonsQuery])
 
@@ -89,9 +97,10 @@ export const PokemonsContextProvider = ({ children }: PropsWithChildren) => {
    */
   const computed = useMemo(
     () => ({
-      pokemonsByNumber: keyBy(pokemonsQuery.pokemons, 'number'),
+      hasMore: pokemonsQuery.count ? pokemonsQuery.edges.length < pokemonsQuery.count : false,
+      pokemonsByNumber: keyBy(pokemonsQuery.edges, 'number'),
     }),
-    [pokemonsQuery.pokemons],
+    [pokemonsQuery],
   )
 
   const context = useMemo(

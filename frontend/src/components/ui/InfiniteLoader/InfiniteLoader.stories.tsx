@@ -5,7 +5,7 @@ import { useState } from 'react'
 import { InfiniteLoader } from './InfiniteLoader'
 
 export default {
-  title: 'misc/InfiniteLoader',
+  title: 'ui/InfiniteLoader',
   component: InfiniteLoader,
   parameters: { layout: 'centered' },
   tags: ['autodocs'],
@@ -23,13 +23,14 @@ const Template: StoryFn<typeof InfiniteLoader> = (args) => {
   }
 
   const pageKey = data.length % 10
+  const hasMore = pageKey <= 10
 
   return (
     <div>
       <span>Scroll to &quot;fetch&quot; more...</span>
 
       <div className="h-[500px] w-[500px] overflow-y-auto">
-        <InfiniteLoader onLoadMore={handleLoadMore} isLoading={isLoading} pageKey={pageKey}>
+        <InfiniteLoader onLoadMore={handleLoadMore} isLoading={isLoading} pageKey={pageKey} hasMore={hasMore}>
           {data.map((_, index) => (
             <div className="border px-5 py-16" key={index}>
               Item #{index}

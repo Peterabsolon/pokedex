@@ -6,6 +6,7 @@ type Option = SelectOption<string>
 type Options = readonly Option[]
 
 export const initialState = {
+  page: 0,
   searchQuery: '' as string | undefined,
   showDetailInfo: false,
   showFavoritesOnly: false,
@@ -24,6 +25,11 @@ export const initialState = {
 export type PokemonsState = typeof initialState
 
 export const createActions = (setState: React.Dispatch<React.SetStateAction<PokemonsState>>) => ({
+  incrementPage: () => {
+    console.log('increment page...')
+    setState((prev) => ({ ...prev, page: Math.min(prev.page + 1, 2) }))
+  },
+
   setSearchQuery: (searchQuery?: string) => {
     setState((prev) => ({ ...prev, searchQuery }))
   },

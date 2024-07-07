@@ -293,6 +293,7 @@ export type GetPokemonsQuery = {
   __typename?: 'Query'
   pokemons: {
     __typename?: 'PokemonConnection'
+    count: number
     edges: Array<{
       __typename?: 'Pokemon'
       id: string
@@ -980,6 +981,7 @@ export const GetPokemonsDocument = {
             selectionSet: {
               kind: 'SelectionSet',
               selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'count' } },
                 {
                   kind: 'Field',
                   name: { kind: 'Name', value: 'edges' },
