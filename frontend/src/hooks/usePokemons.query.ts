@@ -1,8 +1,8 @@
-import { FieldPolicy, useApolloClient, useQuery } from '@apollo/client'
-import { debounce, defaults, uniqBy } from 'lodash'
+import { useApolloClient, useQuery } from '@apollo/client'
+import { debounce, defaults } from 'lodash'
 import { useMemo } from 'react'
 
-import { GetPokemonsQuery, PokemonConnection, PokemonsQueryInput } from '~/codegen/graphql'
+import { GetPokemonsQuery, PokemonsQueryInput } from '~/codegen/graphql'
 import { GET_POKEMONS_QUERY } from '~/graphql'
 
 // Add slight delay for fetching more results to simulate real client <=> server trip
@@ -41,45 +41,4 @@ export const usePokemonsQuery = (queryArg?: PokemonsQueryInput) => {
       onFetchMore,
     }
   }, [pokemonsQuery, onFetchMore])
-}
-
-// ====================================================
-// Query cache field policy
-// ====================================================
-export const pokemonsQueryFieldPolicy: FieldPolicy = {
-  keyArgs: [
-    ['filter', 'search'],
-    ['filter', 'isFavorite'],
-  ],
-
-  read(existing: PokemonConnection, { args }) {
-    if (!existing || !args) {
-      return undefined
-    }
-
-    // Always search/filter on the server
-    if (args?.query) {
-      const { search, filter } = args.query as PokemonsQueryInput
-
-      // TODO: Improve somehow...
-      if (search || filter?.type?.length || filter?.resistance?.length || filter?.weakness?.length) {
-        return undefined
-      }
-    }
-
-    return existing
-  },
-
-  merge(existing: PokemonConnection, incoming: PokemonConnection) {
-    if (!existing) return incoming
-    if (!incoming) return existing
-
-    const edges = uniqBy([...existing.edges, ...incoming.edges], '__ref')
-
-    return {
-      ...incoming,
-      count: Math.max(existing.count, incoming.count),
-      edges,
-    }
-  },
 }
