@@ -3,7 +3,7 @@ import { merge, set } from 'lodash'
 
 import { GetPokemonsQuery, PokemonInfoFragment } from '~/codegen/graphql'
 
-import { GET_POKEMONS_QUERY } from '../get-pokemons.query'
+import { GET_POKEMONS_QUERY } from '../getPokemons.query'
 
 export const updateGetPokemonsQueryCache = (cache: ApolloCache<any>, pokemon: PokemonInfoFragment) => {
   const cachedData = cache.readQuery<GetPokemonsQuery>({ query: GET_POKEMONS_QUERY })
