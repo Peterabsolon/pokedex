@@ -5,7 +5,7 @@ import { SelectOption } from '../Select'
 import { PokemonTypeSelect } from './PokemonTypeSelect'
 
 export default {
-  title: 'ui/PokemonTypeSelect',
+  title: 'fields/PokemonTypeSelect',
   component: PokemonTypeSelect,
   parameters: { layout: 'centered' },
   tags: ['autodocs'],

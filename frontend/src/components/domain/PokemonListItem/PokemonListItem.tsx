@@ -1,15 +1,13 @@
-import chroma from 'chroma-js'
 import { MotionProps } from 'framer-motion'
 import { useCallback } from 'react'
 
 import { PokemonInfoFragment } from '~/codegen/graphql'
 import { HeartIcon } from '~/components/icons'
 import { Button, Card, DEFAULT_CARD_MOTION } from '~/components/ui'
-import { PokemonType } from '~/constants/pokemonTypes'
+import { PokemonType } from '~/constants'
 import { useFavoritePokemonMutation, useUnFavoritePokemonMutation } from '~/hooks'
 
 import { PokemonTypeBadge } from '../PokemonTypeBadge'
-import { POKEMON_TYPE_COLORS } from '../PokemonTypeBadge/PokemonTypeBadge.constants'
 
 const MOTION_PROPS: MotionProps = {
   ...DEFAULT_CARD_MOTION,
@@ -58,21 +56,16 @@ export const PokemonListItem = ({
   // ====================================================
   // Computed
   // ====================================================
-  const color = types[0] ? POKEMON_TYPE_COLORS[types[0] as PokemonType] : '#fff'
-  const colorLighter = chroma.mix(color, '#fff', 0.4).hex()
-  const colorDarker = chroma.mix(color, '#000', 0.4).hex()
+  // const color = types[0] ? POKEMON_TYPE_COLORS[types[0] as PokemonType] : '#fff'
+  // const colorLighter = chroma.mix(color, '#fff', 0.4).hex()
+  // const colorDarker = chroma.mix(color, '#000', 0.4).hex()
 
   // ====================================================
   // JSX
   // ====================================================
   return (
-    <Card
-      onClick={handleClick}
-      motion={MOTION_PROPS}
-      style={{ background: colorLighter, borderColor: color }}
-      className="border-2 p-4"
-    >
-      <div style={{ borderColor: color }} className="mb-4 rounded-lg border-2 bg-white p-4">
+    <Card onClick={handleClick} motion={MOTION_PROPS} className="border-2 p-4">
+      <div className="mb-4 rounded-lg bg-white p-4">
         <div
           className="mx-auto aspect-square h-auto w-full bg-contain bg-center bg-no-repeat"
           style={{ backgroundImage: `url("${image}")` }}
