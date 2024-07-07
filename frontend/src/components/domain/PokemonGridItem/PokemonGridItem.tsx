@@ -17,7 +17,7 @@ const MOTION_PROPS: MotionProps = {
   whileTap: { scale: 0.98 },
 }
 
-export interface PokemonListItemProps extends Omit<CardProps, 'onClick' | 'children'> {
+export interface PokemonGridItemProps extends Omit<CardProps, 'onClick' | 'children'> {
   pokemon: PokemonInfoFragment
   showDetailInfo: boolean
 
@@ -27,7 +27,7 @@ export interface PokemonListItemProps extends Omit<CardProps, 'onClick' | 'child
   onWeaknessClick?: (type: PokemonType) => void
 }
 
-export const PokemonListItem = ({
+export const PokemonGridItem = ({
   className,
   style,
   pokemon,
@@ -36,7 +36,7 @@ export const PokemonListItem = ({
   onTypeClick,
   onResistanceClick,
   onWeaknessClick,
-}: PokemonListItemProps) => {
+}: PokemonGridItemProps) => {
   // ====================================================
   // Props
   // ====================================================

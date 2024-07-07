@@ -2,16 +2,16 @@ import type { Meta, StoryObj } from '@storybook/react'
 
 import { BULBASAUR } from '~/constants/stories'
 
-import { PokemonListItem } from './PokemonListItem'
+import { PokemonGridItem } from './PokemonGridItem'
 
 const meta = {
   title: 'domain/PokemonListItem',
-  component: PokemonListItem,
+  component: PokemonGridItem,
   parameters: {
     layout: 'centered',
   },
   tags: ['autodocs'],
-} satisfies Meta<typeof PokemonListItem>
+} satisfies Meta<typeof PokemonGridItem>
 
 export default meta
 

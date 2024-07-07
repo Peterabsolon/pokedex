@@ -1,5 +1,5 @@
 import { PokemonInfoFragment } from '~/codegen/graphql'
-import { PokemonListItem } from '~/components'
+import { PokemonGridItem } from '~/components'
 
 import { usePokemonsContext } from '../../pokemons.context'
 
@@ -17,7 +17,7 @@ export const PokemonsGrid = ({ onViewDetail }: PokemonsGridProps) => {
   return (
     <div data-testid="pokemons" className="grid gap-8" style={GRID_STYLES}>
       {pokemons.map((pokemon) => (
-        <PokemonListItem
+        <PokemonGridItem
           key={pokemon.id}
           pokemon={pokemon}
           showDetailInfo={state.showDetailInfo}

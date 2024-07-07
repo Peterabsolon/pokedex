@@ -1,2 +1,2 @@
-export * from './PokemonListItem'
+export * from './PokemonGridItem'
 export * from './PokemonTypeBadge'
