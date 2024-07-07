@@ -7,9 +7,10 @@ export interface TableCellProps<T extends Record<string, any>> {
   row: T
   column: TableColumn<T>
   children?: ReactNode
+  onRowClick?: (row: T) => void
 }
 
-export const TableCell = <T extends Record<string, any>>({ row, column }: TableCellProps<T>) => {
+export const TableCell = <T extends Record<string, any>>({ row, column, onRowClick }: TableCellProps<T>) => {
   let value: ReactNode = ''
 
   if (column.dataKey) {
@@ -20,5 +21,15 @@ export const TableCell = <T extends Record<string, any>>({ row, column }: TableC
     value = column.render(row)
   }
 
-  return <td className={classNames(`border-b p-4 text-${column.align ?? 'left'}`, column.className)}>{value}</td>
+  const handleClick = () => {
+    if (onRowClick) {
+      onRowClick(row)
+    }
+  }
+
+  return (
+    <td onClick={handleClick} className={classNames(`border-b p-4 text-${column.align ?? 'left'}`, column.className)}>
+      {value}
+    </td>
+  )
 }

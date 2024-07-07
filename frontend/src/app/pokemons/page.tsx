@@ -1,11 +1,8 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
-import { useCallback } from 'react'
 
-import { PokemonInfoFragment } from '~/codegen/graphql'
 import { InfiniteLoader } from '~/components'
-import { ROUTES } from '~/constants'
 
 import { PokemonFilters, PokemonsGrid } from './components'
 import { PokemonsTable } from './components/PokemonsTable'
@@ -18,11 +15,6 @@ const PokemonsPage = () => {
 
   const pokemons = pokemonsQuery.edges.filter((p) => (state.showFavoritesOnly ? p.isFavorite : true))
 
-  const handleViewDetail = useCallback(
-    (pokemon: PokemonInfoFragment) => router.push(ROUTES.POKEMON_DETAIL.replace(':id', pokemon.id)),
-    [router],
-  )
-
   return (
     <div className="flex flex-auto px-8">
       <div style={CONTENT_STYLES} className="mr-8 flex-1 self-start">
@@ -33,11 +25,7 @@ const PokemonsPage = () => {
           pageKey={pokemonsQuery.edgesCount.toString()}
           hasMore={!!pokemons.length && computed.hasMore}
         >
-          {state.useTableView ? (
-            <PokemonsTable pokemons={pokemons} />
-          ) : (
-            <PokemonsGrid pokemons={pokemons} onViewDetail={handleViewDetail} />
-          )}
+          {state.useTableView ? <PokemonsTable pokemons={pokemons} /> : <PokemonsGrid pokemons={pokemons} />}
         </InfiniteLoader>
       </div>
 

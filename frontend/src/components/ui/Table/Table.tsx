@@ -1,21 +1,30 @@
 import classNames from 'classnames'
+import { MotionProps } from 'framer-motion'
 import { HTMLAttributes } from 'react'
 
 import { Card } from '../Card'
+import { NoResults } from '../NoResults'
 import { TableAction, TableColumn } from './Table.types'
 import { TableRow } from './TableRow'
 
-export interface TableProps<T extends AnyObject> extends HTMLAttributes<HTMLTableElement> {
-  actions?: TableAction<T>[]
-  columns: TableColumn<T>[]
-  data: T[]
+const MOTION_PROPS: MotionProps = {
+  initial: { scale: 0.97, opacity: 0, y: 10 },
+  animate: { scale: 1, opacity: 1, y: 0 },
 }
 
-export const Table = <T extends AnyObject>({ actions, className, data, ...props }: TableProps<T>) => {
+export interface TableProps<T extends AnyObject> extends HTMLAttributes<HTMLTableElement> {
+  data: T[]
+  columns: TableColumn<T>[]
+
+  actions?: TableAction<T>[]
+  onRowClick?: (row: T) => void
+}
+
+export const Table = <T extends AnyObject>({ actions, className, data, onRowClick, ...props }: TableProps<T>) => {
   const columns = props.columns.filter((column) => !column.hidden)
 
   return (
-    <Card className={classNames('w-full p-3', className)}>
+    <Card className={classNames('w-full p-3', className)} motion={MOTION_PROPS}>
       <table className={classNames('w-full table-auto border-collapse')}>
         <thead>
           <tr>
@@ -40,15 +49,13 @@ export const Table = <T extends AnyObject>({ actions, className, data, ...props 
         {data.length > 0 && (
           <tbody>
             {data.map((row) => (
-              <TableRow<T> actions={actions} key={row.id} columns={columns} row={row} />
+              <TableRow<T> actions={actions} key={row.id} columns={columns} row={row} onRowClick={onRowClick} />
             ))}
           </tbody>
         )}
       </table>
 
-      {!data.length && (
-        <div className="flex w-full items-center justify-center py-16 text-lg font-bold">No results found</div>
-      )}
+      {!data.length && <NoResults />}
     </Card>
   )
 }
