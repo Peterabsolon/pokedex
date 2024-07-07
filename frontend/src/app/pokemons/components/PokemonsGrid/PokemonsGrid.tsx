@@ -4,15 +4,12 @@ import { PokemonGridItem } from '~/components'
 import { usePokemonsContext } from '../../pokemons.context'
 
 export interface PokemonsGridProps {
-  foo?: string
+  pokemons: PokemonInfoFragment[]
   onViewDetail: (pokemon: PokemonInfoFragment) => void
 }
 
-export const PokemonsGrid = ({ onViewDetail }: PokemonsGridProps) => {
-  const { queries, state, actions, computed } = usePokemonsContext()
-  const { pokemonsQuery } = queries
-
-  const pokemons = pokemonsQuery.edges.filter((p) => (state.showFavoritesOnly ? p.isFavorite : true))
+export const PokemonsGrid = ({ pokemons, onViewDetail }: PokemonsGridProps) => {
+  const { queries, state, actions } = usePokemonsContext()
 
   return (
     <div data-testid="pokemons" className="grid gap-8" style={GRID_STYLES}>
@@ -31,9 +28,6 @@ export const PokemonsGrid = ({ onViewDetail }: PokemonsGridProps) => {
     </div>
   )
 }
-
-const REM_PX = 16
-const SIDEBAR_WIDTH_PX = 460
 
 const ITEM_MIN_WIDTH_PX = 360
 const ITEM_MAX_WIDTH_PX = 420

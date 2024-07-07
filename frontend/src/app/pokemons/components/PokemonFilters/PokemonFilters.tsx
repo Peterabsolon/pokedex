@@ -15,6 +15,7 @@ export const PokemonFilters: React.FC = () => {
     typesSelected,
     weaknessesFilterOperator,
     weaknessesSelected,
+    useTableView,
   } = state
 
   const {
@@ -27,6 +28,7 @@ export const PokemonFilters: React.FC = () => {
     setWeaknessFilterOperator,
     toggleDetailedInfo,
     toggleShowFavoritesOnly,
+    toggleTableView,
   } = actions
 
   return (
@@ -34,13 +36,21 @@ export const PokemonFilters: React.FC = () => {
       <InputDebounced
         data-testid="search-query-input"
         name="searchQuery"
-        label="Search by name"
+        label="Search"
         value={searchQuery}
         onValueChange={setSearchQuery}
         className="mb-4"
+        placeholder="Search by name..."
       />
 
-      <Toggle label="Show detailed info" checked={showDetailInfo} onChange={toggleDetailedInfo} className="mb-4" />
+      <Toggle label="Show as table" checked={useTableView} onChange={toggleTableView} className="mb-4" />
+
+      <Toggle
+        label="Show weaknesses & resistances"
+        checked={showDetailInfo}
+        onChange={toggleDetailedInfo}
+        className="mb-4"
+      />
 
       <Toggle
         label="Show favorites only"

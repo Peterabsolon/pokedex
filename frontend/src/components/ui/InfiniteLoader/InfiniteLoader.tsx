@@ -49,6 +49,8 @@ export const InfiniteLoader = ({
   hasMore,
   scrollableAncestor,
 }: InfiniteLoaderProps) => {
+  console.log('isLoading', isLoading)
+
   return (
     <div>
       {children}
@@ -57,9 +59,7 @@ export const InfiniteLoader = ({
         {isLoading && <Spinner />}
 
         {!isLoading && pageKey !== undefined && !error && hasMore && (
-          <Waypoint onEnter={onLoadMore} key={pageKey} scrollableAncestor={scrollableAncestor?.current}>
-            <Spinner />
-          </Waypoint>
+          <Waypoint onEnter={onLoadMore} key={pageKey} scrollableAncestor={scrollableAncestor?.current} />
         )}
       </div>
     </div>

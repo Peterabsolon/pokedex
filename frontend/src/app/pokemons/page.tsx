@@ -8,6 +8,7 @@ import { InfiniteLoader } from '~/components'
 import { ROUTES } from '~/constants'
 
 import { PokemonFilters, PokemonsGrid } from './components'
+import { PokemonsTable } from './components/PokemonsTable'
 import { PokemonsContextProvider, usePokemonsContext } from './pokemons.context'
 
 const PokemonsPage = () => {
@@ -32,7 +33,11 @@ const PokemonsPage = () => {
           pageKey={pokemonsQuery.edgesCount.toString()}
           hasMore={!!pokemons.length && computed.hasMore}
         >
-          <PokemonsGrid onViewDetail={handleViewDetail} />
+          {state.useTableView ? (
+            <PokemonsTable pokemons={pokemons} />
+          ) : (
+            <PokemonsGrid pokemons={pokemons} onViewDetail={handleViewDetail} />
+          )}
         </InfiniteLoader>
       </div>
 

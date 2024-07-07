@@ -7,6 +7,8 @@ type Options = readonly Option[]
 
 export const initialState = {
   searchQuery: '' as string | undefined,
+
+  useTableView: true,
   showDetailInfo: false,
   showFavoritesOnly: false,
 
@@ -30,6 +32,10 @@ export const createActions = (setState: React.Dispatch<React.SetStateAction<Poke
 
   toggleDetailedInfo: () => {
     setState((prev) => ({ ...prev, showDetailInfo: !prev.showDetailInfo }))
+  },
+
+  toggleTableView: () => {
+    setState((prev) => ({ ...prev, useTableView: !prev.useTableView }))
   },
 
   toggleShowFavoritesOnly: () => {

@@ -8,6 +8,7 @@ export const DEFAULT_BUTTON_MOTION: MotionProps = {
 }
 
 export type ButtonVariant = keyof typeof variantStyles
+export type ButtonSize = keyof typeof sizeStyles
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   /**
@@ -26,6 +27,11 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
    * The button color variant to use when hovered
    */
   variantHover?: ButtonVariant
+
+  /**
+   * The size variant
+   */
+  size?: ButtonSize
 
   /**
    * The icon rendered on the left side of the label
@@ -53,6 +59,7 @@ export const Button = ({
   label,
   variant = 'primary',
   variantHover,
+  size = 'md',
   className,
   iconLeft,
   iconRight,
@@ -82,13 +89,9 @@ export const Button = ({
         // https://github.com/mdn/browser-compat-data/issues/17726
         // Tailwind shadows use some unsupported Safari API, force use GPU to fix perf issues
         'transform-gpu drop-shadow-2xl',
-        'relative flex flex-row items-center justify-center text-nowrap rounded-md px-8 py-2',
+        'relative flex flex-row items-center justify-center text-nowrap rounded-md',
         'font-medium transition-colors disabled:cursor-not-allowed',
-        {
-          // 'emboss-effect': variant !== 'text',
-          'pl-6': iconLeft && !className,
-          'pr-6': iconRight && !className,
-        },
+        sizeStyles[size],
         variantStyles[variant],
         variantHoverStyles[variantHover ?? variant],
         className,
@@ -113,4 +116,9 @@ const variantHoverStyles = {
   primary: 'hover:bg-blue-400',
   secondary: 'hover:bg-blue-400 disabled:hover:bg-slate-900',
   danger: 'hover:bg-red-500 hover:border-red-800',
+}
+
+const sizeStyles = {
+  sm: 'text-sm px-4 py-2',
+  md: 'px-8 py-2',
 }

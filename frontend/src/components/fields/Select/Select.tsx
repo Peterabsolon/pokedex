@@ -40,7 +40,9 @@ export const Select = <
         isSearchable={isSearchable}
         closeMenuOnSelect={!props.isMulti}
         classNames={{
+          control: () => '!border-slate-300',
           input: () => 'h-9',
+          placeholder: () => '!text-slate-400',
         }}
         components={
           props.components ?? {

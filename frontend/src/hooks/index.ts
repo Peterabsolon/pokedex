@@ -1,5 +1,6 @@
 export * from './useDebouncedValue'
 export * from './useFavoritePokemon.mutation'
+export * from './usePokemonActions'
 export * from './usePokemonById.query'
 export * from './usePokemonByName.query'
 export * from './usePokemons.query'

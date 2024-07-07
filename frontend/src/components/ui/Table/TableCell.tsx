@@ -1,3 +1,4 @@
+import classNames from 'classnames'
 import { ReactNode } from 'react'
 
 import { TableColumn } from './Table.types'
@@ -19,5 +20,5 @@ export const TableCell = <T extends Record<string, any>>({ row, column }: TableC
     value = column.render(row)
   }
 
-  return <td>{value}</td>
+  return <td className={classNames(`border-b p-4 text-${column.align ?? 'left'}`, column.className)}>{value}</td>
 }

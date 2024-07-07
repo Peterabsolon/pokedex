@@ -12,7 +12,7 @@ export const Input = ({ name, label, className, ...props }: InputProps) => {
         {...props}
         id={props.id ?? name}
         name={name}
-        className={classNames('border border-black text-black', className)}
+        className={classNames('h-11 w-full rounded border border-slate-300 px-2 py-2 text-black', className)}
       />
     </Field>
   )

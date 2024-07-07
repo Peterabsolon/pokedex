@@ -9,6 +9,7 @@ import { PokemonType } from '~/constants'
 import { useFavoritePokemonMutation, useUnFavoritePokemonMutation } from '~/hooks'
 import { playPokemonSound } from '~/utils'
 
+import { PokemonImage } from '../PokemonImage'
 import { PokemonTypeBadge } from '../PokemonTypeBadge'
 
 const MOTION_PROPS: MotionProps = {
@@ -75,10 +76,7 @@ export const PokemonGridItem = ({
   return (
     <Card onClick={handleClick} motion={MOTION_PROPS} className={classNames('p-4', className)} style={style}>
       <div className="mb-4 rounded-lg bg-white p-4">
-        <div
-          className="mx-auto aspect-square h-auto w-full bg-contain bg-center bg-no-repeat"
-          style={{ backgroundImage: `url("${image}")` }}
-        />
+        <PokemonImage className="mx-auto w-full" imageSrcUrl={image} />
       </div>
 
       {/* TODO: Title component */}
