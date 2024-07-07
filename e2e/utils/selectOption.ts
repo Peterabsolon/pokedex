@@ -11,7 +11,7 @@ interface SelectOptionProps {
 export const selectOption = async ({ page, browser, testId, options, operationName }: SelectOptionProps) => {
   const isSafari = browser.browserType().name() === 'webkit'
   const hasManyOptions = options.length > 1
-  const select = page.locator(`[data-test-id="${testId}"]`)
+  const select = page.locator(`[data-testid="${testId}"]`)
 
   // open dropdown
   await select.first().click()

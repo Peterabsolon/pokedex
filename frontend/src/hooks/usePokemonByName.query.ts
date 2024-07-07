@@ -16,8 +16,6 @@ export const usePokemonByNameQuery = ({ name }: Props) => {
 
   const pokemonByName = pokemonByNameQuery.data
 
-  console.log('usePokemonByNameQuery')
-
   return useMemo(
     () => ({
       pokemonByNameQuery,

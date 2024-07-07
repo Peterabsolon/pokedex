@@ -32,7 +32,7 @@ const PokemonsPage = () => {
           pageKey={pokemonsQuery.edgesCount.toString()}
           hasMore={!!pokemons.length && computed.hasMore}
         >
-          <div data-testId="pokemons" className="grid gap-8" style={GRID_STYLES}>
+          <div data-testid="pokemons" className="grid gap-8" style={GRID_STYLES}>
             {pokemons.map((pokemon) => (
               <PokemonListItem
                 key={pokemon.id}

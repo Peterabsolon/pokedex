@@ -28,7 +28,7 @@ export const Select = <
   const id = props.id ?? name
 
   return (
-    <Field name={name} label={label} data-test-id={id}>
+    <Field name={name} label={label} data-testid={id}>
       <ReactSelect<Option, IsMulti, Group>
         {...props}
         id={id}
@@ -39,7 +39,7 @@ export const Select = <
         components={
           props.components ?? {
             Option: (props) => (
-              <div data-testId="react-select-option">
+              <div data-testid="react-select-option">
                 <components.Option {...props} />
               </div>
             ),

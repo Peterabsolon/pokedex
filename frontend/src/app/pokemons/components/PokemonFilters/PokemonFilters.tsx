@@ -32,7 +32,7 @@ export const PokemonFilters: React.FC = () => {
   return (
     <Card>
       <InputDebounced
-        data-testId="search-query-input"
+        data-testid="search-query-input"
         name="searchQuery"
         label="Search by name"
         value={searchQuery}

@@ -53,12 +53,12 @@ export const pokemonsQueryFieldPolicy: FieldPolicy = {
   ],
 
   read(existing: PokemonConnection, { args }) {
-    if (!existing) {
+    if (!existing || !args) {
       return undefined
     }
 
     // Always search/filter on the server
-    if (args) {
+    if (args?.query) {
       const { search, filter } = args.query as PokemonsQueryInput
 
       // TODO: Improve somehow...

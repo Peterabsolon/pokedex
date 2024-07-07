@@ -12,6 +12,8 @@ export const useFavoritePokemonMutation = () => {
         toast.success(`${data.favoritePokemon.name} successfully added to favorites.`)
         updateGetPokemonsQueryCache(cache, data.favoritePokemon)
       }
+
+      return
     },
   })
 
@@ -19,6 +21,7 @@ export const useFavoritePokemonMutation = () => {
     async (id: string) => {
       try {
         await mutate({ variables: { id } })
+        console.log('after favorite...')
       } catch (err) {
         const msg = 'Failed to add pokemon to favorites.'
         console.error(msg, err)

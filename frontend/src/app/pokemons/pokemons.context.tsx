@@ -53,11 +53,6 @@ export const PokemonsContextProvider = ({ children }: PropsWithChildren) => {
   const actions = useMemo(() => createActions(setState), [setState])
 
   /**
-   * Pagination
-   */
-  const offset = state.page * PAGE_SIZE
-
-  /**
    * Filters
    */
   const search = state.searchQuery
@@ -88,7 +83,7 @@ export const PokemonsContextProvider = ({ children }: PropsWithChildren) => {
   /**
    * Queries
    */
-  const pokemonsQuery = usePokemonsQuery({ search, filter, offset, limit: PAGE_SIZE })
+  const pokemonsQuery = usePokemonsQuery({ search, filter, limit: PAGE_SIZE })
 
   const queries = useMemo(() => ({ pokemonsQuery }), [pokemonsQuery])
 
@@ -97,10 +92,6 @@ export const PokemonsContextProvider = ({ children }: PropsWithChildren) => {
    */
   const computed = useMemo(() => {
     const hasMore = pokemonsQuery.count ? pokemonsQuery.edges.length < pokemonsQuery.count : true
-
-    console.log('hasMore', hasMore)
-    console.log('pokemonsQuery.count', pokemonsQuery.count)
-    console.log('pokemonsQuery.edges.length', pokemonsQuery.edges.length)
 
     return {
       hasMore,

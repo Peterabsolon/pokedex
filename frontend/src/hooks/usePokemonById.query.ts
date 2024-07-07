@@ -16,8 +16,6 @@ export const usePokemonByIdQuery = ({ id }: Props) => {
 
   const pokemonById = pokemonByIdQuery.data?.pokemonById
 
-  console.log('usePokemonByIdQuery')
-
   return useMemo(
     () => ({
       pokemonById,

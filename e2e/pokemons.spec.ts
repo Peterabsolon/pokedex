@@ -34,7 +34,7 @@ test.describe('Required features', () => {
     })
 
     const count = await page.getByTestId('pokemons').locator('> *').count()
-    expect(count).toBe(10)
+    expect(count).toBe(12)
   })
 
   test('can filter pokemons by matching types, using AND logic', async ({ page, browser }) => {
