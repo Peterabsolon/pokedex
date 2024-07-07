@@ -12,8 +12,8 @@ import { POKEMON_TYPE_COLORS } from '../PokemonTypeBadge/PokemonTypeBadge.consta
 
 const MOTION_PROPS: MotionProps = {
   ...DEFAULT_CARD_MOTION,
-  whileHover: { scale: 1.02 },
-  whileTap: { scale: 0.95 },
+  whileHover: { scale: 1.03 },
+  whileTap: { scale: 0.98 },
 }
 
 export interface PokemonListItemProps {
@@ -54,48 +54,24 @@ export const PokemonListItem = ({
     }
   }, [pokemon, onClick])
 
-  const handleTypeClick = useCallback(
-    (event: React.MouseEvent<HTMLDivElement>, type: PokemonType) => {
-      if (onTypeClick) {
-        event.stopPropagation()
-        onTypeClick(type)
-      }
-    },
-    [onTypeClick],
-  )
-
-  const handleResistanceClick = useCallback(
-    (event: React.MouseEvent<HTMLDivElement>, type: PokemonType) => {
-      if (onResistanceClick) {
-        event.stopPropagation()
-        onResistanceClick(type)
-      }
-    },
-    [onResistanceClick],
-  )
-
-  const handleWeaknessClick = useCallback(
-    (event: React.MouseEvent<HTMLDivElement>, type: PokemonType) => {
-      if (onWeaknessClick) {
-        event.stopPropagation()
-        onWeaknessClick(type)
-      }
-    },
-    [onWeaknessClick],
-  )
-
   // ====================================================
   // Computed
   // ====================================================
   const color = types[0] ? POKEMON_TYPE_COLORS[types[0] as PokemonType] : '#fff'
-  const colorBackground = chroma.mix(color, '#fff', 0.4).hex()
+  const colorLighter = chroma.mix(color, '#fff', 0.4).hex()
+  const colorDarker = chroma.mix(color, '#000', 0.4).hex()
 
   // ====================================================
   // JSX
   // ====================================================
   return (
-    <Card onClick={handleClick} motion={MOTION_PROPS} style={{ background: colorBackground }} className="p-4">
-      <div className="mb-4 rounded-lg bg-white p-4">
+    <Card
+      onClick={handleClick}
+      motion={MOTION_PROPS}
+      style={{ background: colorLighter, borderColor: color }}
+      className="border-2 p-4"
+    >
+      <div style={{ borderColor: color }} className="mb-4 rounded-lg border-2 bg-white p-4">
         <div
           className="mx-auto aspect-square h-auto w-full bg-contain bg-center bg-no-repeat"
           style={{ backgroundImage: `url("${image}")` }}
@@ -105,40 +81,36 @@ export const PokemonListItem = ({
       {/* TODO: Title component */}
       <h2 className="mb-1 text-lg font-bold">{name}</h2>
 
-      <h3 className="text-md mb-3 flex gap-2 font-medium">
+      <h3 className="mb-3 flex flex-wrap gap-2 font-medium">
         {types.map((type) => (
-          <PokemonTypeBadge
-            key={type}
-            type={type as PokemonType}
-            onClick={(e) => handleTypeClick(e, type as PokemonType)}
-          />
+          <PokemonTypeBadge key={type} type={type as PokemonType} onClick={() => onTypeClick?.(type as PokemonType)} />
         ))}
       </h3>
 
       {showDetailInfo && (
-        <>
+        <div className="mb-4 rounded-lg p-4">
           <div className="mb-3 flex flex-wrap gap-2 font-medium">
-            <div className="w-full text-lg font-bold">Resistant</div>
+            <div className="w-full text-sm font-medium">Resistant</div>
             {resistant.map((type) => (
               <PokemonTypeBadge
                 key={type}
                 type={type as PokemonType}
-                onClick={(e) => handleResistanceClick(e, type as PokemonType)}
+                onClick={() => onResistanceClick?.(type as PokemonType)}
               />
             ))}
           </div>
 
           <div className="mb-3 flex flex-wrap gap-2 font-medium">
-            <div className="w-full text-lg font-bold">Weaknesses</div>
+            <div className="w-full text-sm font-medium">Weaknesses</div>
             {weaknesses.map((type) => (
               <PokemonTypeBadge
                 key={type}
                 type={type as PokemonType}
-                onClick={(e) => handleWeaknessClick(e, type as PokemonType)}
+                onClick={() => onWeaknessClick?.(type as PokemonType)}
               />
             ))}
           </div>
-        </>
+        </div>
       )}
 
       <Button className="w-full" onClick={handleToggleFavorite} stopPropagation>

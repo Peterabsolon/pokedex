@@ -38,6 +38,7 @@ export const Card = ({ children, className, onClick, style, ...props }: CardProp
       )}
       onClick={onClick}
       style={style}
+      {...props}
       {...motionProps}
     >
       {children}

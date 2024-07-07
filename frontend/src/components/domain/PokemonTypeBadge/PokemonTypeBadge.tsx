@@ -5,13 +5,24 @@ import { POKEMON_TYPE_COLORS } from './PokemonTypeBadge.constants'
 
 export interface PokemonTypeBadgeProps extends Omit<BadgeProps, 'color' | 'children'> {
   type: PokemonType
+  stopPropagation?: boolean
 }
 
-export const PokemonTypeBadge = ({ type, ...props }: PokemonTypeBadgeProps) => {
+export const PokemonTypeBadge = ({ type, stopPropagation, onClick, ...props }: PokemonTypeBadgeProps) => {
   const color = POKEMON_TYPE_COLORS[type]
 
+  const handleClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    if (stopPropagation) {
+      e.stopPropagation()
+    }
+
+    if (onClick) {
+      onClick(e)
+    }
+  }
+
   return (
-    <Badge color={color} {...props}>
+    <Badge {...props} color={color} onClick={handleClick}>
       {type}
     </Badge>
   )
