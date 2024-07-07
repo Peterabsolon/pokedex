@@ -1,22 +1,24 @@
+import classNames from 'classnames'
+
 import { PokemonDetailsFragment } from '~/codegen/graphql'
 import { Button } from '~/components/ui'
 import { usePokemonActions } from '~/hooks'
 
 export interface PokemonEvolutionProps {
-  pokemon: PokemonDetailsFragment
+  className?: string
   pokemonEvolutionPrev?: PokemonDetailsFragment
   pokemonEvolutionNext?: PokemonDetailsFragment
 }
 
-export const PokemonEvolution = ({ pokemon, pokemonEvolutionPrev, pokemonEvolutionNext }: PokemonEvolutionProps) => {
+export const PokemonEvolution = ({ className, pokemonEvolutionPrev, pokemonEvolutionNext }: PokemonEvolutionProps) => {
   const { handleViewDetail } = usePokemonActions()
 
   return (
-    <div>
+    <div className={classNames('flex gap-2', className)}>
       <div>
         {pokemonEvolutionPrev && (
           <Button onClick={() => handleViewDetail(pokemonEvolutionPrev.name)}>
-            {`< `} {pokemonEvolutionPrev.name}
+            {`<- `} {pokemonEvolutionPrev.name}
           </Button>
         )}
       </div>
@@ -24,7 +26,7 @@ export const PokemonEvolution = ({ pokemon, pokemonEvolutionPrev, pokemonEvoluti
       <div>
         {pokemonEvolutionNext && (
           <Button onClick={() => handleViewDetail(pokemonEvolutionNext.name)}>
-            {pokemonEvolutionNext.name} {` >`}
+            {pokemonEvolutionNext.name} {` ->`}
           </Button>
         )}
       </div>

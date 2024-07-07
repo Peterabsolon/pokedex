@@ -19,7 +19,7 @@ export const Logo = ({ withHomeRedirect = true }: LogoProps) => {
   }
 
   return (
-    <div className={classNames('flex items-center', { 'cursor-pointer': handleClick })} onClick={handleClick}>
+    <div className={classNames('flex items-center', { 'cursor-pointer': handleClick })}>
       <img className="mr-4 w-12" alt="Pokeball logo" src="/pokeball.svg" />
       <h1 className="font-medium text-white">Pokedex</h1>
     </div>

@@ -39,7 +39,7 @@ export const PokemonsContextProvider = ({ children }: PropsWithChildren) => {
 
   // TODO: Read from Apollo cache...
   const pokemonEvolutionPrevQuery = usePokemonByNameQuery({
-    name: pokemonQuery.pokemon?.evolutionsPrevious[pokemonQuery.pokemon?.evolutionsPrevious.length - 1]?.name,
+    name: pokemonQuery.pokemon?.evolutionsPrevious?.[pokemonQuery.pokemon?.evolutionsPrevious?.length - 1]?.name,
   })
 
   const pokemonEvolutionNextQuery = usePokemonByNameQuery({ name: pokemonQuery.pokemon?.evolutions[0]?.name })

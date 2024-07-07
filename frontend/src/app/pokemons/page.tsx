@@ -2,7 +2,7 @@
 
 import classNames from 'classnames'
 
-import { InfiniteLoader, Modal } from '~/components'
+import { InfiniteLoader } from '~/components'
 
 import { PokemonFilters, PokemonsGrid } from './components'
 import { PokemonsTable } from './components/PokemonsTable'
@@ -16,10 +16,6 @@ const PokemonsPage = () => {
 
   return (
     <>
-      <Modal isOpen={Boolean(state.openedPokemonName)} onClose={() => console.log('yo')}>
-        Sup
-      </Modal>
-
       <div className={classNames('flex flex-auto px-8', { 'blur-sm': state.openedPokemonName })}>
         <div style={CONTENT_STYLES} className="mr-8 flex-1 self-start">
           <InfiniteLoader

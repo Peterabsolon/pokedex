@@ -9,6 +9,7 @@ export interface PokemonInfoProps {
   onTypeClick?: (type: PokemonType) => void
   onResistanceClick?: (type: PokemonType) => void
   onWeaknessClick?: (type: PokemonType) => void
+  withName?: boolean
 }
 
 export const PokemonInfo = ({
@@ -17,12 +18,13 @@ export const PokemonInfo = ({
   onResistanceClick,
   onTypeClick,
   onWeaknessClick,
+  withName = true,
 }: PokemonInfoProps) => {
   const { name, types, resistant, weaknesses } = pokemon
 
   return (
     <>
-      <h2 className="mb-1 text-xl font-bold">{name}</h2>
+      {withName && <h2 className="mb-1 text-xl font-bold">{name}</h2>}
 
       <h3 className="mb-3 flex flex-wrap gap-2 font-medium">
         {types.map((type) => (
