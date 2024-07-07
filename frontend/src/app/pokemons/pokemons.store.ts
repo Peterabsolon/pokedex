@@ -8,7 +8,7 @@ type Options = readonly Option[]
 export const initialState = {
   searchQuery: '' as string | undefined,
 
-  useTableView: true,
+  useTableView: false,
   showDetailInfo: false,
   showFavoritesOnly: false,
 

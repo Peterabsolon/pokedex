@@ -5,7 +5,7 @@ import { BULBASAUR } from '~/constants/stories'
 import { PokemonGridItem } from './PokemonGridItem'
 
 const meta = {
-  title: 'domain/PokemonListItem',
+  title: 'domain/PokemonGridItem',
   component: PokemonGridItem,
   parameters: {
     layout: 'centered',

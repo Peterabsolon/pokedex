@@ -5,12 +5,11 @@ import { useCallback } from 'react'
 import { PokemonInfoFragment } from '~/codegen/graphql'
 import { HeartIcon, SpeakerIcon } from '~/components/icons'
 import { Button, Card, CardProps, DEFAULT_CARD_MOTION } from '~/components/ui'
-import { PokemonType } from '~/constants'
 import { useFavoritePokemonMutation, useUnFavoritePokemonMutation } from '~/hooks'
 import { playPokemonSound } from '~/utils'
 
 import { PokemonImage } from '../PokemonImage'
-import { PokemonTypeBadge } from '../PokemonTypeBadge'
+import { PokemonInfo, PokemonInfoProps } from '../PokemonInfo'
 
 const MOTION_PROPS: MotionProps = {
   ...DEFAULT_CARD_MOTION,
@@ -18,25 +17,19 @@ const MOTION_PROPS: MotionProps = {
   whileTap: { scale: 0.98 },
 }
 
-export interface PokemonGridItemProps extends Omit<CardProps, 'onClick' | 'children'> {
+export interface PokemonGridItemProps extends Omit<CardProps, 'onClick' | 'children'>, PokemonInfoProps {
   pokemon: PokemonInfoFragment
   showDetailInfo: boolean
-
   onClick?: (pokemon: PokemonInfoFragment) => void
-  onTypeClick?: (type: PokemonType) => void
-  onResistanceClick?: (type: PokemonType) => void
-  onWeaknessClick?: (type: PokemonType) => void
 }
 
 export const PokemonGridItem = ({
   className,
   style,
   pokemon,
-  showDetailInfo,
   onClick,
-  onTypeClick,
-  onResistanceClick,
-  onWeaknessClick,
+  showDetailInfo,
+  ...pokemonInfoProps
 }: PokemonGridItemProps) => {
   // ====================================================
   // Props
@@ -79,40 +72,7 @@ export const PokemonGridItem = ({
         <PokemonImage className="mx-auto w-full" imageSrcUrl={image} />
       </div>
 
-      {/* TODO: Title component */}
-      <h2 className="mb-1 text-lg font-bold">{name}</h2>
-
-      <h3 className="mb-3 flex flex-wrap gap-2 font-medium">
-        {types.map((type) => (
-          <PokemonTypeBadge key={type} type={type as PokemonType} onClick={() => onTypeClick?.(type as PokemonType)} />
-        ))}
-      </h3>
-
-      {showDetailInfo && (
-        <div className="mb-4">
-          <div className="mb-3 flex flex-wrap gap-2 font-medium">
-            <div className="w-full text-sm font-medium">Resistant</div>
-            {resistant.map((type) => (
-              <PokemonTypeBadge
-                key={type}
-                type={type as PokemonType}
-                onClick={() => onResistanceClick?.(type as PokemonType)}
-              />
-            ))}
-          </div>
-
-          <div className="mb-3 flex flex-wrap gap-2 font-medium">
-            <div className="w-full text-sm font-medium">Weaknesses</div>
-            {weaknesses.map((type) => (
-              <PokemonTypeBadge
-                key={type}
-                type={type as PokemonType}
-                onClick={() => onWeaknessClick?.(type as PokemonType)}
-              />
-            ))}
-          </div>
-        </div>
-      )}
+      <PokemonInfo pokemon={pokemon} showDetailInfo={showDetailInfo} {...pokemonInfoProps} />
 
       <div className="flex gap-2">
         <Button
