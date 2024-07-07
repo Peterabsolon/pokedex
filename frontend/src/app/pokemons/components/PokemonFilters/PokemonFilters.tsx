@@ -49,37 +49,57 @@ export const PokemonFilters: React.FC = () => {
         className="mb-4"
       />
 
-      <PokemonTypeSelect<true>
-        name="types"
-        label="Types"
-        placeholder="Select types..."
-        isMulti
-        value={typesSelected}
-        onChange={setTypesSelected}
-      />
+      <div className="flex gap-2">
+        <PokemonTypeSelect<true>
+          name="types"
+          label="Types"
+          placeholder="Select types..."
+          isMulti
+          value={typesSelected}
+          onChange={setTypesSelected}
+        />
 
-      <FilterOperatorSelect
-        name="typesFilterOperator"
-        value={typeFilterOperator}
-        onChange={setTypeFilterOperator}
-        className="mb-4"
-      />
+        <FilterOperatorSelect
+          label="&nbsp;"
+          name="typesFilterOperator"
+          value={typeFilterOperator}
+          onChange={setTypeFilterOperator}
+          fieldClassName="w-32 mb-4"
+        />
+      </div>
 
-      <PokemonTypeSelect<true>
-        name="resistances"
-        label="Resistances"
-        isMulti
-        value={resistancesSelected}
-        onChange={setResistancesSelected}
-      />
-      <FilterOperatorSelect
-        value={resistancesFilterOperator}
-        onChange={setResistancesFilterOperator}
-        className="mb-4"
-      />
+      <div className="flex gap-2">
+        <PokemonTypeSelect<true>
+          name="resistances"
+          label="Resistances"
+          isMulti
+          value={resistancesSelected}
+          onChange={setResistancesSelected}
+        />
 
-      <PokemonTypeSelect<true> label="Weaknesses" isMulti value={weaknessesSelected} onChange={setWeaknessesSelected} />
-      <FilterOperatorSelect value={weaknessesFilterOperator} onChange={setWeaknessFilterOperator} className="mb-4" />
+        <FilterOperatorSelect
+          label="&nbsp;"
+          value={resistancesFilterOperator}
+          onChange={setResistancesFilterOperator}
+          fieldClassName="w-32 mb-4"
+        />
+      </div>
+
+      <div className="flex gap-2">
+        <PokemonTypeSelect<true>
+          label="Weaknesses"
+          isMulti
+          value={weaknessesSelected}
+          onChange={setWeaknessesSelected}
+        />
+
+        <FilterOperatorSelect
+          label="&nbsp;"
+          value={weaknessesFilterOperator}
+          onChange={setWeaknessFilterOperator}
+          fieldClassName="w-32 mb-4"
+        />
+      </div>
     </Card>
   )
 }

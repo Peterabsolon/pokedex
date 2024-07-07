@@ -13,7 +13,9 @@ export interface SelectProps<
   IsMulti extends boolean = boolean,
   Group extends GroupBase<Option> = GroupBase<Option>,
 > extends ReactSelectProps<Option, IsMulti, Group>,
-    FieldProps {}
+    FieldProps {
+  fieldClassName?: string
+}
 
 export const Select = <
   Option = unknown,
@@ -23,12 +25,13 @@ export const Select = <
   name,
   label,
   isSearchable = true,
+  fieldClassName,
   ...props
 }: SelectProps<Option, IsMulti, Group>) => {
   const id = props.id ?? name
 
   return (
-    <Field name={name} label={label} data-testid={id}>
+    <Field name={name} label={label} data-testid={id} className={fieldClassName}>
       <ReactSelect<Option, IsMulti, Group>
         {...props}
         id={id}
@@ -36,6 +39,9 @@ export const Select = <
         instanceId={useId()}
         isSearchable={isSearchable}
         closeMenuOnSelect={!props.isMulti}
+        classNames={{
+          input: () => 'h-9',
+        }}
         components={
           props.components ?? {
             Option: (props) => (
