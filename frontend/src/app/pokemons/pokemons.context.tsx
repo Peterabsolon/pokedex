@@ -95,13 +95,18 @@ export const PokemonsContextProvider = ({ children }: PropsWithChildren) => {
   /**
    * Computed
    */
-  const computed = useMemo(
-    () => ({
-      hasMore: pokemonsQuery.count ? pokemonsQuery.edges.length < pokemonsQuery.count : false,
+  const computed = useMemo(() => {
+    const hasMore = pokemonsQuery.count ? pokemonsQuery.edges.length < pokemonsQuery.count : true
+
+    console.log('hasMore', hasMore)
+    console.log('pokemonsQuery.count', pokemonsQuery.count)
+    console.log('pokemonsQuery.edges.length', pokemonsQuery.edges.length)
+
+    return {
+      hasMore,
       pokemonsByNumber: keyBy(pokemonsQuery.edges, 'number'),
-    }),
-    [pokemonsQuery],
-  )
+    }
+  }, [pokemonsQuery])
 
   const context = useMemo(
     () => ({

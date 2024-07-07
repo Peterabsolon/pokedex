@@ -1,7 +1,7 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
-import { useCallback, useRef } from 'react'
+import { useCallback } from 'react'
 
 import { PokemonInfoFragment } from '~/codegen/graphql'
 import { InfiniteLoader, PokemonListItem } from '~/components'
@@ -10,17 +10,7 @@ import { ROUTES } from '~/constants'
 import { PokemonFilters } from './components'
 import { PokemonsContextProvider, usePokemonsContext } from './pokemons.context'
 
-const REM_PX = 16
-const HEADER_SIZE = 120
-const SIDEBAR_WIDTH_PX = 460
-const ITEM_MIN_WIDTH_PX = 360
-const CONTENT_STYLES = {
-  maxWidth: `calc(100% - ${SIDEBAR_WIDTH_PX + 2 * REM_PX}px)`,
-  maxHeight: `calc(100vh - ${HEADER_SIZE}px)`,
-}
-
 const PokemonsPage = () => {
-  const scrollArea = useRef<HTMLDivElement>(null)
   const router = useRouter()
   const { queries, state, actions, computed } = usePokemonsContext()
   const { pokemonsQuery } = queries
@@ -33,23 +23,16 @@ const PokemonsPage = () => {
   )
 
   return (
-    <div className="flex flex-auto overflow-hidden px-8">
-      <div ref={scrollArea} className="mr-8 flex-1 self-start overflow-y-auto" style={CONTENT_STYLES}>
+    <div className="flex flex-auto px-8">
+      <div className="mr-8 flex-1 self-start" style={CONTENT_STYLES}>
         <InfiniteLoader
           error={pokemonsQuery.error}
           isLoading={pokemonsQuery.loading}
           onLoadMore={pokemonsQuery.onFetchMore}
           pageKey={pokemonsQuery.edgesCount.toString()}
           hasMore={!!pokemons.length && computed.hasMore}
-          scrollableAncestor={scrollArea}
         >
-          <div
-            data-testId="pokemons"
-            className="grid gap-8"
-            style={{
-              gridTemplateColumns: `repeat(auto-fit, minmax(${ITEM_MIN_WIDTH_PX}px, 1fr))`,
-            }}
-          >
+          <div data-testId="pokemons" className="grid gap-8" style={GRID_STYLES}>
             {pokemons.map((pokemon) => (
               <PokemonListItem
                 key={pokemon.id}
@@ -65,7 +48,7 @@ const PokemonsPage = () => {
         </InfiniteLoader>
       </div>
 
-      <div style={{ width: SIDEBAR_WIDTH_PX }} className="flex-shrink-0">
+      <div style={{ width: SIDEBAR_WIDTH_PX }} className="fixed right-8 flex-shrink-0">
         <PokemonFilters />
       </div>
     </div>
@@ -78,4 +61,16 @@ export default function Page() {
       <PokemonsPage />
     </PokemonsContextProvider>
   )
+}
+
+const REM_PX = 16
+const SIDEBAR_WIDTH_PX = 460
+
+const ITEM_MIN_WIDTH_PX = 360
+const GRID_STYLES = {
+  gridTemplateColumns: `repeat(auto-fit, minmax(${ITEM_MIN_WIDTH_PX}px, 1fr))`,
+}
+
+const CONTENT_STYLES = {
+  maxWidth: `calc(100% - ${SIDEBAR_WIDTH_PX + 2 * REM_PX}px)`,
 }

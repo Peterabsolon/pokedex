@@ -82,7 +82,7 @@ export const PokemonListItem = ({
       </h3>
 
       {showDetailInfo && (
-        <div className="mb-4 rounded-lg p-4">
+        <div className="mb-4">
           <div className="mb-3 flex flex-wrap gap-2 font-medium">
             <div className="w-full text-sm font-medium">Resistant</div>
             {resistant.map((type) => (

@@ -53,7 +53,7 @@ export const InfiniteLoader = ({
     <div>
       {children}
 
-      <div className="flex h-24 items-center justify-center">
+      <div className="flex h-48 items-center justify-center">
         {isLoading && <Spinner />}
 
         {!isLoading && pageKey !== undefined && !error && hasMore && (

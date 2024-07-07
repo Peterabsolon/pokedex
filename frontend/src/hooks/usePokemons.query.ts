@@ -1,13 +1,16 @@
-import { useApolloClient, useQuery } from '@apollo/client'
-import { debounce, defaults } from 'lodash'
+import { FieldPolicy, useApolloClient, useQuery } from '@apollo/client'
+import { debounce, defaults, uniqBy } from 'lodash'
 import { useMemo } from 'react'
 
-import { GetPokemonsQuery, PokemonsQueryInput } from '~/codegen/graphql'
+import { GetPokemonsQuery, PokemonConnection, PokemonsQueryInput } from '~/codegen/graphql'
 import { GET_POKEMONS_QUERY } from '~/graphql'
 
 // Add slight delay for fetching more results to simulate real client <=> server trip
-const DEBOUNCE_MS = 500
+const DEBOUNCE_MS = 250
 
+// ====================================================
+// Hook
+// ====================================================
 export const usePokemonsQuery = (queryArg?: PokemonsQueryInput) => {
   const client = useApolloClient()
 
@@ -19,17 +22,9 @@ export const usePokemonsQuery = (queryArg?: PokemonsQueryInput) => {
     () =>
       debounce(async () => {
         const offset = pokemonsQuery.data?.pokemons.edges.length
-
-        await pokemonsQuery.fetchMore({
-          variables: {
-            query: {
-              offset,
-              limit: query.limit,
-            },
-          },
-        })
+        await pokemonsQuery.fetchMore({ variables: { query: { offset } } })
       }, DEBOUNCE_MS),
-    [pokemonsQuery, query],
+    [pokemonsQuery],
   )
 
   return useMemo(() => {
@@ -46,4 +41,45 @@ export const usePokemonsQuery = (queryArg?: PokemonsQueryInput) => {
       onFetchMore,
     }
   }, [pokemonsQuery, onFetchMore])
+}
+
+// ====================================================
+// Query cache field policy
+// ====================================================
+export const pokemonsQueryFieldPolicy: FieldPolicy = {
+  keyArgs: [
+    ['filter', 'search'],
+    ['filter', 'isFavorite'],
+  ],
+
+  read(existing: PokemonConnection, { args }) {
+    if (!existing) {
+      return undefined
+    }
+
+    // Always search/filter on the server
+    if (args) {
+      const { search, filter } = args.query as PokemonsQueryInput
+
+      // TODO: Improve somehow...
+      if (search || filter?.type?.length || filter?.resistance?.length || filter?.weakness?.length) {
+        return undefined
+      }
+    }
+
+    return existing
+  },
+
+  merge(existing: PokemonConnection, incoming: PokemonConnection) {
+    if (!existing) return incoming
+    if (!incoming) return existing
+
+    const edges = uniqBy([...existing.edges, ...incoming.edges], '__ref')
+
+    return {
+      ...incoming,
+      count: Math.max(existing.count, incoming.count),
+      edges,
+    }
+  },
 }
