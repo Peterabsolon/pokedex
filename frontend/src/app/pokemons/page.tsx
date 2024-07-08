@@ -1,7 +1,5 @@
 'use client'
 
-import classNames from 'classnames'
-
 import { InfiniteLoader } from '~/components'
 
 import { PokemonFilters, PokemonsGrid } from './components'
@@ -16,7 +14,7 @@ const PokemonsPage = () => {
 
   return (
     <>
-      <div className={classNames('flex flex-auto px-8', { 'blur-sm': state.openedPokemonName })}>
+      <div className="flex flex-auto px-8">
         <div style={CONTENT_STYLES} className="mr-8 flex-1 self-start">
           <InfiniteLoader
             error={pokemonsQuery.error}

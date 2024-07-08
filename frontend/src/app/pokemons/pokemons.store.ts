@@ -9,8 +9,6 @@ type Options = readonly Option[]
 const useTableView = typeof window === 'undefined' ? false : localStorage.getItem('useTableView') === 'true'
 
 export const initialState = {
-  openedPokemonName: undefined as string | undefined,
-
   searchQuery: '' as string | undefined,
 
   useTableView,
