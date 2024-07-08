@@ -6,12 +6,14 @@ import { SelectOption } from '~/components/fields/Select'
 type Option = SelectOption<string>
 type Options = readonly Option[]
 
+const useTableView = typeof window === 'undefined' ? false : localStorage.getItem('useTableView') === 'true'
+
 export const initialState = {
   openedPokemonName: undefined as string | undefined,
 
   searchQuery: '' as string | undefined,
 
-  useTableView: localStorage.getItem('useTableView') === 'true',
+  useTableView,
   showDetailInfo: false,
   showFavoritesOnly: false,
 

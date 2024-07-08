@@ -8,6 +8,7 @@ import { playPokemonSound } from '~/utils'
 
 export const usePokemonActions = () => {
   const router = useRouter()
+
   const { handleFavorite } = useFavoritePokemonMutation()
   const { handleUnFavorite } = useUnFavoritePokemonMutation()
 
