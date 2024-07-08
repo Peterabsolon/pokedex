@@ -86,11 +86,14 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
    * Computed
    */
   const computed = useMemo(() => {
-    const hasMore = pokemonsQuery.count ? pokemonsQuery.edges.length < pokemonsQuery.count : true
+    const { edges, count } = pokemonsQuery
+
+    const pokemons = edges.filter((p) => (state.showFavoritesOnly ? p.isFavorite : true))
+    const hasMore = count ? edges.length < count : true
 
     return {
       hasMore,
-      pokemons: pokemonsQuery.edges.filter((p) => (state.showFavoritesOnly ? p.isFavorite : true)),
+      pokemons,
     }
   }, [pokemonsQuery, state.showFavoritesOnly])
 
