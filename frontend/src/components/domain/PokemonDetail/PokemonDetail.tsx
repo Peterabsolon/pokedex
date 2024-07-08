@@ -1,15 +1,15 @@
 import { useRouter } from 'next/navigation'
 import { ElementType } from 'react'
 
-import { PokemonDetailsFragment } from '~/codegen/graphql'
-import { HeartIcon, SpeakerIcon } from '~/components/icons'
-import { Button, Card } from '~/components/ui'
+import { Attack, PokemonDetailsFragment } from '~/codegen/graphql'
+import { Button, Card, Table, TableColumn } from '~/components/ui'
 import { ROUTES } from '~/constants'
-import { usePokemonActions } from '~/hooks'
 
+import { PokemonActions } from '../PokemonActions'
 import { PokemonEvolution, PokemonEvolutionProps } from '../PokemonEvolution'
 import { PokemonImage } from '../PokemonImage'
 import { PokemonInfo } from '../PokemonInfo'
+import { PokemonTypeBadge } from '../PokemonTypeBadge'
 
 export interface PokemonDetailProps extends PokemonEvolutionProps {
   pokemon: PokemonDetailsFragment
@@ -23,56 +23,80 @@ export const PokemonDetail = ({
   withCard = true,
 }: PokemonDetailProps) => {
   const router = useRouter()
-  const { handlePlaySound, handleToggleFavorite } = usePokemonActions()
+
+  const { attacks, image, maxCP, maxHP, evolutionRequirements, weight, height } = pokemon
+
   const Wrapper = withCard ? Card : ('div' as ElementType)
 
   return (
     <Wrapper className="mx-auto w-full max-w-[1280px]">
-      <Button className="mb-4" onClick={() => router.push(ROUTES.POKEMONS)}>
-        {'<-'} Return
-      </Button>
+      <div className="flex justify-between">
+        <Button className="mb-8" onClick={() => router.push(ROUTES.POKEMONS)}>
+          {'<-'} Return
+        </Button>
 
-      <div className="mt-8 flex flex-row gap-8">
-        <PokemonImage className="min-w-[260px] flex-1" imageSrcUrl={pokemon.image} />
+        <div className="flex-none">
+          <PokemonActions pokemon={pokemon} />
+        </div>
+      </div>
+
+      <div className="mb-8 flex flex-row gap-16">
+        <PokemonImage className="min-w-[260px] flex-1" imageSrcUrl={image} />
 
         <div className="flex-1">
           <PokemonInfo showDetailInfo pokemon={pokemon} />
 
           <div className="mb-3">
-            <h3 className="mb-2 text-sm font-bold">Max CP</h3>
-            <h4 className="text-xl font-bold">{pokemon.maxCP}</h4>
-          </div>
-
-          <div className="mb-3">
-            <h3 className="mb-2 text-sm font-bold">Max HP</h3>
-            <h4 className="text-xl font-bold">{pokemon.maxHP}</h4>
-          </div>
-
-          <div className="mb-3">
-            <h3 className="mb-2 text-sm font-bold">Evolutions</h3>
+            <h3 className="mb-2 text-lg font-bold">Evolutions</h3>
             <PokemonEvolution pokemonEvolutionNext={pokemonEvolutionNext} pokemonEvolutionPrev={pokemonEvolutionPrev} />
           </div>
 
-          <h3 className="mb-2 text-sm font-bold">Actions</h3>
-          <div className="flex gap-2">
-            <Button
-              onClick={() => handleToggleFavorite(pokemon)}
-              stopPropagation
-              iconLeft={<HeartIcon className="mr-2 size-5" fill={pokemon.isFavorite ? 'currentColor' : 'none'} />}
-            >
-              {pokemon.isFavorite ? 'Unfavorite' : 'Favorite'}
-            </Button>
+          {evolutionRequirements && (
+            <div className="mb-3">
+              <h3 className="mb-2 text-lg font-bold">Evolution requirement</h3>
+              <div>
+                <h4 className="mr-2 inline text-3xl font-bold">{evolutionRequirements.amount}</h4>
+                <h4 className="inline font-bold">{evolutionRequirements.name}</h4>
+              </div>
+            </div>
+          )}
 
-            <Button
-              onClick={() => handlePlaySound(pokemon)}
-              stopPropagation
-              iconLeft={<SpeakerIcon className="mr-2 size-5" />}
-            >
-              Sound
-            </Button>
+          <div className="mb-3">
+            <h3 className="mb-2 text-lg font-bold">Max CP</h3>
+            <h4 className="text-3xl font-bold">{maxCP}</h4>
+          </div>
+
+          <div className="mb-3">
+            <h3 className="mb-2 text-lg font-bold">Max HP</h3>
+            <h4 className="text-3xl font-bold">{maxHP}</h4>
+          </div>
+
+          <div className="mb-3">
+            <h3 className="mb-2 text-lg font-bold">Weight</h3>
+            <h4 className="text-3xl font-bold">
+              {weight.minimum} - {weight.maximum}
+            </h4>
+          </div>
+
+          <div className="mb-3">
+            <h3 className="mb-2 text-lg font-bold">Height</h3>
+            <h4 className="text-3xl font-bold">
+              {height.minimum} - {height.maximum}
+            </h4>
           </div>
         </div>
+      </div>
+
+      <div>
+        <Table label="Fast attacks" keyProp="name" data={attacks.fast} columns={ATTACK_COLUMNS} />
+        <Table label="Special attacks" keyProp="name" data={attacks.special} columns={ATTACK_COLUMNS} />
       </div>
     </Wrapper>
   )
 }
+
+const ATTACK_COLUMNS: TableColumn<Attack>[] = [
+  { label: 'Name', dataKey: 'name', width: '35%' },
+  { label: 'Damage', dataKey: 'damage' },
+  { label: 'Type', render: (row) => <PokemonTypeBadge className="w-fit" type={row.type} /> },
+]

@@ -4,16 +4,18 @@ import { TableCell } from './TableCell'
 
 export interface TableActionsProps<T extends AnyObject> {
   row: T
+  actionsWidth?: number
   actions?: TableAction<T>[]
 }
 
-export const TableActions = <T extends AnyObject>({ actions = [], row }: TableActionsProps<T>) => {
+export const TableActions = <T extends AnyObject>({ actions = [], actionsWidth, row }: TableActionsProps<T>) => {
   return (
     <TableCell
       row={row}
       column={{
         label: 'Actions',
         align: 'right',
+        width: actionsWidth,
         render: (row) => (
           <div className="flex flex-wrap justify-end gap-1">
             {actions.map((action) => {

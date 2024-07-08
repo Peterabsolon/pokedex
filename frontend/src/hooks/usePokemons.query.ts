@@ -5,9 +5,6 @@ import { useCallback, useMemo } from 'react'
 import { GetPokemonsQuery, PokemonsQueryInput } from '~/codegen/graphql'
 import { GET_POKEMONS_QUERY } from '~/graphql'
 
-// Add slight delay for fetching more results to simulate real client <=> server trip
-const DEBOUNCE_MS = 1000
-
 // ====================================================
 // Hook
 // ====================================================

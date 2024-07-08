@@ -9,6 +9,7 @@ const meta = {
   component: PokemonGridItem,
   parameters: {
     layout: 'centered',
+    nextjs: { appDirectory: true },
   },
   tags: ['autodocs'],
 } satisfies Meta<typeof PokemonGridItem>

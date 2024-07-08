@@ -81,6 +81,7 @@ export const PokemonFilters: React.FC = () => {
       <div className="mb-4 flex gap-2">
         <PokemonTypeSelect<true>
           name="resistances"
+          placeholder="Select resistances..."
           label="Resistances"
           isMulti
           value={resistancesSelected}
@@ -98,6 +99,7 @@ export const PokemonFilters: React.FC = () => {
       <div className="mb-4 flex gap-2">
         <PokemonTypeSelect<true>
           label="Weaknesses"
+          placeholder="Select weaknesses..."
           isMulti
           value={weaknessesSelected}
           onChange={setWeaknessesSelected}

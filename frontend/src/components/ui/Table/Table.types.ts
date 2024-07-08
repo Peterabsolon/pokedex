@@ -36,9 +36,9 @@ export interface TableColumn<T extends AnyObject> {
   align?: 'left' | 'center' | 'right'
 
   /**
-   * Table column width in pixels
+   * Table column width (any valid CSS value)
    */
-  width?: number
+  width?: number | string
 }
 
 export interface TableAction<T extends AnyObject> extends Pick<ButtonProps, 'variant' | 'variantHover'> {

@@ -1,4 +1,5 @@
 export * from './Logo'
+export * from './PokemonActions'
 export * from './PokemonDetail'
 export * from './PokemonEvolution'
 export * from './PokemonGridItem'

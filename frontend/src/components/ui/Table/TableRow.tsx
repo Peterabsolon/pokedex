@@ -7,17 +7,24 @@ export interface TableRowProps<T extends AnyObject> {
   columns: TableColumn<T>[]
 
   actions?: TableAction<T>[]
+  actionsWidth?: number
   onRowClick?: (row: T) => void
 }
 
-export const TableRow = <T extends AnyObject>({ actions, columns, row, onRowClick }: TableRowProps<T>) => {
+export const TableRow = <T extends AnyObject>({
+  actions,
+  actionsWidth,
+  columns,
+  row,
+  onRowClick,
+}: TableRowProps<T>) => {
   return (
     <tr>
       {columns.map((column) => {
         return <TableCell key={column.label} column={column} row={row} onRowClick={onRowClick} />
       })}
 
-      {actions && actions.length > 0 && <TableActions<T> row={row} actions={actions} />}
+      {actions && actions.length > 0 && <TableActions<T> row={row} actions={actions} actionsWidth={actionsWidth} />}
     </tr>
   )
 }

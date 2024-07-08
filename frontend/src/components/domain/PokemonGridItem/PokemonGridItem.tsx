@@ -2,10 +2,10 @@ import classNames from 'classnames'
 import { MotionProps } from 'framer-motion'
 
 import { PokemonInfoFragment } from '~/codegen/graphql'
-import { HeartIcon, SpeakerIcon } from '~/components/icons'
-import { Button, Card, CardProps, DEFAULT_CARD_MOTION } from '~/components/ui'
+import { Card, CardProps, DEFAULT_CARD_MOTION } from '~/components/ui'
 import { usePokemonActions } from '~/hooks'
 
+import { PokemonActions } from '../PokemonActions'
 import { PokemonImage } from '../PokemonImage'
 import { PokemonInfo, PokemonInfoProps } from '../PokemonInfo'
 
@@ -46,25 +46,7 @@ export const PokemonGridItem = ({
 
       <PokemonInfo pokemon={pokemon} showDetailInfo={showDetailInfo} {...pokemonInfoProps} />
 
-      <div className="flex gap-2">
-        <Button
-          className="flex-1 pl-0 pr-0"
-          onClick={() => handleToggleFavorite(pokemon)}
-          stopPropagation
-          iconLeft={<HeartIcon className="mr-2 size-5" fill={isFavorite ? 'currentColor' : 'none'} />}
-        >
-          {isFavorite ? 'Unfavorite' : 'Favorite'}
-        </Button>
-
-        <Button
-          className="flex-1 pl-0 pr-0"
-          onClick={() => handlePlaySound(pokemon)}
-          stopPropagation
-          iconLeft={<SpeakerIcon className="mr-2 size-5" />}
-        >
-          Sound
-        </Button>
-      </div>
+      <PokemonActions fixedWidth pokemon={pokemon} />
     </Card>
   )
 }

@@ -19,25 +19,6 @@
   .text-balance {
     text-wrap: balance;
   }
-
-  .emboss-effect::before {
-    /* force GPU use */
-    transform: translateZ(0);
-    content: '';
-    pointer-events: none;
-    user-select: none;
-    position: absolute;
-    top: 0px;
-    right: 0px;
-    bottom: 0px;
-    left: 0px;
-    border-radius: inherit;
-    padding: 1px;
-    background: linear-gradient(rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.07));
-    mask:
-      linear-gradient(black, black) content-box exclude,
-      linear-gradient(black, black);
-  }
 }
 
 body,

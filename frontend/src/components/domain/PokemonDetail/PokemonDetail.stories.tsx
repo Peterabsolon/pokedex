@@ -7,7 +7,10 @@ import { PokemonDetail } from './PokemonDetail'
 export default {
   title: 'domain/PokemonDetail',
   component: PokemonDetail,
-  parameters: { layout: 'centered' },
+  parameters: {
+    layout: 'centered',
+    nextjs: { appDirectory: true },
+  },
   tags: ['autodocs'],
 } as Meta<typeof PokemonDetail>
 

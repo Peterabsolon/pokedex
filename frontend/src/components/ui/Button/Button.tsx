@@ -86,11 +86,8 @@ export const Button = ({
       {...motionProps}
       onClick={handleClick}
       className={classNames(
-        // https://github.com/mdn/browser-compat-data/issues/17726
-        // Tailwind shadows use some unsupported Safari API, force use GPU to fix perf issues
-        'transform-gpu drop-shadow-2xl',
         'relative flex flex-row items-center justify-center text-nowrap rounded-md',
-        'font-medium transition-colors disabled:cursor-not-allowed',
+        'transform-gpu font-medium transition-colors disabled:cursor-not-allowed',
         sizeStyles[size],
         variantStyles[variant],
         variantHoverStyles[variantHover ?? variant],

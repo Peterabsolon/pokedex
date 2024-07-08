@@ -51,11 +51,13 @@ export const pokemonsQueryFieldPolicy: FieldPolicy<
 
     // TODO: Fixme
     const edges = uniqBy([...existing.edges, ...incoming.edges], '__ref')
+    const count = incoming.count < existing.count ? 0 : incoming.count
+
+    console.log('count', count)
 
     return {
       ...incoming,
-      // TODO: Fixme
-      count: Math.max(existing.count, incoming.count),
+      count,
       edges,
     }
   },

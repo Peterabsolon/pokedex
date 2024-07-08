@@ -28,7 +28,18 @@ export const TableCell = <T extends Record<string, any>>({ row, column, onRowCli
   }
 
   return (
-    <td onClick={handleClick} className={classNames(`border-b p-4 text-${column.align ?? 'left'}`, column.className)}>
+    <td
+      onClick={handleClick}
+      className={classNames(
+        'border-b p-4',
+        {
+          'text-left': column.align === 'left',
+          'text-center': column.align === 'center',
+          'cursor-pointer': onRowClick,
+        },
+        column.className,
+      )}
+    >
       {value}
     </td>
   )

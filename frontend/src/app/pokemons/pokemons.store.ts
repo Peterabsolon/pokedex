@@ -11,7 +11,7 @@ export const initialState = {
 
   searchQuery: '' as string | undefined,
 
-  useTableView: false,
+  useTableView: localStorage.getItem('useTableView') === 'true',
   showDetailInfo: false,
   showFavoritesOnly: false,
 
@@ -38,7 +38,10 @@ export const createActions = (setState: React.Dispatch<React.SetStateAction<Poke
   },
 
   toggleTableView: () => {
-    setState((prev) => ({ ...prev, useTableView: !prev.useTableView }))
+    setState((prev) => {
+      localStorage.setItem('useTableView', (!prev.useTableView).toString())
+      return { ...prev, useTableView: !prev.useTableView }
+    })
   },
 
   toggleShowFavoritesOnly: () => {

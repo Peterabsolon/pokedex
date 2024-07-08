@@ -5,7 +5,10 @@ import { PokemonEvolution } from './PokemonEvolution'
 export default {
   title: 'domain/PokemonEvolution',
   component: PokemonEvolution,
-  parameters: { layout: 'centered' },
+  parameters: {
+    layout: 'centered',
+    nextjs: { appDirectory: true },
+  },
   tags: ['autodocs'],
 } as Meta<typeof PokemonEvolution>
 

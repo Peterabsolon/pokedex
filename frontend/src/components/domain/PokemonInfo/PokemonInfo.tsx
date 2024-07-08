@@ -24,7 +24,7 @@ export const PokemonInfo = ({
 
   return (
     <>
-      {withName && <h2 className="mb-1 text-xl font-bold">{name}</h2>}
+      {withName && <h2 className="mb-3 text-3xl font-bold">{name}</h2>}
 
       <h3 className="mb-3 flex flex-wrap gap-2 font-medium">
         {types.map((type) => (
@@ -34,8 +34,12 @@ export const PokemonInfo = ({
 
       {showDetailInfo && (
         <div className="mb-4">
+          <div className="mb-3">
+            <h4 className="text-xl font-bold">{pokemon.classification}</h4>
+          </div>
+
           <div className="mb-3 flex flex-wrap gap-2">
-            <div className="w-full text-sm font-bold">Resistant</div>
+            <div className="w-full text-lg font-bold">Resistant</div>
             {resistant.map((type) => (
               <PokemonTypeBadge
                 key={type}
@@ -46,7 +50,7 @@ export const PokemonInfo = ({
           </div>
 
           <div className="mb-3 flex flex-wrap gap-2">
-            <div className="w-full text-sm font-bold">Weaknesses</div>
+            <div className="w-full text-lg font-bold">Weaknesses</div>
             {weaknesses.map((type) => (
               <PokemonTypeBadge
                 key={type}

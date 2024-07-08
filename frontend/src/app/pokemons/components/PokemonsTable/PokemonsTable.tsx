@@ -18,7 +18,7 @@ export interface PokemonsTableProps {
 }
 
 export const PokemonsTable = ({ pokemons }: PokemonsTableProps) => {
-  const { state } = usePokemonsContext()
+  const { state, queries } = usePokemonsContext()
   const { handlePlaySound, handleToggleFavorite, handleViewDetail } = usePokemonActions()
 
   const columns: TableColumn<PokemonInfoFragment>[] = [
@@ -54,6 +54,7 @@ export const PokemonsTable = ({ pokemons }: PokemonsTableProps) => {
     },
     {
       label: 'Types',
+      align: 'left',
       className: 'w-96',
       render: (pokemon) => (
         <div className="flex flex-wrap gap-1">
@@ -106,8 +107,13 @@ export const PokemonsTable = ({ pokemons }: PokemonsTableProps) => {
   ]
 
   return (
-    <div>
-      <Table<PokemonInfoFragment> data={pokemons} actions={actions} columns={columns} />
-    </div>
+    <Table<PokemonInfoFragment>
+      data={pokemons}
+      actions={actions}
+      actionsWidth={250}
+      columns={columns}
+      loading={queries.pokemonsQuery.loading}
+      onRowClick={handleViewDetail}
+    />
   )
 }

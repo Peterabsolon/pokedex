@@ -22,8 +22,8 @@ export const PokemonsGrid = ({ pokemons }: PokemonsGridProps) => {
           className={classNames(
             'grid gap-8',
             'grid-cols-[repeat(auto-fill,minmax(300px,1fr))]',
-            'xl:grid-cols-[repeat(auto-fill,minmax(340px,1fr))]',
-            '2xl:grid-cols-[repeat(auto-fill,minmax(420px,1fr))]',
+            'xl:grid-cols-[repeat(auto-fill,minmax(320px,1fr))]',
+            '2xl:grid-cols-[repeat(auto-fill,minmax(360px,1fr))]',
           )}
         >
           {pokemons.map((pokemon) => (
