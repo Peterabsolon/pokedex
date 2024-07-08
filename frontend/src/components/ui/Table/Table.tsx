@@ -41,7 +41,7 @@ export const Table = <T extends AnyObject>({
     <Card className={classNames('w-full p-3', className)} motion={MOTION_PROPS}>
       {label && <h3 className="mb-2 pl-3 text-lg font-bold">{label}</h3>}
 
-      <table className={classNames('w-full table-auto border-collapse')}>
+      <table className="w-full table-auto border-collapse">
         <thead>
           <tr>
             {columns.map((column) => (

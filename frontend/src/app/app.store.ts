@@ -6,12 +6,10 @@ import { SelectOption } from '~/components/fields/Select'
 type Option = SelectOption<string>
 type Options = readonly Option[]
 
-const useTableView = typeof window === 'undefined' ? false : localStorage.getItem('useTableView') === 'true'
-
 export const initialState = {
   searchQuery: '' as string | undefined,
 
-  useTableView,
+  useTableView: false,
   showDetailInfo: false,
   showFavoritesOnly: false,
 
@@ -38,10 +36,7 @@ export const createActions = (setState: React.Dispatch<React.SetStateAction<Poke
   },
 
   toggleTableView: () => {
-    setState((prev) => {
-      localStorage.setItem('useTableView', (!prev.useTableView).toString())
-      return { ...prev, useTableView: !prev.useTableView }
-    })
+    setState((prev) => ({ ...prev, useTableView: !prev.useTableView }))
   },
 
   toggleShowFavoritesOnly: () => {

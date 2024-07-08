@@ -1,9 +1,8 @@
+import { useAppContext } from '~/app'
 import { Card, FilterOperatorSelect, InputDebounced, PokemonTypeSelect, Toggle } from '~/components'
 
-import { usePokemonsContext } from '../../pokemons.context'
-
-export const PokemonFilters: React.FC = () => {
-  const { state, actions } = usePokemonsContext()
+export const PokemonsFilters: React.FC = () => {
+  const { state, actions } = useAppContext()
 
   const {
     resistancesFilterOperator,

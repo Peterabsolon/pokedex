@@ -47,7 +47,6 @@ export const PokemonDetail = ({
           <PokemonInfo showDetailInfo pokemon={pokemon} />
 
           <div className="mb-3">
-            <h3 className="mb-2 text-lg font-bold">Evolutions</h3>
             <PokemonEvolution pokemonEvolutionNext={pokemonEvolutionNext} pokemonEvolutionPrev={pokemonEvolutionPrev} />
           </div>
 

@@ -1,3 +1,4 @@
+import { last } from 'lodash'
 import { createContext, PropsWithChildren, useContext, useMemo, useState } from 'react'
 
 import { usePokemonByNameQuery } from '~/hooks'
@@ -39,10 +40,12 @@ export const PokemonsContextProvider = ({ children }: PropsWithChildren) => {
 
   // TODO: Read from Apollo cache...
   const pokemonEvolutionPrevQuery = usePokemonByNameQuery({
-    name: pokemonQuery.pokemon?.evolutionsPrevious?.[pokemonQuery.pokemon?.evolutionsPrevious?.length - 1]?.name,
+    name: last(pokemonQuery.pokemon?.evolutionsPrevious)?.name,
   })
 
-  const pokemonEvolutionNextQuery = usePokemonByNameQuery({ name: pokemonQuery.pokemon?.evolutions[0]?.name })
+  const pokemonEvolutionNextQuery = usePokemonByNameQuery({
+    name: pokemonQuery.pokemon?.evolutions[0]?.name,
+  })
 
   const queries = useMemo(
     () => ({ pokemonQuery, pokemonEvolutionPrevQuery, pokemonEvolutionNextQuery }),

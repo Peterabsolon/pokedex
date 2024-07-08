@@ -1,50 +1,45 @@
-import { keyBy } from 'lodash'
 import { createContext, PropsWithChildren, useContext, useMemo, useState } from 'react'
 
 import { PokemonInfoFragment } from '~/codegen/graphql'
 import { usePokemonsQuery } from '~/hooks'
 
-import { createActions, initialState } from './pokemons.store'
+import { createActions, initialState } from './app.store'
 
 const PAGE_SIZE = 20
 
 // ====================================================
 // Types
 // ====================================================
-export type PokemonsByIdMap = {
-  [id: string]: PokemonInfoFragment
-}
-
-interface PokemonsContextQueries {
+interface AppContextQueries {
   pokemonsQuery: ReturnType<typeof usePokemonsQuery>
 }
 
-interface PokemonsContextComputed {
+interface AppContextComputed {
+  pokemons: PokemonInfoFragment[]
   hasMore: boolean
-  pokemonsById: PokemonsByIdMap
 }
 
-interface PokemonsContextType {
+interface AppContextType {
   actions: ReturnType<typeof createActions>
-  computed: PokemonsContextComputed
-  queries: PokemonsContextQueries
+  computed: AppContextComputed
+  queries: AppContextQueries
   state: typeof initialState
 }
 
 // ====================================================
 // Context
 // ====================================================
-const PokemonsContext = createContext<PokemonsContextType>({
+const AppContext = createContext<AppContextType>({
   state: initialState,
   actions: createActions(() => {}),
-  queries: {} as PokemonsContextQueries,
-  computed: {} as PokemonsContextComputed,
+  queries: {} as AppContextQueries,
+  computed: {} as AppContextComputed,
 })
 
 // ====================================================
 // Provider
 // ====================================================
-export const PokemonsContextProvider = ({ children }: PropsWithChildren) => {
+export const AppContextProvider = ({ children }: PropsWithChildren) => {
   /**
    * State & Actions
    */
@@ -95,9 +90,9 @@ export const PokemonsContextProvider = ({ children }: PropsWithChildren) => {
 
     return {
       hasMore,
-      pokemonsById: keyBy(pokemonsQuery.edges, 'id'),
+      pokemons: pokemonsQuery.edges.filter((p) => (state.showFavoritesOnly ? p.isFavorite : true)),
     }
-  }, [pokemonsQuery])
+  }, [pokemonsQuery, state.showFavoritesOnly])
 
   const context = useMemo(
     () => ({
@@ -109,7 +104,7 @@ export const PokemonsContextProvider = ({ children }: PropsWithChildren) => {
     [actions, computed, queries, state],
   )
 
-  return <PokemonsContext.Provider value={context}>{children}</PokemonsContext.Provider>
+  return <AppContext.Provider value={context}>{children}</AppContext.Provider>
 }
 
-export const usePokemonsContext = () => useContext(PokemonsContext)
+export const useAppContext = () => useContext(AppContext)

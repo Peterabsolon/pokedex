@@ -1,3 +1,4 @@
+import { useAppContext } from '~/app/app.context'
 import { PokemonInfoFragment } from '~/codegen/graphql'
 import {
   EyeIcon,
@@ -11,14 +12,12 @@ import {
 } from '~/components'
 import { usePokemonActions } from '~/hooks'
 
-import { usePokemonsContext } from '../../pokemons.context'
-
 export interface PokemonsTableProps {
   pokemons: PokemonInfoFragment[]
 }
 
 export const PokemonsTable = ({ pokemons }: PokemonsTableProps) => {
-  const { state, queries } = usePokemonsContext()
+  const { state, queries } = useAppContext()
   const { handlePlaySound, handleToggleFavorite, handleViewDetail } = usePokemonActions()
 
   const columns: TableColumn<PokemonInfoFragment>[] = [

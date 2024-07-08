@@ -2,15 +2,14 @@
 
 import { InfiniteLoader } from '~/components'
 
-import { PokemonFilters, PokemonsGrid } from './components'
+import { useAppContext } from '../app.context'
+import { PokemonsFilters, PokemonsGrid } from './components'
 import { PokemonsTable } from './components/PokemonsTable'
-import { PokemonsContextProvider, usePokemonsContext } from './pokemons.context'
 
-const PokemonsPage = () => {
-  const { queries, state, computed } = usePokemonsContext()
+export default function PokemonsPage() {
+  const { queries, state, computed } = useAppContext()
   const { pokemonsQuery } = queries
-
-  const pokemons = pokemonsQuery.edges.filter((p) => (state.showFavoritesOnly ? p.isFavorite : true))
+  const { pokemons } = computed
 
   return (
     <>
@@ -28,18 +27,10 @@ const PokemonsPage = () => {
         </div>
 
         <div style={SIDEBAR_STYLES} className="fixed right-8 flex-shrink-0">
-          <PokemonFilters />
+          <PokemonsFilters />
         </div>
       </div>
     </>
-  )
-}
-
-export default function Page() {
-  return (
-    <PokemonsContextProvider>
-      <PokemonsPage />
-    </PokemonsContextProvider>
   )
 }
 

@@ -1,17 +1,16 @@
 import classNames from 'classnames'
 
+import { useAppContext } from '~/app'
 import { PokemonInfoFragment } from '~/codegen/graphql'
 import { Card, NoResults, PokemonGridItem } from '~/components'
 import { usePokemonActions } from '~/hooks'
-
-import { usePokemonsContext } from '../../pokemons.context'
 
 export interface PokemonsGridProps {
   pokemons: PokemonInfoFragment[]
 }
 
 export const PokemonsGrid = ({ pokemons }: PokemonsGridProps) => {
-  const { state, actions } = usePokemonsContext()
+  const { state, actions } = useAppContext()
   const { handleViewDetail } = usePokemonActions()
 
   return (

@@ -13,19 +13,27 @@ export interface PokemonEvolutionProps {
 export const PokemonEvolution = ({ className, pokemonEvolutionPrev, pokemonEvolutionNext }: PokemonEvolutionProps) => {
   const { handleViewDetail } = usePokemonActions()
 
-  return (
-    <div className={classNames('flex justify-start gap-2', className)}>
-      {pokemonEvolutionPrev && (
-        <Button onClick={() => handleViewDetail(pokemonEvolutionPrev.name)}>
-          {`<- `} {pokemonEvolutionPrev.name}
-        </Button>
-      )}
+  if (!pokemonEvolutionPrev && !pokemonEvolutionNext) {
+    return null
+  }
 
-      {pokemonEvolutionNext && (
-        <Button onClick={() => handleViewDetail(pokemonEvolutionNext.name)}>
-          {pokemonEvolutionNext.name} {` ->`}
-        </Button>
-      )}
-    </div>
+  return (
+    <>
+      <h3 className="mb-2 text-lg font-bold">Evolutions</h3>
+
+      <div className={classNames('flex justify-start gap-2', className)}>
+        {pokemonEvolutionPrev && (
+          <Button onClick={() => handleViewDetail(pokemonEvolutionPrev.name)}>
+            {`<- `} {pokemonEvolutionPrev.name}
+          </Button>
+        )}
+
+        {pokemonEvolutionNext && (
+          <Button onClick={() => handleViewDetail(pokemonEvolutionNext.name)}>
+            {pokemonEvolutionNext.name} {` ->`}
+          </Button>
+        )}
+      </div>
+    </>
   )
 }
