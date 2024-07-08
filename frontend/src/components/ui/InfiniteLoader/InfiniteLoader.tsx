@@ -49,8 +49,6 @@ export const InfiniteLoader = ({
   hasMore,
   scrollableAncestor,
 }: InfiniteLoaderProps) => {
-  console.log('isLoading', isLoading)
-
   return (
     <div>
       {children}

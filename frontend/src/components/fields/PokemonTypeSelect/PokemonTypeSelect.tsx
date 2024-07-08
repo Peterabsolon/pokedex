@@ -38,8 +38,6 @@ export const PokemonTypeSelect = <IsMulti extends boolean = boolean>(props: Poke
         MultiValueRemove: () => null,
 
         Option: (props) => {
-          console.log('option props', props)
-
           return (
             <components.Option {...props} className={classNames(props.className, '!flex')}>
               <PokemonTypeBadge onClick={props.innerProps.onClick} type={props.data.value as PokemonType} />

@@ -53,8 +53,6 @@ export const pokemonsQueryFieldPolicy: FieldPolicy<
     const edges = uniqBy([...existing.edges, ...incoming.edges], '__ref')
     const count = incoming.count < existing.count ? 0 : incoming.count
 
-    console.log('count', count)
-
     return {
       ...incoming,
       count,

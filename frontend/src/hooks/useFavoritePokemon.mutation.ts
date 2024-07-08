@@ -21,7 +21,6 @@ export const useFavoritePokemonMutation = () => {
     async (id: string) => {
       try {
         await mutate({ variables: { id } })
-        console.log('after favorite...')
       } catch (err) {
         const msg = 'Failed to add pokemon to favorites.'
         console.error(msg, err)
