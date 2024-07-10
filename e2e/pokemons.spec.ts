@@ -4,12 +4,6 @@ import { selectOption } from './utils'
 
 const operationName = 'getPokemons'
 
-// Add and remove a Pokemon to and from your Favorites by clicking the heart icon.
-// Use tabs to switch between All Pokemon and Favorite Pokemon views.
-// Change the view from either a grid or list.
-// View Pokemon details using a /:name route.
-// Clicking on a Pokemon image or name should navigate to the above route to view the Pokemon details.
-
 test.describe('Required features', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('/')
@@ -86,15 +80,5 @@ test.describe('Required features', () => {
     await expect(page.getByText(`Bulbasaur successfully removed from favorites.`)).toBeVisible()
   })
 
-  // test('can view favorites only', async ({ page }) => {
-  //   await page.getByRole('button', { name: 'Favorite' }).first().click()
-  //   await page.reload()
-
-  //   await page.getByRole('button', { name: 'Unfavorite' }).first().click()
-  //   await page.reload()
-
-  //   await expect(page.getByText('Unfavorite')).not.toBeVisible()
-  // })
-
-  // test('can view favorites only', () => {})
+  // ... More tests could be here but this should be enough for a "showcase"
 })
