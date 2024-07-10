@@ -17,7 +17,8 @@ export const PokemonActions = ({ pokemon, className, fixedWidth }: PokemonAction
   return (
     <div className={classNames('flex gap-2', className)}>
       <Button
-        className={classNames('flex-1', { '!px-0': fixedWidth })}
+        className={classNames('flex-1 py-2', { 'px-0': fixedWidth })}
+        noPadding
         onClick={() => handleToggleFavorite(pokemon)}
         stopPropagation
         iconLeft={<HeartIcon className="mr-2 size-5" fill={pokemon.isFavorite ? 'currentColor' : 'none'} />}
@@ -26,7 +27,8 @@ export const PokemonActions = ({ pokemon, className, fixedWidth }: PokemonAction
       </Button>
 
       <Button
-        className={classNames('flex-1', { '!px-0': fixedWidth })}
+        className={classNames('flex-1 py-2', { 'px-0': fixedWidth })}
+        noPadding
         onClick={() => handlePlaySound(pokemon)}
         stopPropagation
         iconLeft={<SpeakerIcon className="mr-2 size-5" />}

@@ -52,6 +52,11 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
    * If true, the onClick event is not propagated
    */
   stopPropagation?: boolean
+
+  /**
+   * If true, the default paddings are not applied
+   */
+  noPadding?: boolean
 }
 
 export const Button = ({
@@ -65,6 +70,7 @@ export const Button = ({
   iconRight,
   onClick,
   stopPropagation,
+  noPadding,
   ...props
 }: ButtonProps) => {
   const motionProps = props.motion ?? DEFAULT_BUTTON_MOTION
@@ -89,6 +95,7 @@ export const Button = ({
         'relative flex flex-row items-center justify-center text-nowrap rounded-md',
         'transform-gpu font-medium transition-colors disabled:cursor-not-allowed',
         sizeStyles[size],
+        noPadding ? undefined : sizePaddingStyles[size],
         variantStyles[variant],
         variantHoverStyles[variantHover ?? variant],
         className,
@@ -115,7 +122,12 @@ const variantHoverStyles = {
   danger: 'hover:bg-red-500 hover:border-red-800',
 }
 
-const sizeStyles = {
-  sm: 'text-sm px-4 py-2',
+const sizePaddingStyles = {
+  sm: 'px-4 py-2',
   md: 'px-8 py-2',
+}
+
+const sizeStyles = {
+  sm: 'text-sm',
+  md: '',
 }
